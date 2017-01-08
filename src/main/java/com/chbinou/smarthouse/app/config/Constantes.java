@@ -24,6 +24,6 @@ public class Constantes
 
     public interface Views
     {
-        String INDEX_PAGE            = "/myApp/www/index.html";
+        String INDEX_PAGE            = "/app/www/index.html";
     }
 }

@@ -15,6 +15,9 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <excludes>
+                        <exclude>${basedir}/src/main/resources/public/app/node_modules</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -22,11 +25,9 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.4.1</version>
                 <configuration>
-                    <!-- get all project dependencies -->
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <!-- MainClass in mainfest make a executable jar -->
                     <archive>
                         <manifest>
                             <mainClass>com.chbinou.smarthouse.app.SmartHouseApp</mainClass>
@@ -36,7 +37,6 @@
                 <executions>
                     <execution>
                         <id>make-assembly</id>
-                        <!-- bind to the packaging phase -->
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
@@ -45,6 +45,16 @@
                 </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>lightning_config.json</include>
+                    <include>public/app/www/**/*</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
     <!-- library dependencies -->
