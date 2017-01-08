@@ -1,11 +1,8 @@
-/target/
-/src/main/resources/public/node_modules/
 /.idea/
+/target/
 /smarthouse-spark.iml
-/src/main/resources/public/dist/
-/src/main/resources/public/bower_components/
-!/src/main/resources/public/app/node_modules/
+/src/main/resources/public/app/node_modules/
 /src/main/resources/public/app/platforms/*
+/src/main/resources/public/app/plugins/*
 /src/main/resources/public/app/resources/*
 /src/main/resources/public/app/www/*
-/src/main/resources/public/app/plugins/*
