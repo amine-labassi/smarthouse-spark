@@ -4,3 +4,8 @@
 /smarthouse-spark.iml
 /src/main/resources/public/dist/
 /src/main/resources/public/bower_components/
+!/src/main/resources/public/app/node_modules/
+/src/main/resources/public/app/platforms/android/
+/src/main/resources/public/app/resources/android/
+/src/main/resources/public/app/resources/ios/
+/src/main/resources/public/app/www/
