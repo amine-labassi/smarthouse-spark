@@ -1,10 +1,9 @@
-package com.chbinou.smarthouse.app.components.lightning;
+package com.chbinou.smarthouse.app.components.lightning.model;
 
 /**
- * Created by nxuser on 07/01/2017.
+ * Created by yassine on 07/01/2017.
  */
-public class Lamp
-{
+public class Window {
     private String identifier;
 
     public String getIdentifier() {

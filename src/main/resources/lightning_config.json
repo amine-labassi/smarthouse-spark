@@ -1,0 +1,25 @@
+{
+    "lamps" : [
+        {
+            "identifier" : "1", "status" : true
+        },
+        {
+            "identifier" : "2"
+        },
+        {
+            "identifier" : "3"
+        }
+    ],
+    "windows" : [
+        {
+            "identifier" : "1"
+        },
+        {
+            "identifier" : "2"
+        },
+        {
+            "identifier" : "3"
+        }
+    ]
+
+}

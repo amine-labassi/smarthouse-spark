@@ -17,6 +17,8 @@ public class Constantes
         String SWITCHON_LAMP_ALL    = "/api/lightning/lamp/all/on";
         String SWITCHOFF_LAMP_ALL   = "/api/lightning/lamp/all/off";
 
+        // windows
+
 
     }
 

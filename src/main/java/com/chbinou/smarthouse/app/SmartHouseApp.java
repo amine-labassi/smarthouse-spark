@@ -1,7 +1,7 @@
 package com.chbinou.smarthouse.app;
 
 import com.chbinou.smarthouse.app.components.index.IndexController;
-import com.chbinou.smarthouse.app.components.lightning.LightningController;
+import com.chbinou.smarthouse.app.components.lightning.LightingController;
 import com.chbinou.smarthouse.app.config.Constantes;
 import com.chbinou.smarthouse.app.config.GsonConfiguration;
 import com.chbinou.smarthouse.app.security.SecurityFilter;
@@ -14,9 +14,7 @@ import static spark.Spark.*;
  */
 public class SmartHouseApp
 {
-
-
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
         Gson gson = GsonConfiguration.getGsonInstance();
 
@@ -26,8 +24,11 @@ public class SmartHouseApp
         before(SecurityFilter.ensureCallSecured());
 
         get(Constantes.Url.DEFAULT, IndexController.serveDefaultPage);
-        get("/api/lightning/alllamps", LightningController.getAllLamps, gson::toJson);
+        get(Constantes.Url.STATUS_LAMP_ALL, LightingController.getAllLamps, gson::toJson);
+        get(Constantes.Url.SWITCHON_LAMP, LightingController.switchOnLamp, gson::toJson);
 
+        // 404
         get(Constantes.Url.ANY, IndexController.notFoundResponse);
+
     }
 }
