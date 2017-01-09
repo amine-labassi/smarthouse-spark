@@ -1,15 +1,24 @@
 {
-    "lamps" : [
+
+    "mcps" : [
         {
-            "identifier" : "1", "status" : true
-        },
-        {
-            "identifier" : "2"
-        },
-        {
-            "identifier" : "3"
+            "add": 21,
+            "identifier" : "1"
         }
     ],
+    "lamps" : [
+        {
+            "identifier" : "1",
+            "description" : "2 Lampes (100Watt) chambre parent",
+            "status" : true,
+            "mcpInput" : "1",
+            "mcpOutput" : "1",
+            "addressInput" : "GPIO A1",
+            "addressOutput" : "GPIO B1"
+
+        }
+    ],
+
     "windows" : [
         {
             "identifier" : "1"
