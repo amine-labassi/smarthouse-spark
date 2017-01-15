@@ -1,9 +1,7 @@
 {
-
     "mcps" : [
         {
-            "add": 21,
-            "identifier" : "1"
+            "address": 32
         }
     ],
     "lamps" : [
@@ -11,24 +9,30 @@
             "identifier" : "1",
             "description" : "2 Lampes (100Watt) chambre parent",
             "status" : true,
-            "mcpInput" : "1",
-            "mcpOutput" : "1",
-            "addressInput" : "GPIO A1",
+            "mcpInput" : 32,
+            "mcpOutput" : 32,
+            "addressInput" : "GPIO B2",
             "addressOutput" : "GPIO B1"
-
         }
     ],
-
     "windows" : [
         {
-            "identifier" : "1"
-        },
+            "identifier": "1",
+            "mcpUp" : 32,
+            "mcpDown" : 32,
+            "addressUp" : "GPIO A1",
+            "addressDown" : "GPIO A2"
+        }
+    ],
+    "climatiseur" : [
         {
-            "identifier" : "2"
-        },
-        {
-            "identifier" : "3"
+            "identifier": "1",
+            "description": "2 Lampes (100Watt) chambre parent",
+            "status": true,
+            "mcpInput": 32,
+            "mcpOutput": 32,
+            "addressInput": "GPIO B5",
+            "addressOutput": "GPIO B6"
         }
     ]
-
 }

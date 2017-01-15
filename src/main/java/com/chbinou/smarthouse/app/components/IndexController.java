@@ -1,4 +1,4 @@
-package com.chbinou.smarthouse.app.components.index;
+package com.chbinou.smarthouse.app.components;
 
 import com.chbinou.smarthouse.app.config.Constantes;
 import spark.Request;
