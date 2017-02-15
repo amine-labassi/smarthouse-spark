@@ -18,6 +18,7 @@ public class Constantes
         String SWITCHON_LAMP_ALL            = "/api/switching/lamp/all/on";
         String SWITCHOFF_LAMP_ALL           = "/api/switching/lamp/all/off";
 
+        String STATUS_CLIMATISEUR_ALL       = "/api/switching/lamp/all/status";
         String SWITCHON_CLIMATISEUR         = "/api/switching/lamp/:identifier/on";
         String SWITCHOFF_CLIMATISEUR        = "/api/switching/lamp/:identifier/off";
         String SWITCHON_CLIMATISEUR_ALL     = "/api/switching/lamp/all/on";
