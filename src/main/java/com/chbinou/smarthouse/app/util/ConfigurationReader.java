@@ -32,7 +32,7 @@ public class ConfigurationReader
 
     }
 
-    public static void init() throws IOException, I2CFactory.UnsupportedBusNumberException
+    public static void  init() throws IOException, I2CFactory.UnsupportedBusNumberException
     {
         for (Mcp mcp : SmartHouseApp.lightingConfigurationInstance.getMcps())
         {

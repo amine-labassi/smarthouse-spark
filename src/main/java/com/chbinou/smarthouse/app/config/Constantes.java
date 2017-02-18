@@ -5,7 +5,7 @@ package com.chbinou.smarthouse.app.config;
  */
 public class Constantes
 {
-    public interface Url
+    public  interface  Url
     {
         String ANY                          = "*";
         String DEFAULT                      = "/";

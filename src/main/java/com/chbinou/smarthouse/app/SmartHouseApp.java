@@ -46,11 +46,11 @@ public class SmartHouseApp
         get(Constantes.Url.SWITCHDOWN_WINDOW, WindowsController.switchDownWindow, gson::toJson);
         get(Constantes.Url.SWITCHUP_WINDOW_ALL, WindowsController.switchUpWindowAll, gson::toJson);
         get(Constantes.Url.SWITCHDOWN_WINDOW_ALL, WindowsController.switchDownWindowAll, gson::toJson);
-        get(Constantes.Url.STATUS_LAMP_ALL, AirConditionnerController.getAllClimatiseurs, gson::toJson);
+        get(Constantes.Url.STATUS_CLIMATISEUR_ALL, AirConditionnerController.getAllClimatiseurs, gson::toJson);
         get(Constantes.Url.SWITCHON_CLIMATISEUR, AirConditionnerController.switchOnClimatiseur, gson::toJson);
         get(Constantes.Url.SWITCHOFF_CLIMATISEUR, AirConditionnerController.switchOffClimatiseur, gson::toJson);
-        get(Constantes.Url.SWITCHON_CLIMATISEUR, AirConditionnerController.switchOnClimatiseurAll, gson::toJson);
-        get(Constantes.Url.SWITCHOFF_CLIMATISEUR, AirConditionnerController.switchOffClimatiseurAll, gson::toJson);
+        get(Constantes.Url.SWITCHON_CLIMATISEUR_ALL, AirConditionnerController.switchOnClimatiseurAll, gson::toJson);
+        get(Constantes.Url.SWITCHOFF_CLIMATISEUR_ALL, AirConditionnerController.switchOffClimatiseurAll, gson::toJson);
         // 404
         get(Constantes.Url.ANY, IndexController.notFoundResponse);
 

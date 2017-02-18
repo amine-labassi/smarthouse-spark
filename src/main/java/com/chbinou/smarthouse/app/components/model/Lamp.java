@@ -14,15 +14,13 @@ public class Lamp
     private String identifier;
     @Expose
     private boolean status;
-    @Expose
-
-
+    @Expose(serialize = false)
     private int mcpInput;
-    @Expose
+    @Expose(serialize = false)
     private int mcpOutput;
-    @Expose
+    @Expose(serialize = false)
     private String addressInput;
-    @Expose
+    @Expose(serialize = false)
     private String addressOutput;
     //@Expose(deserialize = false, serialize = false)
     private GpioPinDigitalOutput outputPinInstance;
