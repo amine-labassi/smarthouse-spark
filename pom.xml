@@ -53,6 +53,7 @@
                 <includes>
                     <include>lightning_config.json</include>
                     <include>public/app/www/**/*</include>
+                    <include>public/appli/**/*</include>
                 </includes>
             </resource>
         </resources>
