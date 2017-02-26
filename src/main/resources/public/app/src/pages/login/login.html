@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>SmartHouse</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <form id="smartHouseForm">
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input type="text" name="username" [(ngModel)]="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+    <div padding>
+      <button ion-button icon-left full (click)="doLogin()">
+        <ion-icon name="key"></ion-icon>
+        Entrer
+      </button>
+    </div>
+  </form>
+</ion-content>
