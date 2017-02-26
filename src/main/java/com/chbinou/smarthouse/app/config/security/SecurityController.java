@@ -1,4 +1,4 @@
-package com.chbinou.smarthouse.app.security;
+package com.chbinou.smarthouse.app.config.security;
 
 import com.chbinou.smarthouse.app.config.Constantes;
 import spark.Request;
