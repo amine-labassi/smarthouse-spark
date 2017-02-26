@@ -5,6 +5,7 @@ import { LoginPage } from '../pages/login/login';
 import { DomotiquePage } from '../pages/domotique/domotique';
 import { FavorisPage } from '../pages/favoris/favoris';
 import { ZonePage } from '../pages/zone/zone';
+import {TitlePipe} from "../pipes/title-pipe";
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { ZonePage } from '../pages/zone/zone';
     LoginPage,
     DomotiquePage,
     FavorisPage,
-    ZonePage
+    ZonePage,
+    TitlePipe
   ],
   imports: [
     IonicModule.forRoot(MyApp)
