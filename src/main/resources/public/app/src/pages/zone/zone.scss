@@ -1,0 +1,39 @@
+.cards-list-zone-lamps ion-card-header
+{
+  background-color: yellow;
+  margin-bottom: 15px;
+}
+
+.cards-list-zone-windows ion-card-header
+{
+  background-color: lightskyblue;
+  margin-bottom: 15px;
+}
+
+.cards-list-zone-airconditionners ion-card-header
+{
+  background-color: springgreen;
+  margin-bottom: 15px;
+}
+
+.lamp-on
+{
+  color: yellow;
+}
+
+.lamp-off
+{
+  color: darkgray;
+}
+
+.window-opened
+{
+  color: lightskyblue;
+  font-size: 4em;
+}
+
+.window-closed
+{
+  color: lightskyblue;
+  font-size: 4em;
+}

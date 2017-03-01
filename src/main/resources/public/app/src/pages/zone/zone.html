@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ zone.title }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-card class="cards-list-zone-lamps">
+    <ion-card-header>Lampes</ion-card-header>
+    <ion-card-content>
+      <ion-slides [options]="shSlideOptions">
+        <ion-slide *ngFor="let lamp of zone.lamps">
+          <h2>{{ lamp.title }}</h2>
+          <ion-grid>
+            <ion-row center>
+              <ion-col width-100>
+                <ion-icon name="bulb" color="bright" [ngClass]="{'lamp-on' : lamp.status, 'lamp-off' : !lamp.status}"
+                          style="font-size: 4em;"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <ion-row center>
+              <ion-col width-50>
+                <button ion-button color="light" round (click)="switchOnLamp(lamp);">I</button>
+              </ion-col>
+              <ion-col width-50>
+                <button ion-button color="light" round (click)="switchOffLamp(lamp);">O</button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-slide>
+      </ion-slides>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="cards-list-zone-windows">
+    <ion-card-header style="background-color: lightskyblue; margin-bottom: 15px;">Fenêtres</ion-card-header>
+    <ion-card-content>
+      <ion-slides [options]="shSlideOptions">
+        <ion-slide *ngFor="let mywindow of zone.windows">
+          <h2>{{ mywindow.title }}</h2>
+          <ion-grid>
+            <ion-row center>
+              <ion-col width-100>
+                <ion-icon *ngIf="mywindow.status" name="square-outline" color="bright" class="window-opened"></ion-icon>
+                <ion-icon *ngIf="!mywindow.status" name="square" color="bright" class="window-closed"></ion-icon>
+              </ion-col>
+            </ion-row>
+            <ion-row center>
+              <ion-col width-50>
+                <button ion-button color="light" round (click)="openTheWindow(mywindow)">OUVRIR</button>
+              </ion-col>
+              <ion-col width-50>
+                <button ion-button color="light" round (click)="closeTheWindow(mywindow)">FERMER</button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-slide>
+      </ion-slides>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="cards-list-zone-airconditionners">
+    <ion-card-header>Climatisation</ion-card-header>
+    <ion-card-content>
+      <ion-slides [options]="shSlideOptions">
+        <ion-slide *ngFor="let airconditionner of zone.airconditionners">
+          <h2>{{ airconditionner.title }}</h2>
+          <ion-grid>
+            <ion-row center>
+              <ion-col width-100>
+                <ion-icon name="thermometer" color="bright" style="font-size: 2em;"></ion-icon>
+                <span style="font-size: 4em;">{{airconditionner.temperature + '°'}}</span>
+              </ion-col>
+            </ion-row>
+            <ion-row center>
+              <ion-col width-50>
+                <button ion-button color="light" round (click)="hoter(airconditionner)">
+                  <ion-icon name="add"></ion-icon>
+                </button>
+              </ion-col>
+              <ion-col width-50>
+                <button ion-button color="light" round (click)="colder(airconditionner)">
+                  <ion-icon name="remove"></ion-icon>
+                </button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-slide>
+      </ion-slides>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

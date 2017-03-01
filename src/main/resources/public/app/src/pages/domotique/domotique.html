@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar color="secondary">
+    <ion-title>SmartHouse</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar [(ngModel)]="searchFilter" [showCancelButton]="true">
+  </ion-searchbar>
+  <ion-list>
+    <button ion-item *ngFor="let item of (items | titlePipe:searchFilter)" (click)="openNavZonePage(item)">
+      {{ item.title }}
+    </button>
+  </ion-list>
+</ion-content>
