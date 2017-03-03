@@ -9,23 +9,24 @@ import java.util.List;
  */
 public class ElectronicInterfaceConfiguration
 {
-
+    @Expose
+    private List<Zone> zones;
     @Expose
     private List<Lamp> lamps;
     @Expose
     private List<Mcp> mcps;
     @Expose
     private List<Window> windows;
-    @Expose
-    private List<AirConditionner> airConditionners;
 
-    public List<AirConditionner> getAirConditionners() {
-        return airConditionners;
+
+    public List<Zone> getZones() {
+        return zones;
     }
 
-    public void setAirConditionners(List<AirConditionner> airConditionners) {
-        this.airConditionners = airConditionners;
+    public void setZones(List<Zone> zones) {
+        this.zones = zones;
     }
+
 
     public List<Window> getWindows() {
         return windows;

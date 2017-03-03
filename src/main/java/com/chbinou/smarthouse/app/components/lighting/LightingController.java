@@ -1,7 +1,6 @@
 package com.chbinou.smarthouse.app.components.lighting;
 
 import com.chbinou.smarthouse.app.SmartHouseApp;
-import com.chbinou.smarthouse.app.components.model.Lamp;
 import spark.Route;
 
 /**
@@ -16,7 +15,7 @@ public class LightingController
 
         LightingManager.getStatusAllLamps();
 
-        return SmartHouseApp.lightingConfigurationInstance.getLamps();
+        return SmartHouseApp.lightingConfigurationInstance.getZones();
     };
 
     public static Route switchOnLamp = (request, response) ->
@@ -26,21 +25,19 @@ public class LightingController
 
 
 
-        Lamp lamp = SmartHouseApp.lightingConfigurationInstance.getLamps().stream().filter(o -> o.getIdentifier().equals(request.params(":identifier"))).findFirst().get();
 
 
-        LightingManager.switchOnLamp(lamp);
+        LightingManager.switchOnLamp(request.params("identifierzone"),request.params("identifier"));
 
-        return SmartHouseApp.lightingConfigurationInstance.getLamps();
+        return SmartHouseApp.lightingConfigurationInstance.getZones();
     };
     public static Route switchOffLamp  = (request,  response) ->
     {
         response.header("Content-Type","application/json");
-        Lamp lamp = SmartHouseApp.lightingConfigurationInstance.getLamps().stream().filter(o -> o.getIdentifier().equals(request.params("identifier"))).findFirst().get();
 
-        LightingManager.switchOffLamp(lamp);
+        LightingManager.switchOffLamp(request.params("identifierzone"),request.params("identifier"));
 
-        return SmartHouseApp.lightingConfigurationInstance.getLamps() ;
+        return SmartHouseApp.lightingConfigurationInstance.getZones() ;
     };
 
     public static Route switchOffLampAll  = (request,  response) ->
@@ -49,7 +46,7 @@ public class LightingController
 
         LightingManager. switchOffLampAll();
 
-        return SmartHouseApp.lightingConfigurationInstance.getLamps() ;
+        return SmartHouseApp.lightingConfigurationInstance.getZones() ;
     };
 
     public static Route switchOnLampAll  = (request,  response) ->
@@ -58,6 +55,6 @@ public class LightingController
 
         LightingManager. switchOnLampAll();
 
-        return SmartHouseApp.lightingConfigurationInstance.getLamps() ;
+        return SmartHouseApp.lightingConfigurationInstance.getZones() ;
     };
 }

@@ -15,8 +15,7 @@ public class SparkWebContext extends J2EContext
     private final Request request;
 
     private final Response response;
-
-    private String location = null;
+  private String location = null;
 
     public SparkWebContext(final Request request, final Response response)
     {

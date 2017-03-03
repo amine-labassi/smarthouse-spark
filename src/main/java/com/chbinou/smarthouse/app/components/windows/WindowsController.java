@@ -1,7 +1,5 @@
 package com.chbinou.smarthouse.app.components.windows;
 
-import com.chbinou.smarthouse.app.SmartHouseApp;
-import com.chbinou.smarthouse.app.components.model.Window;
 import spark.Route;
 
 /**
@@ -12,8 +10,8 @@ public class WindowsController
     public static Route switchUPWindow  = (request, response) ->
     {
         response.header("Content-Type","application/json");
-        Window window = SmartHouseApp.lightingConfigurationInstance.getWindows().stream().filter(o -> o.getIdentifier().equals("1")).findFirst().get();
-        WindowsManager.switchUPWindow(window);
+
+        WindowsManager.switchUPWindow(request.params("identifierzone"), request.params("identifier"));
 
         return true ;
     };
@@ -21,8 +19,7 @@ public class WindowsController
     public static Route switchDownWindow  = (request,  response) ->
     {
         response.header("Content-Type","application/json");
-        Window window = SmartHouseApp.lightingConfigurationInstance.getWindows().stream().filter(o -> o.getIdentifier().equals("1")).findFirst().get();
-        WindowsManager.switchDownWindow(window);
+        WindowsManager.switchDownWindow(request.params("identifierzone"), request.params("identifier"));
 
         return true ;
     };

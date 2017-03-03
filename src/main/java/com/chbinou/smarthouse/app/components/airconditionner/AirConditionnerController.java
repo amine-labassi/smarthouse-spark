@@ -1,7 +1,6 @@
 package com.chbinou.smarthouse.app.components.airconditionner;
 
 import com.chbinou.smarthouse.app.SmartHouseApp;
-import com.chbinou.smarthouse.app.components.model.AirConditionner;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -16,38 +15,33 @@ public class AirConditionnerController
         response.header("Content-Type","application/json");
 
 
-        return SmartHouseApp.lightingConfigurationInstance.getAirConditionners();
+        return SmartHouseApp.lightingConfigurationInstance.getZones();
     };
 
     public static Route switchOnClimatiseur = (request, response) ->
     {
 
         response.header("Content-Type","application/json");
+        AirConditionnerManager.switchOnClimatiseur(request.params("identifierzone"),request.params("identifier"));
 
-        AirConditionner airConditionner = SmartHouseApp.lightingConfigurationInstance.getAirConditionners().stream().filter(o -> o.getIdentifier().equals("1")).findFirst().get();
-
-
-        AirConditionnerManager.switchOnClimatiseur(airConditionner);
-
-        return SmartHouseApp.lightingConfigurationInstance.getAirConditionners();
+        return SmartHouseApp.lightingConfigurationInstance.getZones();
     };
     public static Route switchOffClimatiseur  = (request,  response) ->
     {
         response.header("Content-Type","application/json");
-        AirConditionner airConditionner = SmartHouseApp.lightingConfigurationInstance.getAirConditionners().stream().filter(o -> o.getIdentifier().equals("1")).findFirst().get();
 
-        AirConditionnerManager.switchOffClimatiseur(airConditionner);
+        AirConditionnerManager.switchOffClimatiseur(request.params("identifierzone"),request.params("identifier"));
 
-        return SmartHouseApp.lightingConfigurationInstance.getAirConditionners() ;
+        return SmartHouseApp.lightingConfigurationInstance.getZones() ;
     };
 
     public static Route switchOffClimatiseurAll  = (request,  response) ->
     {
         response.header("Content-Type","application/json");
 
-        AirConditionnerManager. switchOffClimatiseurAll();
+        AirConditionnerManager.switchOffClimatiseurAll();
 
-        return SmartHouseApp.lightingConfigurationInstance.getAirConditionners() ;
+        return SmartHouseApp.lightingConfigurationInstance.getZones() ;
     };
 
     public static Route switchOnClimatiseurAll  = (request,  response) ->
@@ -56,6 +50,6 @@ public class AirConditionnerController
 
         AirConditionnerManager.switchOnClimatiseurAll();
 
-        return SmartHouseApp.lightingConfigurationInstance.getAirConditionners() ;
+        return SmartHouseApp.lightingConfigurationInstance.getZones() ;
     };
 }

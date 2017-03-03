@@ -10,7 +10,13 @@
             "address": 33
         }
     ],
-    "lamps" : [
+    "zones" : [
+        {
+            "id" : 1,
+            "title" : "Chambre parent",
+
+
+       "lamps" : [
         {
             "identifier" : "1",
             "description" : "2 Lampes (100Watt) chambre parent",
@@ -84,6 +90,8 @@
             "mcpOutput": 34,
             "addressInput": "GPIO B7",
             "addressOutput": "GPIO B6"
+        }]
         }
+
     ]
 }
