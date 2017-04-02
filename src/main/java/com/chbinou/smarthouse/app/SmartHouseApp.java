@@ -10,8 +10,10 @@ import com.chbinou.smarthouse.app.config.Constantes;
 import com.chbinou.smarthouse.app.config.GsonConfiguration;
 import com.chbinou.smarthouse.app.config.security.SecurityFilter;
 import com.chbinou.smarthouse.app.config.security.SmartHouseSecurityConfigFactory;
+import com.chbinou.smarthouse.app.util.ConfigurationReader;
 import com.google.gson.Gson;
 import com.pi4j.io.gpio.GpioController;
+import com.pi4j.io.gpio.GpioFactory;
 import org.pac4j.core.config.Config;
 import spark.Spark;
 
@@ -23,7 +25,7 @@ import static spark.Spark.*;
 public class SmartHouseApp
 {
 
-    public static final GpioController gpio = null;//GpioFactory.getInstance();
+    public static final GpioController gpio = GpioFactory.getInstance();
     public static ElectronicInterfaceConfiguration lightingConfigurationInstance;
 
     public static void main(String[] args) throws Exception
@@ -34,8 +36,8 @@ public class SmartHouseApp
 
         Gson gson = GsonConfiguration.getGsonInstance();
 
-        //lightingConfigurationInstance = ConfigurationReader.parseConfiguration();
-        //ConfigurationReader.init();
+        lightingConfigurationInstance = ConfigurationReader.parseConfiguration();
+        ConfigurationReader.init();
 
         port(80);
         staticFiles.location("/public");
@@ -44,34 +46,29 @@ public class SmartHouseApp
             exception.printStackTrace();
         });
 
-        before(Constantes.Url.LOGIN, new SecurityFilter(config, "DirectFormClient", "hsts,nosniff,noframe,xssprotection,nocache"));
-        before(Constantes.Url.API_SECURE, new SecurityFilter(config, "HeaderClient", "hsts,nosniff,noframe,xssprotection,nocache"));
+        options("/*",  (request, response) -> {
 
-        options("/*",
-            (request, response) -> {
+            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
 
-                String accessControlRequestHeaders = request
-                        .headers("Access-Control-Request-Headers");
+            if (accessControlRequestHeaders != null)
+            {
+                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
+            }
 
-                if (accessControlRequestHeaders != null)
-                {
-                    response.header("Access-Control-Allow-Headers",
-                            accessControlRequestHeaders);
-                }
+            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
 
-                String accessControlRequestMethod = request
-                        .headers("Access-Control-Request-Method");
+            if (accessControlRequestMethod != null)
+            {
+                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
+            }
 
-                if (accessControlRequestMethod != null)
-                {
-                    response.header("Access-Control-Allow-Methods",
-                            accessControlRequestMethod);
-                }
-
-                return "OK";
+            return "OK";
         });
 
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
+
+        before(Constantes.Url.LOGIN, new SecurityFilter(config, "DirectFormClient", "hsts,nosniff,noframe,xssprotection,nocache"));
+        before(Constantes.Url.API_SECURE, new SecurityFilter(config, "HeaderClient", "hsts,nosniff,noframe,xssprotection,nocache"));
 
         // login request
         post(Constantes.Url.LOGIN,"application/json" ,AuthenticationController.login);

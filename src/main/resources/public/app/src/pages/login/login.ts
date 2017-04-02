@@ -28,7 +28,7 @@ export class LoginPage
       urlSearchParams.append('password', this.password);
       let body = urlSearchParams.toString();
 
-      this.http.post('http://localhost/login', body, {headers:headers})
+      this.http.post('http://192.168.99.100/login', body, {headers:headers})
         .subscribe(function(data){
           localStorage.setItem("token", data.text());
           vm.navCtrl.setRoot(DomotiquePage);

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {ZonePage} from "../zone/zone";
+import {Http} from "@angular/http";
 
 @Component({
   selector: 'page-domotique',
@@ -11,7 +12,7 @@ export class DomotiquePage
   items: any = [];
   searchFilter: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams)
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http)
   {
     this.items.push(
       {
@@ -81,6 +82,11 @@ export class DomotiquePage
           }]
       }
     );
+  }
+
+  loadZones()
+  {
+
   }
 
   openNavZonePage(item)

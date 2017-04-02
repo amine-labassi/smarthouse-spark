@@ -72,8 +72,7 @@ public class LightingManager
         for(Zone zone : lightingConfigurationInstance.getZones() ) {
         for (Lamp lamp : zone.getLamps())
         {
-            lamp.setStatus(gpio.isState(PinState.LOW ,lamp.getInputPinInstance()));
-
+            //lamp.setStatus(gpio.isState(PinState.LOW ,lamp.getInputPinInstance()));
         }
     }}
 }

@@ -1,5 +1,7 @@
 package com.chbinou.smarthouse.app.components.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.List;
 
 /**
@@ -7,10 +9,15 @@ import java.util.List;
  */
 public class Zone
 {
+    @Expose
     private String id;
+    @Expose
     private String title;
+    @Expose
     private List<Lamp> lamps;
+    @Expose
     private List<Window> windows;
+    @Expose
     private List<AirConditionner> airConditionners;
 
     public List<Lamp> getLamps() {
