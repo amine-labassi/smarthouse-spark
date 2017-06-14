@@ -2,6 +2,7 @@ package com.chbinou.smarthouse.app.config.security;
 
 import com.chbinou.smarthouse.app.config.SparkWebContext;
 import com.chbinou.smarthouse.app.exception.SecurityGrantedAccessException;
+import org.bouncycastle.math.ec.ECCurve;
 import org.pac4j.core.config.Config;
 import org.pac4j.core.engine.DefaultSecurityLogic;
 import org.pac4j.core.engine.SecurityLogic;
@@ -52,6 +53,9 @@ public class SecurityFilter implements Filter
         this.authorizers = authorizers;
         this.matchers = matchers;
         this.multiProfile = multiProfile;
+    }
+
+    public SecurityFilter(ECCurve.Config config, String headerClient, String authorizers) {
     }
 
     @Override

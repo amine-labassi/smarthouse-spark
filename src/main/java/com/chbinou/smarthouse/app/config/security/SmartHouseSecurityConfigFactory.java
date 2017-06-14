@@ -21,7 +21,6 @@ public class SmartHouseSecurityConfigFactory implements ConfigFactory
     public final static String KEY1 = "JaNdRgUkXp2s5v8y/B?E(H+MbPeShVmY";
     public final static String KEY2 = "z$C&F)H@McQfTjWnZr4u7x!A%D*G-KaP";
 
-    @Override
     public Config build()
     {
         DirectFormClient directFormClient = new DirectFormClient(new SimpleTestUsernamePasswordAuthenticator());

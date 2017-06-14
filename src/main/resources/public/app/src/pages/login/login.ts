@@ -46,7 +46,6 @@ export class LoginPage
 
   showAlert(msg: string)
   {
-    var vm = this;
     let alert = this.alertCtrl.create({
       title: 'Oops!!',
       subTitle: msg,
