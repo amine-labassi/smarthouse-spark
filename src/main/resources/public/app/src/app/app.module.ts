@@ -6,6 +6,8 @@ import { DomotiquePage } from '../pages/domotique/domotique';
 import { FavorisPage } from '../pages/favoris/favoris';
 import { ZonePage } from '../pages/zone/zone';
 import {TitlePipe} from "../pipes/title-pipe";
+import {BrowserModule} from "@angular/platform-browser";
+import {HttpModule} from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import {TitlePipe} from "../pipes/title-pipe";
     TitlePipe
   ],
   imports: [
+    HttpModule,
+    BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
