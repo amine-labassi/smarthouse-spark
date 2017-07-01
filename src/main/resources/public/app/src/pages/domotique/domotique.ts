@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {ZonePage} from "../zone/zone";
 import {Headers, Http, RequestOptions} from "@angular/http";
-import {ENV} from "../../config/environment.prod";
+import {ENV} from "../../config/environment.dev";
 
 @Component({
   selector: 'page-domotique',

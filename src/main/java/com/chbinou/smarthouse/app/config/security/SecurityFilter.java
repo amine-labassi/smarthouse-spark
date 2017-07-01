@@ -6,7 +6,6 @@ import org.bouncycastle.math.ec.ECCurve;
 import org.pac4j.core.config.Config;
 import org.pac4j.core.engine.DefaultSecurityLogic;
 import org.pac4j.core.engine.SecurityLogic;
-import org.pac4j.core.http.J2ENopHttpActionAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Filter;
@@ -59,16 +58,11 @@ public class SecurityFilter implements Filter
     }
 
     @Override
-    public void handle(final Request request, final Response response) {
+    public void handle(final Request request, final Response response)
+    {
 
         assertNotNull("securityLogic", securityLogic);
         assertNotNull("config", config);
-
-        // exclude options method
-        if("OPTIONS".equals(request.requestMethod()))
-        {
-            return;
-        }
 
         final SparkWebContext context = new SparkWebContext(request, response, config.getSessionStore());
 

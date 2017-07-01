@@ -9,6 +9,8 @@ import org.pac4j.jwt.profile.JwtGenerator;
 import org.pac4j.jwt.profile.JwtProfile;
 import spark.Route;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Date;
 
 import static spark.Spark.halt;
@@ -34,12 +36,12 @@ public class AuthenticationController
         jwtProfile.setId("smartHouseOwner");
         jwtProfile.setClientName("smartHouseOwner");
 
-        Date now = new Date();
+        LocalDateTime now = LocalDateTime.now(ZoneOffset.UTC);
 
-        ((UserProfile)jwtProfile).addAttribute(JwtClaims.ISSUER, "smartHouseOwner");
-        //((UserProfile)jwtProfile).addAttribute(JwtClaims.SUBJECT, "smartHouseOwner");
-        ((UserProfile)jwtProfile).addAttribute(JwtClaims.ISSUED_AT, now);
-        ((UserProfile)jwtProfile).addAttribute(JwtClaims.EXPIRATION_TIME, "smartHouseOwner");
+        ((UserProfile)jwtProfile).addAttribute(JwtClaims.ISSUER, "Chbinou.Yassin");
+        //((UserProfile)jwtProfile).addAttribute(JwtClaims.SUBJECT, "smartHouse.Owner");
+        ((UserProfile)jwtProfile).addAttribute(JwtClaims.ISSUED_AT, Date.from(now.toInstant(ZoneOffset.UTC)));
+        ((UserProfile)jwtProfile).addAttribute(JwtClaims.EXPIRATION_TIME, Date.from(now.plusMinutes(10).toInstant(ZoneOffset.UTC)));
 
         return jwtGenerator.generate(jwtProfile);
     };
