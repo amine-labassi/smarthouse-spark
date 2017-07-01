@@ -7,7 +7,7 @@
   <ion-card class="cards-list-zone-lamps">
     <ion-card-header>Lampes</ion-card-header>
     <ion-card-content>
-      <ion-slides [options]="shSlideOptions">
+      <ion-slides [pager]="true">
         <ion-slide *ngFor="let lamp of zone.lamps">
           <h2>{{ lamp.title }}</h2>
           <ion-grid>
@@ -33,7 +33,7 @@
   <ion-card class="cards-list-zone-windows">
     <ion-card-header style="background-color: lightskyblue; margin-bottom: 15px;">Fenêtres</ion-card-header>
     <ion-card-content>
-      <ion-slides [options]="shSlideOptions">
+      <ion-slides [pager]="true">
         <ion-slide *ngFor="let mywindow of zone.windows">
           <h2>{{ mywindow.title }}</h2>
           <ion-grid>
@@ -59,7 +59,7 @@
   <ion-card class="cards-list-zone-airconditionners">
     <ion-card-header>Climatisation</ion-card-header>
     <ion-card-content>
-      <ion-slides [options]="shSlideOptions">
+      <ion-slides [pager]="true">
         <ion-slide *ngFor="let airconditionner of zone.airconditionners">
           <h2>{{ airconditionner.title }}</h2>
           <ion-grid>
