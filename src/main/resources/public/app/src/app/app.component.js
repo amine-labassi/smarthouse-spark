@@ -11,21 +11,19 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { LoginPage } from '../pages/login/login';
-import { DomotiquePage } from '../pages/domotique/domotique';
-import { FavorisPage } from '../pages/favoris/favoris';
-import { ZonePage } from '../pages/zone/zone';
-export var MyApp = (function () {
+var MyApp = (function () {
+    /*pages: Array<{title: string, component: any}>;*/
     function MyApp(platform) {
         this.platform = platform;
         this.rootPage = LoginPage;
         this.initializeApp();
         // used for an example of ngFor and navigation
-        this.pages = [
-            { title: 'SmartHouse', component: LoginPage },
-            { title: 'Domotique', component: DomotiquePage },
-            { title: 'Favoris', component: FavorisPage },
-            { title: 'Zone', component: ZonePage }
-        ];
+        /*this.pages = [
+          { title: 'SmartHouse', component: LoginPage },
+          { title: 'Domotique', component: DomotiquePage },
+          { title: 'Favoris', component: FavorisPage },
+          { title: 'Zone', component: ZonePage }
+        ];*/
     }
     MyApp.prototype.initializeApp = function () {
         this.platform.ready().then(function () {
@@ -35,21 +33,17 @@ export var MyApp = (function () {
             Splashscreen.hide();
         });
     };
-    MyApp.prototype.openPage = function (page) {
-        // Reset the content nav to have just this page
-        // we wouldn't want the back button to show in this scenario
-        this.nav.setRoot(page.component);
-    };
-    __decorate([
-        ViewChild(Nav), 
-        __metadata('design:type', Nav)
-    ], MyApp.prototype, "nav", void 0);
-    MyApp = __decorate([
-        Component({
-            templateUrl: 'app.html'
-        }), 
-        __metadata('design:paramtypes', [Platform])
-    ], MyApp);
     return MyApp;
 }());
+__decorate([
+    ViewChild(Nav),
+    __metadata("design:type", Nav)
+], MyApp.prototype, "nav", void 0);
+MyApp = __decorate([
+    Component({
+        templateUrl: 'app.html'
+    }),
+    __metadata("design:paramtypes", [Platform])
+], MyApp);
+export { MyApp };
 //# sourceMappingURL=app.component.js.map
