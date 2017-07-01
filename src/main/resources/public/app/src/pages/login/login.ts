@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Http, URLSearchParams, Headers} from '@angular/http';
 import {NavController, NavParams, AlertController} from 'ionic-angular';
 import {DomotiquePage} from "../domotique/domotique";
-import {ENV} from "../../config/environment.prod";
+import {ENV} from "../../config/environment.dev";
 
 @Component({
   selector: 'page-login',

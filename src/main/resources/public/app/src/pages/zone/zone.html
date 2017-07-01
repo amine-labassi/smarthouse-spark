@@ -4,12 +4,12 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-card class="cards-list-zone-lamps">
+  <ion-card class="cards-list-zone-lamps" *ngIf="zone.lamps && zone.lamps.length > 0">
     <ion-card-header>Lampes</ion-card-header>
     <ion-card-content>
       <ion-slides [pager]="true">
         <ion-slide *ngFor="let lamp of zone.lamps">
-          <h2>{{ lamp.title }}</h2>
+          <h2>{{ lamp.description }}</h2>
           <ion-grid>
             <ion-row center>
               <ion-col width-100>
@@ -30,7 +30,7 @@
       </ion-slides>
     </ion-card-content>
   </ion-card>
-  <ion-card class="cards-list-zone-windows">
+  <ion-card class="cards-list-zone-windows" *ngIf="zone.windows && zone.windows.length > 0">
     <ion-card-header style="background-color: lightskyblue; margin-bottom: 15px;">Fenêtres</ion-card-header>
     <ion-card-content>
       <ion-slides [pager]="true">
@@ -56,7 +56,7 @@
       </ion-slides>
     </ion-card-content>
   </ion-card>
-  <ion-card class="cards-list-zone-airconditionners">
+  <ion-card class="cards-list-zone-airconditionners" *ngIf="zone.airconditionners && zone.airconditionners.length > 0">
     <ion-card-header>Climatisation</ion-card-header>
     <ion-card-content>
       <ion-slides [pager]="true">

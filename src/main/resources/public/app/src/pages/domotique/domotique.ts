@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {ZonePage} from "../zone/zone";
 import {Headers, Http, RequestOptions} from "@angular/http";
-import {ENV} from "../../config/environment.prod";
+import {ENV} from "../../config/environment.dev";
+import 'rxjs/Rx';
 
 @Component({
   selector: 'page-domotique',
@@ -23,13 +24,16 @@ export class DomotiquePage
     headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
     let options = new RequestOptions({ headers: headers });
 
-    vm.items = vm.http.get(ENV.API_URL + "/api/switching/lamp/all/status", options)
-      .subscribe(function(data){
-          vm.items = JSON.parse(data['_body']);
+    vm.http.get(ENV.API_URL + "/api/switching/lamp/all/status", options)
+      .map(response => response.json())
+      .subscribe(
+        function(data){
+          vm.items = data;
         },
         function (error) {
           vm.showAlert('Je n\'arrive pas à m\'initialiser');
-        });
+        }
+      );
 /*
     this.items.push(
       {

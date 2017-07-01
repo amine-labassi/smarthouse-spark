@@ -8,28 +8,123 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-/*
-  Generated class for the Domotique page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
-export var DomotiquePage = (function () {
-    function DomotiquePage(navCtrl, navParams) {
+import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { ZonePage } from "../zone/zone";
+import { Headers, Http, RequestOptions } from "@angular/http";
+import { ENV } from "../../config/environment.dev";
+import 'rxjs/Rx';
+var DomotiquePage = (function () {
+    function DomotiquePage(navCtrl, navParams, http, alertCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.http = http;
+        this.alertCtrl = alertCtrl;
+        this.items = [];
+        this.searchFilter = '';
+        var vm = this;
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        var options = new RequestOptions({ headers: headers });
+        vm.http.get(ENV.API_URL + "/api/switching/lamp/all/status", options)
+            .map(function (response) { return response.json(); })
+            .subscribe(function (data) {
+            vm.items = JSON.parse(data['_body']);
+        }, function (error) {
+            vm.showAlert('Je n\'arrive pas à m\'initialiser');
+        });
+        /*
+            this.items.push(
+              {
+                'id':1,
+                'title' : 'Chambre parents',
+                'lamps' : [
+                  {
+                    'id' : 11,
+                    'title' : 'Plafonnier 3 lampes',
+                    'status' : true
+                  },
+                  {
+                    'id' : 12,
+                    'title' : 'Plafonnier 3 lampes',
+                    'status' : false
+                }],
+                'windows' : [
+                  {
+                    'id' : 13,
+                    'title' : 'Fenêtre face'
+                  },
+                  {
+                    'id' : 14,
+                    'title' : 'Fenêtre gauche'
+                  }],
+                'airconditionners' : [
+                  {
+                    'id' : 15,
+                    'title' : 'Individuel',
+                    'temperature' : 22,
+                    'max' : 28,
+                    'min' : 6
+                  }]
+              }
+            );
+            this.items.push(
+              {
+                'id':2,
+                'title' : 'Chambre garçons',
+                'lamps' : [
+                  {
+                    'id' : 21,
+                    'title' : 'Plafonnier 3 lampes',
+                    'status' : true
+                  },
+                  {
+                    'id' : 22,
+                    'title' : 'Plafonnier 3 lampes',
+                    'status' : true
+                  }],
+                'windows' : [
+                  {
+                    'id' : 23,
+                    'title' : 'Fenêtre face 1'
+                  },
+                  {
+                    'id' : 24,
+                    'title' : 'Fenêtre face 2'
+                  }],
+                'airconditionners' : [
+                  {
+                    'id' : 25,
+                    'title' : 'Individuel',
+                    'temperature' : 18,
+                    'max' : 28,
+                    'min' : 6
+                  }]
+              }
+            );*/
     }
-    DomotiquePage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad DomotiquePage');
+    DomotiquePage.prototype.loadZones = function () {
     };
-    DomotiquePage = __decorate([
-        Component({
-            selector: 'page-domotique',
-            templateUrl: 'domotique.html'
-        }), 
-        __metadata('design:paramtypes', [NavController, NavParams])
-    ], DomotiquePage);
+    DomotiquePage.prototype.openNavZonePage = function (item) {
+        this.navCtrl.push(ZonePage, { 'item': item });
+    };
+    DomotiquePage.prototype.showAlert = function (msg) {
+        var alert = this.alertCtrl.create({
+            title: 'Oops!!',
+            subTitle: msg,
+            buttons: ['OK']
+        });
+        alert.present();
+    };
     return DomotiquePage;
 }());
+DomotiquePage = __decorate([
+    Component({
+        selector: 'page-domotique',
+        templateUrl: 'domotique.html'
+    }),
+    __metadata("design:paramtypes", [NavController, NavParams, Http, AlertController])
+], DomotiquePage);
+export { DomotiquePage };
 //# sourceMappingURL=domotique.js.map

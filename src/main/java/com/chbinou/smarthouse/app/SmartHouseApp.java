@@ -47,7 +47,7 @@ public class SmartHouseApp
             exception.printStackTrace();
         });
 
-      /*  options("*//*",  (request, response) -> {
+      options("*//*",  (request, response) -> {
 
             String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
 
@@ -64,12 +64,12 @@ public class SmartHouseApp
             }
 
             return "OK";
-        });*/
+        });
 
-       // before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
+        before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
-        //before(Constantes.Url.LOGIN, new SecurityFilter(config, "DirectFormClient", "hsts,nosniff,noframe,xssprotection,nocache"));
-        //before(Constantes.Url.API_SECURE, new SecurityFilter(config, "HeaderClient", "hsts,nosniff,noframe,xssprotection,nocache"));
+        before(Constantes.Url.LOGIN, new SecurityFilter(config, "DirectFormClient", "hsts,nosniff,noframe,xssprotection,nocache","excludedPublicResources,securedHttpMethod"));
+        before(Constantes.Url.API_SECURE, new SecurityFilter(config, "HeaderClient", "hsts,nosniff,noframe,xssprotection,nocache", "excludedPublicResources,securedHttpMethod"));
 
         // login request*/
         post(Constantes.Url.LOGIN,"application/json" ,AuthenticationController.login);
