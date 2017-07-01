@@ -1,13 +1,24 @@
 {
   "mcps": [
     {
-      "address": 32
+      "address": 32,
+      "porta": 0 ,
+      "portb": 0
     },
     {
-      "address": 34
+      "address": 33,
+      "porta": 0,
+      "portb": 0
     },
     {
-      "address": 33
+      "address": 34,
+      "porta":255,
+      "portb":0
+    },
+    {
+      "address": 35,
+      "porta": 255,
+      "portb": 255
     }
   ],
   "zones": [
@@ -19,77 +30,94 @@
           "identifier": "1",
           "description": "2 Lampes (100Watt) chambre parent",
           "status": true,
-          "mcpInput": 34,
+          "mcpInput": 35,
           "mcpOutput": 32,
-          "addressInput": "GPIO B0",
-          "addressOutput": "GPIO B1"
+          "addressInput": "GPIO A0",
+          "addressOutput": "GPIO A5"
         },
         {
           "identifier": "2",
           "description": "2 Lampes (100Watt) chambre parent",
           "status": true,
-          "mcpInput": 34,
-          "mcpOutput": 32,
-          "addressInput": "GPIO B1",
-          "addressOutput": "GPIO B2"
+          "mcpInput": 35,
+          "mcpOutput": 34,
+          "addressInput": "GPIO A1",
+          "addressOutput": "GPIO B7"
         },
         {
           "identifier": "3",
           "description": "2 Lampes (100Watt) chambre parent",
           "status": true,
-          "mcpInput": 34,
-          "mcpOutput": 32,
-          "addressInput": "GPIO B2",
-          "addressOutput": "GPIO B3"
+          "mcpInput": 35,
+          "mcpOutput": 34,
+          "addressInput": "GPIO A2",
+          "addressOutput": "GPIO B6"
         },
         {
           "identifier": "4",
           "description": "2 Lampes (100Watt) chambre parent",
           "status": true,
-          "mcpInput": 34,
-          "mcpOutput": 32,
-          "addressInput": "GPIO B3",
-          "addressOutput": "GPIO B4"
+          "mcpInput": 35,
+          "mcpOutput": 34,
+          "addressInput": "GPIO A3",
+          "addressOutput": "GPIO B5"
         },
         {
           "identifier": "5",
           "description": "2 Lampes (100Watt) chambre parent",
           "status": true,
           "mcpInput": 34,
-          "mcpOutput": 32,
-          "addressInput": "GPIO B4",
-          "addressOutput": "GPIO B5"
+          "mcpOutput": 34,
+          "addressInput": "GPIO A3",
+          "addressOutput": "GPIO B4"
         },
         {
           "identifier": "6",
           "description": "2 Lampes (100Watt) chambre parent",
           "status": true,
           "mcpInput": 34,
-          "mcpOutput": 32,
-          "addressInput": "GPIO B5",
-          "addressOutput": "GPIO B6"
-        }
-      ],
-      "windows": [
+          "mcpOutput": 34,
+          "addressInput": "GPIO A4",
+          "addressOutput": "GPIO B3"
+        },
         {
-          "identifier": "1",
-          "mcpUp": 32,
-          "mcpDown": 32,
-          "addressUp": "GPIO A1",
-          "addressDown": "GPIO A2"
-        }
-      ],
-      "airConditionners": [
-        {
-          "identifier": "1",
+          "identifier": "7",
           "description": "2 Lampes (100Watt) chambre parent",
           "status": true,
           "mcpInput": 34,
           "mcpOutput": 34,
-          "addressInput": "GPIO B7",
-          "addressOutput": "GPIO B6"
+          "addressInput": "GPIO A5",
+          "addressOutput": "GPIO B2"
+        },
+        {
+          "identifier": "8",
+          "description": "2 Lampes (100Watt) chambre parent",
+          "status": true,
+          "mcpInput": 34,
+          "mcpOutput": 34,
+          "addressInput": "GPIO A6",
+          "addressOutput": "GPIO B1"
+        },
+        {
+          "identifier": "8",
+          "description": "2 Lampes (100Watt) chambre parent",
+          "status": true,
+          "mcpInput": 34,
+          "mcpOutput": 34,
+          "addressInput": "GPIO A7",
+          "addressOutput": "GPIO B0"
         }
+      ],
+      "windows": [
+
+      ],
+      "airConditionners": [
+
       ]
     }
-  ]
+  ],
+  "activator": {
+    "mcp": 32,
+    "address": "GPIO A7"
+  }
 }

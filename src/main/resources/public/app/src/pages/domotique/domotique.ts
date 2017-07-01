@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {ZonePage} from "../zone/zone";
-import {Http} from "@angular/http";
+import {Headers, Http, RequestOptions} from "@angular/http";
+import {ENV} from "../../config/environment.prod";
 
 @Component({
   selector: 'page-domotique',
@@ -12,8 +13,24 @@ export class DomotiquePage
   items: any = [];
   searchFilter: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http)
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController)
   {
+    var vm = this;
+
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+    let options = new RequestOptions({ headers: headers });
+
+    vm.items = vm.http.get(ENV.API_URL + "/api/switching/lamp/all/status", options)
+      .subscribe(function(data){
+          vm.items = JSON.parse(data['_body']);
+        },
+        function (error) {
+          vm.showAlert('Je n\'arrive pas à m\'initialiser');
+        });
+/*
     this.items.push(
       {
         'id':1,
@@ -81,7 +98,7 @@ export class DomotiquePage
             'min' : 6
           }]
       }
-    );
+    );*/
   }
 
   loadZones()
@@ -92,5 +109,16 @@ export class DomotiquePage
   openNavZonePage(item)
   {
     this.navCtrl.push(ZonePage, { 'item': item });
+  }
+
+
+  showAlert(msg: string)
+  {
+    let alert = this.alertCtrl.create({
+      title: 'Oops!!',
+      subTitle: msg,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

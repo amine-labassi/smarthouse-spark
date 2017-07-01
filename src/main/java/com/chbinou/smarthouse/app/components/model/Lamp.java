@@ -22,6 +22,18 @@ public class Lamp
     private String addressInput;
     @Expose(serialize = false)
     private String addressOutput;
+    @Expose
+    private int port;
+
+    public int getPort() {
+
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
     //@Expose(deserialize = false, serialize = false)
     private GpioPinDigitalOutput outputPinInstance;
     private GpioPinDigitalInput inputPinInstance;

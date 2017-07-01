@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Http, URLSearchParams, Headers} from '@angular/http';
 import {NavController, NavParams, AlertController} from 'ionic-angular';
 import {DomotiquePage} from "../domotique/domotique";
+import {ENV} from "../../config/environment.prod";
 
 @Component({
   selector: 'page-login',
@@ -28,7 +29,7 @@ export class LoginPage
       urlSearchParams.append('password', this.password);
       let body = urlSearchParams.toString();
 
-      this.http.post('http://192.168.99.100/login', body, {headers:headers})
+      this.http.post(ENV.API_URL + '/login', body, {headers:headers})
         .subscribe(function(data){
           localStorage.setItem("token", data.text());
           vm.navCtrl.setRoot(DomotiquePage);

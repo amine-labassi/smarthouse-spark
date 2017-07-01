@@ -64,6 +64,12 @@ public class SecurityFilter implements Filter
         assertNotNull("securityLogic", securityLogic);
         assertNotNull("config", config);
 
+        // exclude options method
+        if("OPTIONS".equals(request.requestMethod()))
+        {
+            return;
+        }
+
         final SparkWebContext context = new SparkWebContext(request, response, config.getSessionStore());
 
         try

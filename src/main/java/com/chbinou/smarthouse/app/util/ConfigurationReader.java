@@ -6,6 +6,7 @@ import com.chbinou.smarthouse.app.config.GsonConfiguration;
 import com.pi4j.gpio.extension.mcp.MCP23017GpioProvider;
 import com.pi4j.gpio.extension.mcp.MCP23017Pin;
 import com.pi4j.io.gpio.Pin;
+import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CFactory;
@@ -40,7 +41,7 @@ public class ConfigurationReader
           {
             Mcp mcp = findMcp(lamp.getMcpOutput());
             Pin pin = findPin(lamp.getAddressOutput());
-            lamp.setOutputPinInstance(SmartHouseApp.gpio.provisionDigitalOutputPin(mcp.getInstance(),pin));
+            lamp.setOutputPinInstance(SmartHouseApp.gpio.provisionDigitalOutputPin(mcp.getInstance(),pin,PinState.HIGH));
 
             mcp = findMcp(lamp.getMcpInput());
             pin = findPin(lamp.getAddressInput());
@@ -50,22 +51,22 @@ public class ConfigurationReader
           {
           Mcp mcp =findMcp(window.getMcpUp());
           Pin pin =findPin(window.getAddressUp());
-          window.setUpPinInstanse(SmartHouseApp.gpio.provisionDigitalOutputPin(mcp.getInstance(),pin));
+          window.setUpPinInstanse(SmartHouseApp.gpio.provisionDigitalOutputPin(mcp.getInstance(), pin, PinState.HIGH));
 
           mcp =findMcp(window.getMcpDown());
           pin =findPin(window.getAddressDown());
-          window.setDownPinInstanse(SmartHouseApp.gpio.provisionDigitalOutputPin(mcp.getInstance(),pin));
+          window.setDownPinInstanse(SmartHouseApp.gpio.provisionDigitalOutputPin(mcp.getInstance(), pin, PinState.HIGH));
           }
 
           for(AirConditionner airConditionner : zone.getAirConditionners())
           {
             Mcp mcp = findMcp(airConditionner.getMcpOutput());
             Pin pin = findPin(airConditionner.getAddressOutput());
-            airConditionner.setOutputPinInstance(SmartHouseApp.gpio.provisionDigitalOutputPin(mcp.getInstance(),pin));
+            airConditionner.setOutputPinInstance(SmartHouseApp.gpio.provisionDigitalOutputPin(mcp.getInstance(), pin, PinState.HIGH));
 
             mcp = findMcp(airConditionner.getMcpInput());
             pin = findPin(airConditionner.getAddressInput());
-            airConditionner.setInputPinInstance(SmartHouseApp.gpio.provisionDigitalInputPin(mcp.getInstance(),pin));
+            airConditionner.setInputPinInstance(SmartHouseApp.gpio.provisionDigitalInputPin(mcp.getInstance(), pin));
           }
           for(Lamp lamp : zone.getLamps())
           {
@@ -76,6 +77,12 @@ public class ConfigurationReader
             airConditionner.setStatus(SmartHouseApp.gpio.isState(PinState.HIGH, airConditionner.getInputPinInstance()));
           }
         }
+
+        Activator activator = SmartHouseApp.lightingConfigurationInstance.getActivator();
+        Mcp mcp =findMcp(activator.getMcp());
+        Pin pin =findPin(activator.getAddress());
+        activator.setOutputPinInstance(SmartHouseApp.gpio.provisionDigitalOutputPin(mcp.getInstance(), pin, PinState.HIGH));
+
 
 }
 

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {AlertController, NavController, NavParams} from 'ionic-angular';
+import {Headers, Http, RequestOptions} from "@angular/http";
+import {Zone} from "../../model/Zone";
+import {ENV} from "../../config/environment.prod";
 
 @Component({
   selector: 'page-zone',
@@ -8,19 +11,33 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class ZonePage
 {
-  zone:any[];
+  zone:Zone;
   shSlideOptions = {
     pager:true
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams)
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController)
   {
     this.zone = navParams.get('item');
   }
 
   switchOnLamp(lamp:any)
   {
-    lamp.status = true;
+    var vm = this;
+
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+    let options = new RequestOptions({ headers: headers });
+
+    vm.http.get(ENV.API_URL + "/api/switching/lamp/" + vm.zone.id +"/" + lamp.id + "/on", options)
+      .subscribe(function(data){
+          lamp.status = true;
+        },
+        function (error) {
+          vm.showAlert('Erreur d\'allumage de la lampe : ' + vm.zone.title + ':' + lamp.id);
+        });
   }
 
   switchOffLamp(lamp:any)
@@ -52,5 +69,15 @@ export class ZonePage
     {
       airconditionner.temperature = airconditionner.temperature - 1;
     }
+  }
+
+  showAlert(msg: string)
+  {
+    let alert = this.alertCtrl.create({
+      title: 'Oops!!',
+      subTitle: msg,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

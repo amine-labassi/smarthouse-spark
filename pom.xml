@@ -65,22 +65,22 @@
         <dependency>
             <groupId>com.sparkjava</groupId>
             <artifactId>spark-core</artifactId>
-            <version>2.5.4</version>
+            <version>2.6.0</version>
         </dependency>
         <dependency>
             <groupId>org.pac4j</groupId>
             <artifactId>pac4j-core</artifactId>
-            <version>1.9.6</version>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.pac4j</groupId>
             <artifactId>pac4j-http</artifactId>
-            <version>1.9.6</version>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.pac4j</groupId>
             <artifactId>pac4j-jwt</artifactId>
-            <version>1.9.6</version>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -104,6 +104,8 @@
         </dependency>
 
     </dependencies>
+
+
 
 
 </project>

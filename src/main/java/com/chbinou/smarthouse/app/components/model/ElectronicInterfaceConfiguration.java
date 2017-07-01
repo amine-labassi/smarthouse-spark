@@ -15,6 +15,13 @@ public class ElectronicInterfaceConfiguration
     @Expose
     private List<Mcp> mcps;
 
+    @Expose
+    private Activator activator;
+
+    public Activator getActivator() {
+        return activator;
+    }
+
     public List<Zone> getZones() {
         return zones;
     }

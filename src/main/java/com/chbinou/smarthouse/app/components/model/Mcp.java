@@ -11,6 +11,29 @@ public class Mcp
     @Expose
     private int address;
 
+    @Expose
+    private int porta;
+
+    public int getPorta() {
+        return porta;
+    }
+
+    public void setPorta(int porta) {
+        this.porta = porta;
+    }
+
+    public int getPortb() {
+
+        return portb;
+    }
+
+    public void setPortb(int portb) {
+        this.portb = portb;
+    }
+
+    @Expose
+    private int portb;
+
     public MCP23017GpioProvider getInstance() {
         return instance;
     }

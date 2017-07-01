@@ -2,7 +2,7 @@ package com.chbinou.smarthouse.app.components.auth;
 
 import com.chbinou.smarthouse.app.config.security.SmartHouseSecurityConfigFactory;
 import org.pac4j.core.profile.UserProfile;
-import org.pac4j.jwt.JwtClaims;
+import org.pac4j.core.profile.jwt.JwtClaims;
 import org.pac4j.jwt.config.encryption.SecretEncryptionConfiguration;
 import org.pac4j.jwt.config.signature.SecretSignatureConfiguration;
 import org.pac4j.jwt.profile.JwtGenerator;
@@ -38,8 +38,8 @@ public class AuthenticationController
 
         ((UserProfile)jwtProfile).addAttribute(JwtClaims.ISSUER, "smartHouseOwner");
         //((UserProfile)jwtProfile).addAttribute(JwtClaims.SUBJECT, "smartHouseOwner");
-        //((UserProfile)jwtProfile).addAttribute(JwtClaims.ISSUED_AT, now);
-        //((UserProfile)jwtProfile).addAttribute(JwtClaims.EXPIRATION_TIME, "smartHouseOwner");
+        ((UserProfile)jwtProfile).addAttribute(JwtClaims.ISSUED_AT, now);
+        ((UserProfile)jwtProfile).addAttribute(JwtClaims.EXPIRATION_TIME, "smartHouseOwner");
 
         return jwtGenerator.generate(jwtProfile);
     };
