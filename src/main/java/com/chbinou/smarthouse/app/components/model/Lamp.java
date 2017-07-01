@@ -13,6 +13,8 @@ public class Lamp
     @Expose
     private String identifier;
     @Expose
+    private String description;
+    @Expose
     private boolean status;
     @Expose(serialize = false)
     private int mcpInput;
@@ -107,7 +109,11 @@ public class Lamp
         this.addressOutput = addressOutput;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
-
-
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
