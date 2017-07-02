@@ -8,6 +8,7 @@ import { ZonePage } from '../pages/zone/zone';
 import {TitlePipe} from "../pipes/title-pipe";
 import {BrowserModule} from "@angular/platform-browser";
 import {HttpModule} from "@angular/http";
+import {SmartHouseAppBroadcaster} from "../config/SmartHouseAppBroadcaster";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,9 @@ import {HttpModule} from "@angular/http";
     FavorisPage,
     ZonePage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    SmartHouseAppBroadcaster
+  ]
 })
 export class AppModule {}
