@@ -22,10 +22,10 @@ public class Constantes
         String API_SWITCHON_LAMP_ALL            = "/api/switching/lamp/all/on";
         String API_SWITCHOFF_LAMP_ALL           = "/api/switching/lamp/all/off";
 
-        String API_SWITCHON_CLIMATISEUR         = "/api/switching/lamp/:identifierzone/:identifier/on";
-        String API_SWITCHOFF_CLIMATISEUR        = "/api/switching/lamp/:identifierzone/:identifier/off";
-        String API_SWITCHON_CLIMATISEUR_ALL     = "/api/switching/lamp/all/on";
-        String API_SWITCHOFF_CLIMATISEUR_ALL    = "/api/switching/lamp/all/off";
+        String API_SWITCHON_CLIMATISEUR         = "/api/switching/climatiseur/:identifierzone/:identifier/on";
+        String API_SWITCHOFF_CLIMATISEUR        = "/api/switching/climatiseur/:identifierzone/:identifier/off";
+        String API_SWITCHON_CLIMATISEUR_ALL     = "/api/switching/climatiseur/all/on";
+        String API_SWITCHOFF_CLIMATISEUR_ALL    = "/api/switching/climatiseur/all/off";
 
         String API_SWITCHUP_WINDOW              = "/api/switching/window/:identifierzone/:identifier/up";
         String API_SWITCHDOWN_WINDOW            = "/api/switching/window/:identifierzone/:identifier/down";

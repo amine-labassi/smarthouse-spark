@@ -12,12 +12,15 @@ import { Http, URLSearchParams, Headers } from '@angular/http';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { DomotiquePage } from "../domotique/domotique";
 import { ENV } from "../../config/environment.dev";
+import { $WebSocket } from "angular2-websocket/angular2-websocket";
+import { SmartHouseAppBroadcaster } from "../../config/SmartHouseAppBroadcaster";
 var LoginPage = (function () {
-    function LoginPage(navCtrl, navParams, http, alertCtrl) {
+    function LoginPage(navCtrl, navParams, http, alertCtrl, broadcaster) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.http = http;
         this.alertCtrl = alertCtrl;
+        this.broadcaster = broadcaster;
     }
     LoginPage.prototype.doLogin = function () {
         var vm = this;
@@ -31,11 +34,19 @@ var LoginPage = (function () {
         this.http.post(ENV.API_URL + '/login', body, { headers: headers })
             .subscribe(function (data) {
             localStorage.setItem("token", data.text());
+            vm.initializeWebSocket();
             vm.navCtrl.setRoot(DomotiquePage);
         }, function (error) {
             // TODO
             vm.showAlert('La domotique est indisponible');
         });
+    };
+    LoginPage.prototype.initializeWebSocket = function () {
+        var vm = this;
+        var ws = new $WebSocket(ENV.WS_URL + "/push");
+        ws.onMessage(function (msg) {
+            vm.broadcaster.broadcast('configObject', msg.data);
+        }, { autoApply: false });
     };
     LoginPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad LoginPage');
@@ -55,7 +66,7 @@ LoginPage = __decorate([
         selector: 'page-login',
         templateUrl: 'login.html'
     }),
-    __metadata("design:paramtypes", [NavController, NavParams, Http, AlertController])
+    __metadata("design:paramtypes", [NavController, NavParams, Http, AlertController, SmartHouseAppBroadcaster])
 ], LoginPage);
 export { LoginPage };
 //# sourceMappingURL=login.js.map

@@ -13,98 +13,38 @@ import { ZonePage } from "../zone/zone";
 import { Headers, Http, RequestOptions } from "@angular/http";
 import { ENV } from "../../config/environment.dev";
 import 'rxjs/Rx';
+import { SmartHouseAppBroadcaster } from "../../config/SmartHouseAppBroadcaster";
 var DomotiquePage = (function () {
-    function DomotiquePage(navCtrl, navParams, http, alertCtrl) {
+    function DomotiquePage(navCtrl, navParams, http, alertCtrl, broadcaster) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.http = http;
         this.alertCtrl = alertCtrl;
+        this.broadcaster = broadcaster;
         this.items = [];
         this.searchFilter = '';
+        var vm = this;
+        vm.loadZones();
+        vm.broadcaster.on('configObject')
+            .subscribe(function (msg) {
+            vm.items = JSON.parse(msg);
+        });
+    }
+    DomotiquePage.prototype.loadZones = function () {
         var vm = this;
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
         var options = new RequestOptions({ headers: headers });
+        vm.items = [];
         vm.http.get(ENV.API_URL + "/api/switching/lamp/all/status", options)
             .map(function (response) { return response.json(); })
             .subscribe(function (data) {
-            vm.items = JSON.parse(data['_body']);
+            vm.items = data;
         }, function (error) {
             vm.showAlert('Je n\'arrive pas à m\'initialiser');
         });
-        /*
-            this.items.push(
-              {
-                'id':1,
-                'title' : 'Chambre parents',
-                'lamps' : [
-                  {
-                    'id' : 11,
-                    'title' : 'Plafonnier 3 lampes',
-                    'status' : true
-                  },
-                  {
-                    'id' : 12,
-                    'title' : 'Plafonnier 3 lampes',
-                    'status' : false
-                }],
-                'windows' : [
-                  {
-                    'id' : 13,
-                    'title' : 'Fenêtre face'
-                  },
-                  {
-                    'id' : 14,
-                    'title' : 'Fenêtre gauche'
-                  }],
-                'airconditionners' : [
-                  {
-                    'id' : 15,
-                    'title' : 'Individuel',
-                    'temperature' : 22,
-                    'max' : 28,
-                    'min' : 6
-                  }]
-              }
-            );
-            this.items.push(
-              {
-                'id':2,
-                'title' : 'Chambre garçons',
-                'lamps' : [
-                  {
-                    'id' : 21,
-                    'title' : 'Plafonnier 3 lampes',
-                    'status' : true
-                  },
-                  {
-                    'id' : 22,
-                    'title' : 'Plafonnier 3 lampes',
-                    'status' : true
-                  }],
-                'windows' : [
-                  {
-                    'id' : 23,
-                    'title' : 'Fenêtre face 1'
-                  },
-                  {
-                    'id' : 24,
-                    'title' : 'Fenêtre face 2'
-                  }],
-                'airconditionners' : [
-                  {
-                    'id' : 25,
-                    'title' : 'Individuel',
-                    'temperature' : 18,
-                    'max' : 28,
-                    'min' : 6
-                  }]
-              }
-            );*/
-    }
-    DomotiquePage.prototype.loadZones = function () {
     };
     DomotiquePage.prototype.openNavZonePage = function (item) {
         this.navCtrl.push(ZonePage, { 'item': item });
@@ -124,7 +64,7 @@ DomotiquePage = __decorate([
         selector: 'page-domotique',
         templateUrl: 'domotique.html'
     }),
-    __metadata("design:paramtypes", [NavController, NavParams, Http, AlertController])
+    __metadata("design:paramtypes", [NavController, NavParams, Http, AlertController, SmartHouseAppBroadcaster])
 ], DomotiquePage);
 export { DomotiquePage };
 //# sourceMappingURL=domotique.js.map

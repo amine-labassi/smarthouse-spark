@@ -10,16 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { Headers, Http, RequestOptions } from "@angular/http";
-import { ENV } from "../../config/environment.prod";
+import { ENV } from "../../config/environment.dev";
 var ZonePage = (function () {
     function ZonePage(navCtrl, navParams, http, alertCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.http = http;
         this.alertCtrl = alertCtrl;
-        this.shSlideOptions = {
-            pager: true
-        };
         this.zone = navParams.get('item');
     }
     ZonePage.prototype.switchOnLamp = function (lamp) {
@@ -29,7 +26,7 @@ var ZonePage = (function () {
         headers.append('Accept', 'application/json');
         headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
         var options = new RequestOptions({ headers: headers });
-        vm.http.get(ENV.API_URL + "/api/switching/lamp/" + vm.zone.id + "/" + lamp.id + "/on", options)
+        vm.http.get(ENV.API_URL + "/api/switching/lamp/" + vm.zone.id + "/" + lamp.identifier + "/on", options)
             .subscribe(function (data) {
             lamp.status = true;
         }, function (error) {
@@ -37,23 +34,73 @@ var ZonePage = (function () {
         });
     };
     ZonePage.prototype.switchOffLamp = function (lamp) {
+        var vm = this;
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        var options = new RequestOptions({ headers: headers });
+        vm.http.get(ENV.API_URL + "/api/switching/lamp/" + vm.zone.id + "/" + lamp.identifier + "/off", options)
+            .subscribe(function (data) {
+            lamp.status = false;
+        }, function (error) {
+            vm.showAlert('Erreur d\'extinction de la lampe : ' + vm.zone.title + ':' + lamp.id);
+        });
         lamp.status = false;
     };
     ZonePage.prototype.openTheWindow = function (mywindow) {
-        mywindow.status = true;
+        var vm = this;
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        var options = new RequestOptions({ headers: headers });
+        vm.http.get(ENV.API_URL + "/api/switching/window/" + vm.zone.id + "/" + mywindow.identifier + "/up", options)
+            .subscribe(function (data) {
+        }, function (error) {
+            vm.showAlert('Erreur d\'ouvrir de la lampe : ' + vm.zone.title + ':' + mywindow.identifier);
+        });
     };
     ZonePage.prototype.closeTheWindow = function (mywindow) {
-        mywindow.status = false;
+        var vm = this;
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        var options = new RequestOptions({ headers: headers });
+        vm.http.get(ENV.API_URL + "/api/switching/window/" + vm.zone.id + "/" + mywindow.identifier + "/down", options)
+            .subscribe(function (data) {
+        }, function (error) {
+            vm.showAlert('Erreur de baisser de la lampe : ' + vm.zone.title + ':' + mywindow.identifier);
+        });
     };
-    ZonePage.prototype.hoter = function (airconditionner) {
-        if (airconditionner.temperature < airconditionner.max) {
-            airconditionner.temperature = airconditionner.temperature + 1;
-        }
+    ZonePage.prototype.airconditionnerOn = function (airconditionner) {
+        var vm = this;
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        var options = new RequestOptions({ headers: headers });
+        vm.http.get(ENV.API_URL + "/api/switching/climatiseur/" + vm.zone.id + "/" + airconditionner.id + "/on", options)
+            .subscribe(function (data) {
+            airconditionner.status = true;
+        }, function (error) {
+            vm.showAlert('Erreur d\'allumage du climatiseur : ' + vm.zone.title + ':' + airconditionner.id);
+        });
     };
-    ZonePage.prototype.colder = function (airconditionner) {
-        if (airconditionner.temperature > airconditionner.min) {
-            airconditionner.temperature = airconditionner.temperature - 1;
-        }
+    ZonePage.prototype.airconditionnerOff = function (airconditionner) {
+        var vm = this;
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        var options = new RequestOptions({ headers: headers });
+        vm.http.get(ENV.API_URL + "/api/switching/climatiseur/" + vm.zone.id + "/" + airconditionner.id + "/off", options)
+            .subscribe(function (data) {
+            airconditionner.status = true;
+        }, function (error) {
+            vm.showAlert('Erreur de fermer du climatiseur : ' + vm.zone.title + ':' + airconditionner.id);
+        });
     };
     ZonePage.prototype.showAlert = function (msg) {
         var alert = this.alertCtrl.create({

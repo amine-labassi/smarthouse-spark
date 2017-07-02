@@ -14,6 +14,7 @@ import { ZonePage } from '../pages/zone/zone';
 import { TitlePipe } from "../pipes/title-pipe";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpModule } from "@angular/http";
+import { SmartHouseAppBroadcaster } from "../config/SmartHouseAppBroadcaster";
 var AppModule = (function () {
     function AppModule() {
     }
@@ -42,7 +43,10 @@ AppModule = __decorate([
             FavorisPage,
             ZonePage
         ],
-        providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }]
+        providers: [
+            { provide: ErrorHandler, useClass: IonicErrorHandler },
+            SmartHouseAppBroadcaster
+        ]
     })
 ], AppModule);
 export { AppModule };

@@ -1,7 +1,13 @@
 <ion-header>
   <ion-navbar color="secondary">
     <ion-title>SmartHouse</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only>
+        <ion-icon name="heart"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
+
 </ion-header>
 
 <ion-content>
@@ -10,6 +16,9 @@
   <ion-list>
     <button ion-item *ngFor="let item of (items | titlePipe:searchFilter)" (click)="openNavZonePage(item)">
       {{ item.title }}
+      <button ion-button clear  icon-only margin-right="100000" padding-right="100">
+        <ion-icon name="heart" color="secondary"></ion-icon>
+      </button>
     </button>
   </ion-list>
 </ion-content>

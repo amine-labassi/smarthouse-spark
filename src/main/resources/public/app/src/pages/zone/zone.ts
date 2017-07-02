@@ -21,10 +21,6 @@ export class ZonePage
   switchOnLamp(lamp:any)
   {
     var vm = this;
-    switchOffLamp(lamp:any)
-    {
-      lamp.status = false;
-    }
 
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -32,7 +28,7 @@ export class ZonePage
     headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
     let options = new RequestOptions({ headers: headers });
 
-    vm.http.get(ENV.API_URL + "/api/switching/lamp/" + vm.zone.id +"/" + lamp.id + "/on", options)
+    vm.http.get(ENV.API_URL + "/api/switching/lamp/" + vm.zone.id +"/" + lamp.identifier + "/on", options)
       .subscribe(function(data){
           lamp.status = true;
         },
@@ -41,31 +37,100 @@ export class ZonePage
         });
   }
 
+  switchOffLamp(lamp:any)
+  {
+    var vm = this;
+
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+    let options = new RequestOptions({ headers: headers });
+
+    vm.http.get(ENV.API_URL + "/api/switching/lamp/" + vm.zone.id +"/" + lamp.identifier + "/off", options)
+      .subscribe(function(data){
+          lamp.status = false;
+        },
+        function (error) {
+          vm.showAlert('Erreur d\'extinction de la lampe : ' + vm.zone.title + ':' + lamp.id);
+        });
+    lamp.status = false;
+  }
 
   openTheWindow(mywindow:any)
   {
-   mywindow.status = true;
+    var vm = this;
+
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+    let options = new RequestOptions({ headers: headers });
+
+    vm.http.get(ENV.API_URL + "/api/switching/window/" + vm.zone.id +"/" + mywindow.identifier + "/up", options)
+      .subscribe(function(data){
+
+        },
+        function (error) {
+          vm.showAlert('Erreur d\'ouvrir de la lampe : ' + vm.zone.title + ':' + mywindow.identifier);
+        });
   }
 
   closeTheWindow(mywindow:any)
   {
-    mywindow.status = false;
+    var vm = this;
+
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+    let options = new RequestOptions({ headers: headers });
+
+    vm.http.get(ENV.API_URL + "/api/switching/window/" + vm.zone.id +"/" + mywindow.identifier + "/down", options)
+      .subscribe(function(data){
+
+        },
+        function (error) {
+          vm.showAlert('Erreur de baisser de la lampe : ' + vm.zone.title + ':' + mywindow.identifier);
+        });
   }
 
-  hoter(airconditionner:any)
+  airconditionnerOn(airconditionner:any)
   {
-    if(airconditionner.temperature < airconditionner.max)
-    {
-      airconditionner.temperature = airconditionner.temperature + 1;
-    }
+    var vm = this;
+
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+    let options = new RequestOptions({ headers: headers });
+
+    vm.http.get(ENV.API_URL + "/api/switching/climatiseur/" + vm.zone.id +"/" + airconditionner.id + "/on", options)
+      .subscribe(function(data){
+          airconditionner.status = true;
+        },
+        function (error) {
+          vm.showAlert('Erreur d\'allumage du climatiseur : ' + vm.zone.title + ':' + airconditionner.id);
+        });
   }
 
-  colder(airconditionner:any)
+  airconditionnerOff(airconditionner:any)
   {
-    if(airconditionner.temperature > airconditionner.min)
-    {
-      airconditionner.temperature = airconditionner.temperature - 1;
-    }
+    var vm = this;
+
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+    let options = new RequestOptions({ headers: headers });
+
+    vm.http.get(ENV.API_URL + "/api/switching/climatiseur/" + vm.zone.id +"/" + airconditionner.id + "/off", options)
+      .subscribe(function(data){
+          airconditionner.status = true;
+        },
+        function (error) {
+          vm.showAlert('Erreur de fermer du climatiseur : ' + vm.zone.title + ':' + airconditionner.id);
+        });
   }
 
   showAlert(msg: string)

@@ -13,7 +13,7 @@ public class LightingController
 
         response.header("Content-Type","application/json");
 
-        LightingManager.getStatusAllLamps();
+        //LightingManager.getStatusAllLamps();
 
         return SmartHouseApp.lightingConfigurationInstance.getZones();
     };

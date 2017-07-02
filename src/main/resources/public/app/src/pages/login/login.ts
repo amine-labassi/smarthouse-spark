@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {Http, URLSearchParams, Headers} from '@angular/http';
 import {NavController, NavParams, AlertController} from 'ionic-angular';
 import {DomotiquePage} from "../domotique/domotique";
