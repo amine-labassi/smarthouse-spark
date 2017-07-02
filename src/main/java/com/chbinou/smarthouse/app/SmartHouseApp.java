@@ -8,14 +8,18 @@ import com.chbinou.smarthouse.app.components.model.ElectronicInterfaceConfigurat
 import com.chbinou.smarthouse.app.components.windows.WindowsController;
 import com.chbinou.smarthouse.app.config.Constantes;
 import com.chbinou.smarthouse.app.config.GsonConfiguration;
+import com.chbinou.smarthouse.app.config.schedule.CheckStatusPeriodicTask;
 import com.chbinou.smarthouse.app.config.security.SecurityFilter;
 import com.chbinou.smarthouse.app.config.security.SmartHouseSecurityConfigFactory;
+import com.chbinou.smarthouse.app.config.websocket.CheckStatusWebSocket;
 import com.chbinou.smarthouse.app.util.ConfigurationReader;
 import com.google.gson.Gson;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import org.pac4j.core.config.Config;
 import spark.Spark;
+
+import java.util.Timer;
 
 import static spark.Spark.*;
 
@@ -25,47 +29,38 @@ import static spark.Spark.*;
 public class SmartHouseApp
 {
 
-    public static final GpioController gpio = GpioFactory.getInstance();
+    public static final GpioController gpio = null;//GpioFactory.getInstance();
 
     public static ElectronicInterfaceConfiguration lightingConfigurationInstance;
+
+    public static Timer timer = new Timer();
 
     public static void main(String[] args) throws Exception
     {
         System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "INFO");
+        System.setProperty(org.slf4j.impl.SimpleLogger.SHOW_SHORT_LOG_NAME_KEY, "true");
+        System.setProperty(org.slf4j.impl.SimpleLogger.SHOW_THREAD_NAME_KEY, "false");
 
         final Config config = new SmartHouseSecurityConfigFactory().build();
 
         Gson gson = GsonConfiguration.getGsonInstance();
 
         lightingConfigurationInstance = ConfigurationReader.parseConfiguration();
-        ConfigurationReader.init();
+        //ConfigurationReader.init();
 
-        port(80);
+        port(4504);
         staticFiles.location("/public");
+
+        // push status web socket
+        webSocket(Constantes.Url.API_PUSH_WSOCKET, CheckStatusWebSocket.class);
+
+        timer.schedule(new CheckStatusPeriodicTask(), 0);
 
         Spark.exception(Exception.class, (exception, request, response) -> {
             exception.printStackTrace();
         });
 
-      options("*//*",  (request, response) -> {
-
-            String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
-
-            if (accessControlRequestHeaders != null)
-            {
-                response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
-            }
-
-            String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-
-            if (accessControlRequestMethod != null)
-            {
-                response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
-            }
-
-            return "OK";
-        });
-
+        options("*//*",  IndexController.optionsResponse);
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
         before(Constantes.Url.LOGIN, new SecurityFilter(config, "DirectFormClient", "hsts,nosniff,noframe,xssprotection,nocache","excludedPublicResources,securedHttpMethod"));
@@ -91,8 +86,8 @@ public class SmartHouseApp
         get(Constantes.Url.API_SWITCHON_CLIMATISEUR, "application/json", AirConditionnerController.switchOnClimatiseurAll, gson::toJson);
         get(Constantes.Url.API_SWITCHOFF_CLIMATISEUR, "application/json", AirConditionnerController.switchOffClimatiseurAll, gson::toJson);
 
-        // 404
-        get(Constantes.Url.ANY, "*/*", IndexController.notFoundResponse);
+//        // 404
+//        get(Constantes.Url.ANY, "*/*", IndexController.notFoundResponse);
 
     }
 }

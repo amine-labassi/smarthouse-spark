@@ -13,6 +13,8 @@ public class Constantes
 
         String API_SECURE                       = "/api/*";
 
+        String API_PUSH_WSOCKET                 = "/push";
+
         String API_LIGHTNING                    = "/api/switching";
         String API_STATUS_LAMP_ALL              = "/api/switching/lamp/all/status";
         String API_SWITCHON_LAMP                = "/api/switching/lamp/:identifierzone/:identifier/on";

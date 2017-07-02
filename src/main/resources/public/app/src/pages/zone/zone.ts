@@ -12,9 +12,6 @@ import {ENV} from "../../config/environment.prod";
 export class ZonePage
 {
   zone:Zone;
-  shSlideOptions = {
-    pager:true
-  };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController)
   {
