@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {ZonePage} from "../zone/zone";
 import {Headers, Http, RequestOptions} from "@angular/http";
-import {ENV} from "../../config/environment.dev";
+import {ENV} from "../../config/environment.prod";
 import 'rxjs/Rx';
 import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
 import {Zone} from "../../model/Zone";
