@@ -21,6 +21,10 @@ export class ZonePage
   switchOnLamp(lamp:any)
   {
     var vm = this;
+    switchOffLamp(lamp:any)
+    {
+      lamp.status = false;
+    }
 
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -37,10 +41,6 @@ export class ZonePage
         });
   }
 
-  switchOffLamp(lamp:any)
-  {
-    lamp.status = false;
-  }
 
   openTheWindow(mywindow:any)
   {
