@@ -6,6 +6,10 @@ import {ENV} from "../../config/environment.dev";
 import 'rxjs/Rx';
 import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
 import {Zone} from "../../model/Zone";
+import {FavorisPage} from "../favoris/favoris";
+
+import {Favoris} from "../../model/Favoris";
+import {Storage} from "@ionic/storage";
 
 @Component({
   selector: 'page-domotique',
@@ -14,21 +18,24 @@ import {Zone} from "../../model/Zone";
 export class DomotiquePage
 {
   items: any = [];
+
   searchFilter: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster)
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, private storage: Storage)
   {
     var vm = this;
     vm.loadZones();
     vm.broadcaster.on<string>('configObject')
       .subscribe(msg => {
         vm.items = JSON.parse(msg);
+        vm.drawFavoritsIcon();
       });
   }
 
   loadZones()
   {
     var vm = this;
+
 
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -43,6 +50,7 @@ export class DomotiquePage
       .subscribe(
         function(data){
           vm.items = data;
+          vm.drawFavoritsIcon();
         },
         function (error) {
           vm.showAlert('Je n\'arrive pas à m\'initialiser');
@@ -52,10 +60,14 @@ export class DomotiquePage
 
   openNavZonePage(item)
   {
+
     this.navCtrl.push(ZonePage, { 'item': item });
   }
 
-
+  openNavFavorisPage()
+  {
+    this.navCtrl.push(FavorisPage);
+  }
   showAlert(msg: string)
   {
     let alert = this.alertCtrl.create({
@@ -64,5 +76,45 @@ export class DomotiquePage
       buttons: ['OK']
     });
     alert.present();
+  }
+  drawFavoritsIcon()
+  {
+    var vm = this;
+    var myList =[];
+    vm.storage.get('favoritsZones').then((val) => {
+          myList = JSON.parse(val);
+          for (var i = 0; i < vm.items.length; i++)
+          {
+           if (myList.indexOf(vm.items[i].id) != -1)
+           {
+              vm.items[i].favoris = true;
+           }
+          else
+           {
+              vm.items[i].favoris = false;
+           }
+        }
+
+    });
+  }
+  setUnsetFavorits(item:Zone)
+  {
+    var vm = this;
+    var myList=[];
+    vm.storage.get('favoritsZones').then((val) => {
+        myList = JSON.parse(val);
+        var idx = myList.indexOf(item.id);
+        if (idx != -1) {
+          myList.splice(idx, 1);
+          item.favoris = false;
+        }
+        else {
+          myList.push(item.id);
+          item.favoris = true;
+        }
+        vm.storage.set('favoritsZones', JSON.stringify(myList));
+
+    });
+
   }
 }

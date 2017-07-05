@@ -9,6 +9,7 @@ import {TitlePipe} from "../pipes/title-pipe";
 import {BrowserModule} from "@angular/platform-browser";
 import {HttpModule} from "@angular/http";
 import {SmartHouseAppBroadcaster} from "../config/SmartHouseAppBroadcaster";
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,11 @@ import {SmartHouseAppBroadcaster} from "../config/SmartHouseAppBroadcaster";
   imports: [
     HttpModule,
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+      driverOrder: ['indexeddb', 'sqlite', 'websql']
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

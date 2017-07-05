@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Http, URLSearchParams, Headers} from '@angular/http';
 import {NavController, NavParams, AlertController} from 'ionic-angular';
 import {DomotiquePage} from "../domotique/domotique";
-import {ENV} from "../../config/environment.prod";
+import {ENV} from "../../config/environment.dev";
 import {$WebSocket} from "angular2-websocket/angular2-websocket";
 import {Zone} from "../../model/Zone";
 import {Broadcaster} from "ionic-native";

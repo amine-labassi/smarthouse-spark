@@ -78,6 +78,18 @@ public class ConfigurationReader
           }
         }
 
+        for(NotUsedInput notUsedInput : SmartHouseApp.lightingConfigurationInstance.getNotUsedInputs()){
+        Mcp mcp = findMcp(notUsedInput.getMcp());
+        Pin pin = findPin(notUsedInput.getPin());
+        SmartHouseApp.gpio.provisionDigitalInputPin(mcp.getInstance(), pin);
+        }
+
+        for(NotUsedOutput notUsedOutput : SmartHouseApp.lightingConfigurationInstance.getNotUsedOutputs()){
+            Mcp mcp = findMcp(notUsedOutput.getMcp());
+            Pin pin = findPin(notUsedOutput.getPin());
+            SmartHouseApp.gpio.provisionDigitalInputPin(mcp.getInstance(), pin);
+        }
+
         Activator activator = SmartHouseApp.lightingConfigurationInstance.getActivator();
         Mcp mcp =findMcp(activator.getMcp());
         Pin pin =findPin(activator.getAddress());

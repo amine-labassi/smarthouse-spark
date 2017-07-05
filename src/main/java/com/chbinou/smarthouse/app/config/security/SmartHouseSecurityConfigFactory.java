@@ -1,5 +1,6 @@
 package com.chbinou.smarthouse.app.config.security;
 
+import org.bouncycastle.math.ec.ECCurve;
 import org.pac4j.core.authorization.authorizer.RequireAnyRoleAuthorizer;
 import org.pac4j.core.client.Clients;
 import org.pac4j.core.config.Config;
@@ -23,7 +24,6 @@ public class SmartHouseSecurityConfigFactory implements ConfigFactory
     public final static String KEY1 = "JaNdRgUkXp2s5v8y/B?E(H+MbPeShVmY";
     public final static String KEY2 = "z$C&F)H@McQfTjWnZr4u7x!A%D*G-KaP";
 
-    @Override
     public Config build(Object... objects)
     {
         DirectFormClient directFormClient = new DirectFormClient(new SimpleTestUsernamePasswordAuthenticator());

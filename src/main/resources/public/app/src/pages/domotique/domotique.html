@@ -2,8 +2,8 @@
   <ion-navbar color="secondary">
     <ion-title>SmartHouse</ion-title>
     <ion-buttons start>
-      <button ion-button icon-only>
-        <ion-icon name="heart"></ion-icon>
+      <button ion-button icon-only color="red" (click)="openNavFavorisPage(item)">
+        <ion-icon name="heart" ></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -16,8 +16,9 @@
   <ion-list>
     <button ion-item *ngFor="let item of (items | titlePipe:searchFilter)" (click)="openNavZonePage(item)">
       {{ item.title }}
-      <button ion-button clear  icon-only margin-right="100000" padding-right="100">
-        <ion-icon name="heart" color="secondary"></ion-icon>
+
+      <button  ion-button clear  icon-only item-end (click)="setUnsetFavorits(item)" >
+        <ion-icon name="heart" color="secondary" [ngClass]="{'inFav' : item.favoris, 'outOfFav' : !item.favoris}" ></ion-icon>
       </button>
     </button>
   </ion-list>

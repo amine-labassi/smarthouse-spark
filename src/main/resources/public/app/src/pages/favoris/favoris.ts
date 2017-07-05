@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {Favoris} from "../../model/Favoris";
 
 /*
   Generated class for the Favoris page.
@@ -12,6 +13,8 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'favoris.html'
 })
 export class FavorisPage {
+
+  favoris:Favoris;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 

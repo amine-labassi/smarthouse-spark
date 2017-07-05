@@ -1,7 +1,7 @@
 package com.chbinou.smarthouse.app.components.lighting;
 
 import com.chbinou.smarthouse.app.SmartHouseApp;
-import com.chbinou.smarthouse.app.util.SetupDevices;
+
 import com.chbinou.smarthouse.app.components.model.Lamp;
 import com.chbinou.smarthouse.app.components.model.Zone;
 import com.chbinou.smarthouse.app.components.model.Activator;
@@ -32,7 +32,7 @@ public class LightingManager
             lamp.getOutputPinInstance().pulse(100, PinState.LOW, true);
             TimeUnit.MILLISECONDS.sleep(50);
         }
-        lamp.setStatus(gpio.isState(PinState.HIGH,lamp.getInputPinInstance()));
+        lamp.setStatus(gpio.isState(PinState.LOW,lamp.getInputPinInstance()));
         activator.getOutputPinInstance().setState(true);
 
         return true;
@@ -103,13 +103,13 @@ public class LightingManager
     }
 
     public static void getStatusAllLamps() throws InterruptedException {
-        activator.getOutputPinInstance().setState(false);
+      /*  activator.getOutputPinInstance().setState(false);
         TimeUnit.MILLISECONDS.sleep(100);
         for(Zone zone : lightingConfigurationInstance.getZones() )
             for (Lamp lamp : zone.getLamps()) {
-                lamp.setStatus(gpio.isState(PinState.HIGH ,lamp.getInputPinInstance()));
+                lamp.setStatus(gpio.isState(PinState.LOW ,lamp.getInputPinInstance()));
             }
-        activator.getOutputPinInstance().setState(true);
+        activator.getOutputPinInstance().setState(true);*/
     }
 
 }

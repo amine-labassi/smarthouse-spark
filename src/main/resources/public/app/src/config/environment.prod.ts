@@ -4,5 +4,6 @@
 
 export const ENV = {
   PRODUCTION : true,
-  API_URL    : 'http://192.168.1.19:4504'
+  API_URL    : 'http://192.168.1.19:4504',
+  WS_URL     : 'ws://192.168.1.19:4504'
 };

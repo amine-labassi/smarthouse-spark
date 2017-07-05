@@ -1,0 +1,6 @@
+
+/target/
+/smarthouse-spark.iml
+/src/main/resources/public/app/node_modules/
+/src/main/resources/public/app/www/
+/.idea/

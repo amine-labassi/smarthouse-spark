@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {Headers, Http, RequestOptions} from "@angular/http";
 import {Zone} from "../../model/Zone";
-import {ENV} from "../../config/environment.prod";
+import {ENV} from "../../config/environment.dev";
+import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
 
 @Component({
   selector: 'page-zone',
@@ -13,9 +14,21 @@ export class ZonePage
 {
   zone:Zone;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController)
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster)
   {
+    var vm = this;
     this.zone = navParams.get('item');
+    vm.broadcaster.on<string>('configObject')
+      .subscribe(msg => {
+        var items:Array<Zone> = JSON.parse(msg);
+        for(var i=0 ; i< items.length; i++)
+        {
+          if(vm.zone.id == items[i].id)
+          {
+            vm.zone =  items[i];
+          }
+        }
+      });
   }
 
   switchOnLamp(lamp:any)
@@ -33,7 +46,7 @@ export class ZonePage
           lamp.status = true;
         },
         function (error) {
-          vm.showAlert('Erreur d\'allumage de la lampe : ' + vm.zone.title + ':' + lamp.id);
+          vm.showAlert('Problem d\'allumage de la lampe : ' + vm.zone.title + ':' + lamp.id);
         });
   }
 
@@ -105,12 +118,12 @@ export class ZonePage
     headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
     let options = new RequestOptions({ headers: headers });
 
-    vm.http.get(ENV.API_URL + "/api/switching/climatiseur/" + vm.zone.id +"/" + airconditionner.id + "/on", options)
+    vm.http.get(ENV.API_URL + "/api/switching/climatiseur/" + vm.zone.id +"/" + airconditionner.identifier + "/on", options)
       .subscribe(function(data){
           airconditionner.status = true;
         },
         function (error) {
-          vm.showAlert('Erreur d\'allumage du climatiseur : ' + vm.zone.title + ':' + airconditionner.id);
+          vm.showAlert('Erreur d\'allumage du climatiseur : ' + vm.zone.title + ':' + airconditionner.identifier);
         });
   }
 
@@ -124,12 +137,12 @@ export class ZonePage
     headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
     let options = new RequestOptions({ headers: headers });
 
-    vm.http.get(ENV.API_URL + "/api/switching/climatiseur/" + vm.zone.id +"/" + airconditionner.id + "/off", options)
+    vm.http.get(ENV.API_URL + "/api/switching/climatiseur/" + vm.zone.id +"/" + airconditionner.identifier + "/off", options)
       .subscribe(function(data){
           airconditionner.status = true;
         },
         function (error) {
-          vm.showAlert('Erreur de fermer du climatiseur : ' + vm.zone.title + ':' + airconditionner.id);
+          vm.showAlert('Erreur de fermer du climatiseur : ' + vm.zone.title + ':' + airconditionner.identifier);
         });
   }
 

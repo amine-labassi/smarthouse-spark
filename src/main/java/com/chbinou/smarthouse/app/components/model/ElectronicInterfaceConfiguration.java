@@ -16,6 +16,32 @@ public class ElectronicInterfaceConfiguration
     private List<Mcp> mcps;
 
     @Expose
+    private List<NotUsedInput> notUsedInputs;
+
+    @Expose
+    private List<NotUsedOutput> notUsedOutputs;
+
+    public List<NotUsedInput> getNotUsedInputs() {
+        return notUsedInputs;
+    }
+
+    public void setNotUsedInputs(List<NotUsedInput> notUsedInputs) {
+        this.notUsedInputs = notUsedInputs;
+    }
+
+    public List<NotUsedOutput> getNotUsedOutputs() {
+        return notUsedOutputs;
+    }
+
+    public void setNotUsedOutputs(List<NotUsedOutput> notUsedOutputs) {
+        this.notUsedOutputs = notUsedOutputs;
+    }
+
+    public void setActivator(Activator activator) {
+        this.activator = activator;
+    }
+
+    @Expose
     private Activator activator;
 
     public Activator getActivator() {

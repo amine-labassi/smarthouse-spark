@@ -26146,6 +26146,14 @@ ion-navbar.toolbar {
   margin-bottom: -23px;
 }
 
+.inFav {
+  color: red;
+}
+
+.outOfFav {
+  color: darkgray;
+}
+
 .cards-list-zone-lamps ion-card-header {
   background-color: yellow;
   margin-bottom: 15px;
