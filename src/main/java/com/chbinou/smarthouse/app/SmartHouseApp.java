@@ -8,6 +8,7 @@ import com.chbinou.smarthouse.app.components.model.ElectronicInterfaceConfigurat
 import com.chbinou.smarthouse.app.components.windows.WindowsController;
 import com.chbinou.smarthouse.app.config.Constantes;
 import com.chbinou.smarthouse.app.config.GsonConfiguration;
+import com.chbinou.smarthouse.app.config.gpio.GpioFactoryAdapater;
 import com.chbinou.smarthouse.app.config.schedule.CheckStatusPeriodicTask;
 import com.chbinou.smarthouse.app.config.security.SecurityFilter;
 import com.chbinou.smarthouse.app.config.security.SmartHouseSecurityConfigFactory;
@@ -29,7 +30,7 @@ import static spark.Spark.*;
 public class SmartHouseApp
 {
 
-    public static final GpioController gpio = null; //GpioFactory.getInstance();
+    public static final GpioController gpio = GpioFactoryAdapater.getInstance();
 
     public static ElectronicInterfaceConfiguration lightingConfigurationInstance;
 

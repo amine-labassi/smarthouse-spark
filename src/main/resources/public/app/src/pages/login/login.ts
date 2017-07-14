@@ -3,7 +3,7 @@ import {Http, URLSearchParams, Headers} from '@angular/http';
 import {NavController, NavParams, AlertController} from 'ionic-angular';
 import {DomotiquePage} from "../domotique/domotique";
 import {ENV} from "../../config/environment.dev";
-import {$WebSocket} from "angular2-websocket/angular2-websocket";
+import {$WebSocket, WebSocketConfig} from "angular2-websocket/angular2-websocket";
 import {Zone} from "../../model/Zone";
 import {Broadcaster} from "ionic-native";
 import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
@@ -49,7 +49,8 @@ export class LoginPage
   {
     var vm = this;
 
-    var ws = new $WebSocket(ENV.WS_URL + "/push");
+    const webSocketConfig = { reconnectIfNotNormalClose: true } as WebSocketConfig;
+    var ws = new $WebSocket(ENV.WS_URL + "/push",null,webSocketConfig);
 
     ws.onMessage(
       (msg: MessageEvent)=> {
