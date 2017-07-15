@@ -4,6 +4,6 @@
 
 export const ENV = {
   PRODUCTION : false,
-  API_URL    : 'http://localhost:4504',
-  WS_URL     : 'ws://localhost:4504'
+  API_URL    : 'https://localhost:4504',
+  WS_URL     : 'wss://localhost:4504'
 };

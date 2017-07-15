@@ -44,18 +44,28 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>jks</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                    <resources>
+                        <resource>
+                            <directory>src/main/resources</directory>
+                            <filtering>true</filtering>
+                            <includes>
+                                <include>lightning_config.json</include>
+                                <include>public/app/www/**/*</include>
+                                <include>public/appli/**/*</include>
+                                <include>keystores/**/*</include>
+                            </includes>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>lightning_config.json</include>
-                    <include>public/app/www/**/*</include>
-                    <include>public/appli/**/*</include>
-                </includes>
-            </resource>
-        </resources>
     </build>
     <!-- library dependencies -->
     <dependencies>

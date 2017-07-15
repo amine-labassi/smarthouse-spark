@@ -8,6 +8,7 @@ import com.chbinou.smarthouse.app.components.model.ElectronicInterfaceConfigurat
 import com.chbinou.smarthouse.app.components.windows.WindowsController;
 import com.chbinou.smarthouse.app.config.Constantes;
 import com.chbinou.smarthouse.app.config.GsonConfiguration;
+import com.chbinou.smarthouse.app.config.environment.Environment;
 import com.chbinou.smarthouse.app.config.gpio.GpioFactoryAdapater;
 import com.chbinou.smarthouse.app.config.schedule.CheckStatusPeriodicTask;
 import com.chbinou.smarthouse.app.config.security.SecurityFilter;
@@ -50,10 +51,21 @@ public class SmartHouseApp
         //ConfigurationReader.init();
 
         port(4504);
+        secure(Environment.keyStore(),Environment.keyStorePassword(),Environment.trustStore(),Environment.trustStorePassword(), Environment.isSslTwoWay());
+
         staticFiles.location("/public");
 
         // push status web socket
         webSocket(Constantes.Url.API_PUSH_WSOCKET, CheckStatusWebSocket.class);
+
+        before(((request, response) -> {
+            final String url = request.url();
+            if (url.startsWith("http://"))
+            {
+                final String[] split = url.split("http://");
+                response.redirect("https://" + split[1]);
+            }
+        }));
 
         timer.schedule(new CheckStatusPeriodicTask(), 0);
 
@@ -62,10 +74,11 @@ public class SmartHouseApp
         });
 
         options("*//*",  IndexController.optionsResponse);
+
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
-        before(Constantes.Url.LOGIN, new SecurityFilter(config, "DirectFormClient", "hsts,nosniff,noframe,xssprotection,nocache","excludedPublicResources,securedHttpMethod"));
-        before(Constantes.Url.API_SECURE, new SecurityFilter(config, "HeaderClient", "hsts,nosniff,noframe,xssprotection,nocache", "excludedPublicResources,securedHttpMethod"));
+        //before(Constantes.Url.LOGIN, new SecurityFilter(config, "DirectFormClient", "hsts,nosniff,noframe,xssprotection,nocache","excludedPublicResources,securedHttpMethod"));
+        //before(Constantes.Url.API_SECURE, new SecurityFilter(config, "HeaderClient", "hsts,nosniff,noframe,xssprotection,nocache", "excludedPublicResources,securedHttpMethod"));
 
         // login request*/
         post(Constantes.Url.LOGIN,"application/json" ,AuthenticationController.login);
