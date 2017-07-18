@@ -10,6 +10,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {HttpModule} from "@angular/http";
 import {SmartHouseAppBroadcaster} from "../config/SmartHouseAppBroadcaster";
 import {IonicStorageModule} from "@ionic/storage";
+import {ConfigurationPage} from "../pages/configuration/configuration";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {IonicStorageModule} from "@ionic/storage";
     DomotiquePage,
     FavorisPage,
     ZonePage,
+    ConfigurationPage,
     TitlePipe
   ],
   imports: [
@@ -35,7 +37,8 @@ import {IonicStorageModule} from "@ionic/storage";
     LoginPage,
     DomotiquePage,
     FavorisPage,
-    ZonePage
+    ZonePage,
+    ConfigurationPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

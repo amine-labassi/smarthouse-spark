@@ -11,25 +11,22 @@ public class WindowsController
     {
         response.header("Content-Type","application/json");
 
-        WindowsManager.switchUPWindow(request.params("identifierzone"), request.params("identifier"));
 
-        return true ;
+        return  WindowsManager.switchUPWindow(request.params("identifierzone"), request.params("identifier"));
+
     };
 
     public static Route switchDownWindow  = (request,  response) ->
     {
         response.header("Content-Type","application/json");
-        WindowsManager.switchDownWindow(request.params("identifierzone"), request.params("identifier"));
 
-        return true ;
+        return WindowsManager.switchDownWindow(request.params("identifierzone"), request.params("identifier"));
     };
 
     public static Route switchUpWindowAll  = (request,  response) ->
     {
         response.header("Content-Type","application/json");
-        WindowsManager.switchUPWindowAll();
-
-        return true ;
+        return  WindowsManager.switchUPWindowAll();
     };
 
     public static Route switchDownWindowAll  = (request,  response) ->
@@ -37,7 +34,7 @@ public class WindowsController
         response.header("Content-Type","application/json");
         WindowsManager.switchDownWindowAll();
 
-        return true ;
+        return WindowsManager.switchDownWindowAll();
     };
 
 }

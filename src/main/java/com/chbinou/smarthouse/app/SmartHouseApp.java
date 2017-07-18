@@ -29,7 +29,7 @@ import static spark.Spark.*;
 public class SmartHouseApp
 {
 
-    public static final GpioController gpio = null; //GpioFactory.getInstance();
+    public static final GpioController gpio = GpioFactory.getInstance();
 
     public static ElectronicInterfaceConfiguration lightingConfigurationInstance;
 
@@ -46,7 +46,7 @@ public class SmartHouseApp
         Gson gson = GsonConfiguration.getGsonInstance();
 
         lightingConfigurationInstance = ConfigurationReader.parseConfiguration();
-        //ConfigurationReader.init();
+        ConfigurationReader.init();
 
         port(4504);
         staticFiles.location("/public");

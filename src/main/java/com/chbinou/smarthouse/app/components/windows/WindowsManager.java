@@ -13,44 +13,126 @@ import static com.chbinou.smarthouse.app.SmartHouseApp.lightingConfigurationInst
  */
 public class WindowsManager  {
 
-    public static boolean switchUPWindow(String identifierzone,String identifier) throws InterruptedException {
+    public static int switchUPWindow(String identifierzone,String identifier) throws InterruptedException {
+        int returnedValus = 0;
         Zone zone = SmartHouseApp.lightingConfigurationInstance.getZones().stream().filter(o -> o.getId().equals(identifierzone)).findFirst().get();
         Window window = zone.getWindows().stream().filter(o -> o.getIdentifier().equals(identifier)).findFirst().get();
+        if(window.getUpPinInstanse().isHigh() == true && window.getDownPinInstanse().isHigh() == true)
+        {
+            window.getUpPinInstanse().pulse(50000, PinState.LOW, false);
+            returnedValus = 0;
+        }
+        else if (window.getUpPinInstanse().isHigh() == false)
+        {
+            returnedValus = 1;
+        }
+        else if (window.getDownPinInstanse().isHigh() == false)
+        {
+            returnedValus = 2;
+        }
 
-        window.getUpPinInstanse().pulse(50000, PinState.HIGH, false);
-
-
-        return true;
+        return returnedValus;
     }
 
-    public static boolean switchDownWindow(String identifierzone,String identifier) throws InterruptedException {
+    public static int switchDownWindow(String identifierzone,String identifier) throws InterruptedException {
+        int returnedValus = 0;
         Zone zone = SmartHouseApp.lightingConfigurationInstance.getZones().stream().filter(o -> o.getId().equals(identifierzone)).findFirst().get();
         Window window = zone.getWindows().stream().filter(o -> o.getIdentifier().equals(identifier)).findFirst().get();
+        if(window.getUpPinInstanse().isHigh() == true && window.getDownPinInstanse().isHigh() == true)
+        {
+            window.getDownPinInstanse().pulse(50000, PinState.LOW, false);
+            returnedValus = 0;
+        }
+        else if (window.getUpPinInstanse().isHigh() == false)
+        {
+            returnedValus = 1;
+        }
+        else if (window.getDownPinInstanse().isHigh() == false)
+        {
+            returnedValus = 2;
+        }
 
-        window.getDownPinInstanse().pulse(50000, PinState.HIGH, false);
 
-
-        return true;
+        return returnedValus;
     }
 
-    public static boolean switchUPWindowAll() throws InterruptedException {
-        for (Zone zone : lightingConfigurationInstance.getZones()){
-        for (Window window : zone.getWindows()){
-            window.getUpPinInstanse().pulse(50000, PinState.HIGH, false);
-        }}
+    public static int switchUPWindowAll() throws InterruptedException {
+
+        int returnedValus = 0 ;
+        for (Zone zone : lightingConfigurationInstance.getZones())
+        {
+            for (Window window : zone.getWindows()) {
+                if (window.getUpPinInstanse().isHigh() == true) {
+                    returnedValus = 1;
+                } else if (window.getDownPinInstanse().isHigh() == true) {
+                    returnedValus = 2;
+                }
+            }
+        }
+        if(returnedValus ==0)
+        {
+        for (Zone zone : lightingConfigurationInstance.getZones())
+        {
+         for (Window window : zone.getWindows())
+         {
+            if(window.getUpPinInstanse().isHigh() == true || window.getDownPinInstanse().isHigh() == true)
+            {
+                window.getUpPinInstanse().pulse(50000, PinState.LOW, false);
+                returnedValus = 0;
+            }
+            else if (window.getUpPinInstanse().isHigh() == true)
+            {
+                returnedValus = 1;
+            }
+            else if (window.getDownPinInstanse().isHigh() == true)
+            {
+                returnedValus = 2;
+            }
+         }
+        }
+        }
 
 
-        return true;
+        return returnedValus;
     }
 
-    public static boolean switchDownWindowAll() throws InterruptedException {
-        for (Zone zone : lightingConfigurationInstance.getZones()){
-        for (Window window : zone.getWindows()){
-             window.getDownPinInstanse().pulse(50000, PinState.HIGH, false);
-        }}
+    public static int switchDownWindowAll() throws InterruptedException {
+        int returnedValus = 0 ;
+        for (Zone zone : lightingConfigurationInstance.getZones())
+        {
+            for (Window window : zone.getWindows()) {
+                if (window.getUpPinInstanse().isHigh() == true) {
+                    returnedValus = 1;
+                } else if (window.getDownPinInstanse().isHigh() == true) {
+                    returnedValus = 2;
+                }
+            }
+        }
+        if(returnedValus ==0)
+        {
+            for (Zone zone : lightingConfigurationInstance.getZones())
+            {
+                for (Window window : zone.getWindows())
+                {
+                    if(window.getUpPinInstanse().isHigh() == true || window.getDownPinInstanse().isHigh() == true)
+                    {
+                        window.getDownPinInstanse().pulse(50000, PinState.LOW, false);
+                        returnedValus = 0;
+                    }
+                    else if (window.getUpPinInstanse().isHigh() == true)
+                    {
+                        returnedValus = 1;
+                    }
+                    else if (window.getDownPinInstanse().isHigh() == true)
+                    {
+                        returnedValus = 2;
+                    }
+                }
+            }
+        }
 
 
-        return true;
+        return returnedValus;
     }
 
 

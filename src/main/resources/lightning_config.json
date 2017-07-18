@@ -109,6 +109,13 @@
         }
       ],
       "windows": [
+        {
+          "identifier": "1",
+          "mcpUp": 32,
+          "mcpDown": 32,
+          "addressUp": "GPIO A4",
+          "addressDown": "GPIO A3"
+        }
 
       ],
       "airConditionners": [

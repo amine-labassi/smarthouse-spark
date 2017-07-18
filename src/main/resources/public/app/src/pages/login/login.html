@@ -1,6 +1,11 @@
 <ion-header>
   <ion-navbar color="secondary">
     <ion-title>SmartHouse</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only color="black" (click)="openNavConfigurationPage()">
+        <ion-icon name="md-add-circle" ></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -20,4 +25,13 @@
       </button>
     </div>
   </form>
+
+  <ion-list>
+  <ion-item>
+    <ion-label>Maison</ion-label>
+    <ion-select [(ngModel)]="server">
+      <ion-option *ngFor="let server of items" value="{{server.ip}}">{{server.title}}</ion-option>
+    </ion-select>
+  </ion-item>
+    </ion-list>
 </ion-content>

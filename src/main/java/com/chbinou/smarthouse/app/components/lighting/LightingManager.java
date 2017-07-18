@@ -103,13 +103,13 @@ public class LightingManager
     }
 
     public static void getStatusAllLamps() throws InterruptedException {
-      /*  activator.getOutputPinInstance().setState(false);
+        activator.getOutputPinInstance().setState(false);
         TimeUnit.MILLISECONDS.sleep(100);
         for(Zone zone : lightingConfigurationInstance.getZones() )
             for (Lamp lamp : zone.getLamps()) {
                 lamp.setStatus(gpio.isState(PinState.LOW ,lamp.getInputPinInstance()));
             }
-        activator.getOutputPinInstance().setState(true);*/
+        activator.getOutputPinInstance().setState(true);
     }
 
 }

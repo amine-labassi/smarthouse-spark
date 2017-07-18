@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {ZonePage} from "../zone/zone";
 import {Headers, Http, RequestOptions} from "@angular/http";
-import {ENV} from "../../config/environment.dev";
+import {ENV} from "../../config/environment.prod";
 import 'rxjs/Rx';
 import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
 import {Zone} from "../../model/Zone";
@@ -20,10 +20,12 @@ export class DomotiquePage
   items: any = [];
 
   searchFilter: string = '';
+  serverIP:string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, private storage: Storage)
   {
     var vm = this;
+    vm.serverIP = localStorage.getItem("ip");
     vm.loadZones();
     vm.broadcaster.on<string>('configObject')
       .subscribe(msg => {
@@ -45,7 +47,7 @@ export class DomotiquePage
 
     vm.items = [];
 
-    vm.http.get(ENV.API_URL + "/api/switching/lamp/all/status", options)
+    vm.http.get('http://' + vm.serverIP + "/api/switching/lamp/all/status", options)
       .map(response => response.json())
       .subscribe(
         function(data){
