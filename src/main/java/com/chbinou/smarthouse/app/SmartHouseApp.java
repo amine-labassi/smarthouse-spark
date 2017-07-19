@@ -8,6 +8,8 @@ import com.chbinou.smarthouse.app.components.model.ElectronicInterfaceConfigurat
 import com.chbinou.smarthouse.app.components.windows.WindowsController;
 import com.chbinou.smarthouse.app.config.Constantes;
 import com.chbinou.smarthouse.app.config.GsonConfiguration;
+import com.chbinou.smarthouse.app.config.environment.Environment;
+import com.chbinou.smarthouse.app.config.gpio.GpioFactoryAdapater;
 import com.chbinou.smarthouse.app.config.schedule.CheckStatusPeriodicTask;
 import com.chbinou.smarthouse.app.config.security.SecurityFilter;
 import com.chbinou.smarthouse.app.config.security.SmartHouseSecurityConfigFactory;
@@ -45,7 +47,7 @@ public class SmartHouseApp
         Gson gson = GsonConfiguration.getGsonInstance();
 
         lightingConfigurationInstance = ConfigurationReader.parseConfiguration();
-        ConfigurationReader.init();
+        //ConfigurationReader.init();
 
         port(4504);
 

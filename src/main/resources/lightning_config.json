@@ -112,9 +112,12 @@
         {
           "identifier": "1",
           "mcpUp": 32,
-          "mcpDown": 32,
           "addressUp": "GPIO A4",
-          "addressDown": "GPIO A3"
+          "upTime": 22,
+          "mcpDown": 32,
+          "addressDown": "GPIO A3",
+          "downTime": 26
+
         }
 
       ],

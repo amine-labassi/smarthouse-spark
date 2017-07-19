@@ -17,7 +17,7 @@
     <button ion-item *ngFor="let item of (items | titlePipe:searchFilter)" (click)="openNavZonePage(item)">
       {{ item.title }}
 
-      <button  ion-button clear  icon-only item-end (click)="setUnsetFavorits(item)" >
+      <button  ion-button clear  icon-only item-end (click)="setUnsetFavorits(item, $event)" >
         <ion-icon name="heart" color="secondary" [ngClass]="{'inFav' : item.favoris, 'outOfFav' : !item.favoris}" ></ion-icon>
       </button>
     </button>

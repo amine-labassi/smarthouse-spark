@@ -17,8 +17,8 @@ import {Storage} from "@ionic/storage";
 })
 export class DomotiquePage
 {
-  items: any = [];
 
+  items: any = [];
   searchFilter: string = '';
   serverIP:string;
 
@@ -84,7 +84,10 @@ export class DomotiquePage
     var vm = this;
     var myList =[];
     vm.storage.get('favoritsZones').then((val) => {
-          myList = JSON.parse(val);
+         if(val != null)
+         {
+           myList = JSON.parse(val);
+         }
           for (var i = 0; i < vm.items.length; i++)
           {
            if (myList.indexOf(vm.items[i].id) != -1)
@@ -99,12 +102,18 @@ export class DomotiquePage
 
     });
   }
-  setUnsetFavorits(item:Zone)
+  setUnsetFavorits(item:Zone, $event:MouseEvent)
   {
+    $event.stopPropagation();
+    $event.stopImmediatePropagation();
+    $event.preventDefault();
     var vm = this;
     var myList=[];
     vm.storage.get('favoritsZones').then((val) => {
-        myList = JSON.parse(val);
+        if(val != null)
+        {
+          myList = JSON.parse(val);
+        }
         var idx = myList.indexOf(item.id);
         if (idx != -1) {
           myList.splice(idx, 1);

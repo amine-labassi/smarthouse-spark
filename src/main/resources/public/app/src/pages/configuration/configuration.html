@@ -11,7 +11,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-card>
+  <ion-card class="cards-configuration">
 
     <ion-card-header>
       <strong>Ajouter un SmartHouse</strong>
@@ -22,15 +22,15 @@
         <ion-label fixed>Name</ion-label>
         <ion-input #title type="text" value=""></ion-input>
       </ion-item>
-
+      <hr>
       <ion-item>
         <ion-label fixed>Ip</ion-label>
         <ion-input #ip type="text"></ion-input>
       </ion-item>
-
+      <hr>
       <ion-item>
-          <button  ion-button clear  icon-only ion-item-end (click)="addServer()">
-             <ion-icon name="ios-home"></ion-icon>
+          <button  ion-button clear  icon-only item-end (click)="addServer()">
+             <ion-icon name="md-add"></ion-icon>
           </button>
       </ion-item>
 
@@ -39,9 +39,11 @@
 
  <ion-list>
 
-      <button ion-button full ion-item-end *ngFor="let server of items" (click)="removeItem(server)">
+      <ion-item  full *ngFor="let server of items">
         {{server.title}}
-        <ion-icon name='ios-close-circle-outline'  color="danger" margin-left="10"></ion-icon>
-      </button>
+        <button ion-button clear icon-only item-end (click)="removeItem(server)">
+           <ion-icon name='ios-close-circle-outline'  color="danger" margin-left="10"></ion-icon>
+        </button>
+      </ion-item>
   </ion-list>
 </ion-content>

@@ -28,7 +28,10 @@ export class ConfigurationPage
              constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage){
                storage.get('SmartHomeServer').then((val) =>
                {
-                this.items = JSON.parse(val);
+                 if(val != null)
+                 {
+                   this.items = JSON.parse(val);
+                 }
                });
                }
 
@@ -51,7 +54,10 @@ export class ConfigurationPage
   {
     var vm = this;
     vm.storage.get('SmartHomeServer').then((val) => {
-      vm.items = JSON.parse(val);
+      if(val != null)
+      {
+        this.items = JSON.parse(val);
+      }
       var newServer:Server = {} as Server;
       newServer.title = vm.inputTitle["_value"];
       newServer.ip = vm.inputIp["_value"];

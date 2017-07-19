@@ -17,6 +17,26 @@ public class Window {
     private String addressUp;
     @Expose
     private String addressDown;
+    @Expose
+    private int upTime;
+    @Expose
+    private int downTime;
+
+    public int getUpTime() {
+        return upTime;
+    }
+
+    public void setUpTime(int upTime) {
+        this.upTime = upTime;
+    }
+
+    public int getDownTime() {
+        return downTime;
+    }
+
+    public void setDownTime(int downTime) {
+        this.downTime = downTime;
+    }
 
     private GpioPinDigitalOutput upPinInstanse;
     private GpioPinDigitalOutput downPinInstanse;

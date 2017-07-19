@@ -26,9 +26,19 @@ export class LoginPage
     var vm = this;
     storage.get('SmartHomeServer').then((val) =>
     {
-      if(val == "[]")
+      if(val == null || val == "[]")
       {
-         vm.showAlert("aucun Maison disponible !")
+        let alert = this.alertCtrl.create({
+          title: 'Manque de resources',
+          subTitle: "ajouter un SmartHome",
+          buttons: [{
+            text: 'Par ici !!!',
+            handler: data => {
+              vm.navCtrl.setRoot(ConfigurationPage)
+            }
+          }]
+        });
+        alert.present();
       }
       else
         {
