@@ -15,7 +15,6 @@ import com.chbinou.smarthouse.app.config.websocket.CheckStatusWebSocket;
 import com.chbinou.smarthouse.app.util.ConfigurationReader;
 import com.google.gson.Gson;
 import com.pi4j.io.gpio.GpioController;
-import com.pi4j.io.gpio.GpioFactory;
 import org.pac4j.core.config.Config;
 import spark.Spark;
 
@@ -29,7 +28,7 @@ import static spark.Spark.*;
 public class SmartHouseApp
 {
 
-    public static final GpioController gpio = GpioFactory.getInstance();
+    public static final GpioController gpio = GpioFactoryAdapater.getInstance();
 
     public static ElectronicInterfaceConfiguration lightingConfigurationInstance;
 
@@ -49,10 +48,23 @@ public class SmartHouseApp
         ConfigurationReader.init();
 
         port(4504);
+
+        secure(Environment.keyStore(),Environment.keyStorePassword(),Environment.trustStore(),
+                Environment.trustStorePassword(), Environment.isSslTwoWay());
+
         staticFiles.location("/public");
 
         // push status web socket
         webSocket(Constantes.Url.API_PUSH_WSOCKET, CheckStatusWebSocket.class);
+
+        before((request, response) -> {
+            final String url = request.url();
+            if (url.startsWith("http://"))
+            {
+                final String[] split = url.split("http://");
+                response.redirect("https://" + split[1]);
+            }
+        });
 
         timer.schedule(new CheckStatusPeriodicTask(), 0);
 
@@ -61,6 +73,7 @@ public class SmartHouseApp
         });
 
         options("*//*",  IndexController.optionsResponse);
+
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
         before(Constantes.Url.LOGIN, new SecurityFilter(config, "DirectFormClient", "hsts,nosniff,noframe,xssprotection,nocache","excludedPublicResources,securedHttpMethod"));

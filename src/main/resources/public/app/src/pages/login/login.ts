@@ -1,9 +1,11 @@
-import {Component} from "@angular/core";
-import {Headers, Http, URLSearchParams} from "@angular/http";
-import {AlertController, NavController, NavParams} from "ionic-angular";
+import { Component } from '@angular/core';
+import {Http, URLSearchParams, Headers} from '@angular/http';
+import {NavController, NavParams, AlertController} from 'ionic-angular';
 import {DomotiquePage} from "../domotique/domotique";
-import {ENV} from "../../config/environment.prod";
-import {$WebSocket} from "angular2-websocket/angular2-websocket";
+import {ENV} from "../../config/environment.dev";
+import {$WebSocket, WebSocketConfig} from "angular2-websocket/angular2-websocket";
+import {Zone} from "../../model/Zone";
+import {Broadcaster} from "ionic-native";
 import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
 import {ConfigurationPage} from "../configuration/configuration";
 import {Server} from "../../model/Server";
@@ -15,7 +17,6 @@ import {Storage} from "@ionic/storage";
   selector: 'page-login',
   templateUrl: 'login.html'
 })
-
 export class LoginPage
 {
   items:Array<Server> = [];
@@ -46,6 +47,7 @@ export class LoginPage
     var headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Accept', 'application/json');
+
     let urlSearchParams = new URLSearchParams();
     urlSearchParams.append('username', this.username);
     urlSearchParams.append('password', this.password);
@@ -67,7 +69,8 @@ export class LoginPage
   {
     var vm = this;
 
-    var ws = new $WebSocket('ws://' + localStorage.getItem("ip") + "/push");
+    const webSocketConfig = { reconnectIfNotNormalClose: true } as WebSocketConfig;
+    var ws = new $WebSocket('wss://' + localStorage.getItem("ip") + "/push",null,webSocketConfig);
 
     ws.onMessage(
       (msg: MessageEvent)=> {
@@ -75,7 +78,6 @@ export class LoginPage
       },
       {autoApply: false}
     );
-
   }
 
   ionViewDidLoad()
