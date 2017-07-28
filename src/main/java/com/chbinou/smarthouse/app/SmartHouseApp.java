@@ -47,26 +47,26 @@ public class SmartHouseApp
         Gson gson = GsonConfiguration.getGsonInstance();
 
         lightingConfigurationInstance = ConfigurationReader.parseConfiguration();
-        //ConfigurationReader.init();
+        ConfigurationReader.init();
 
-        port(4504);
+        port(4604);
 
-        secure(Environment.keyStore(),Environment.keyStorePassword(),Environment.trustStore(),
-                Environment.trustStorePassword(), Environment.isSslTwoWay());
+        //secure(Environment.keyStore(),Environment.keyStorePassword(),Environment.trustStore(),
+         //       Environment.trustStorePassword(), Environment.isSslTwoWay());
 
         staticFiles.location("/public");
 
         // push status web socket
         webSocket(Constantes.Url.API_PUSH_WSOCKET, CheckStatusWebSocket.class);
 
-        before((request, response) -> {
+        /*before((request, response) -> {
             final String url = request.url();
             if (url.startsWith("http://"))
             {
                 final String[] split = url.split("http://");
                 response.redirect("https://" + split[1]);
             }
-        });
+        });*/
 
         timer.schedule(new CheckStatusPeriodicTask(), 0);
 
@@ -95,6 +95,7 @@ public class SmartHouseApp
         get(Constantes.Url.API_SWITCHDOWN_WINDOW, "application/json", WindowsController.switchDownWindow, gson::toJson);
         get(Constantes.Url.API_SWITCHUP_WINDOW_ALL, "application/json", WindowsController.switchUpWindowAll, gson::toJson);
         get(Constantes.Url.API_SWITCHDOWN_WINDOW_ALL, "application/json", WindowsController.switchDownWindowAll, gson::toJson);
+        get(Constantes.Url.API_POSITION_WINDOW, "application/json", WindowsController.positionWindow, gson::toJson);
         get(Constantes.Url.API_STATUS_LAMP_ALL, "application/json", AirConditionnerController.getAllClimatiseurs, gson::toJson);
         get(Constantes.Url.API_SWITCHON_CLIMATISEUR, "application/json", AirConditionnerController.switchOnClimatiseur, gson::toJson);
         get(Constantes.Url.API_SWITCHOFF_CLIMATISEUR, "application/json", AirConditionnerController.switchOffClimatiseur, gson::toJson);

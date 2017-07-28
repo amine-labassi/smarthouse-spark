@@ -42,6 +42,7 @@ public class ConfigurationReader
             Mcp mcp = findMcp(lamp.getMcpOutput());
             Pin pin = findPin(lamp.getAddressOutput());
             lamp.setOutputPinInstance(SmartHouseApp.gpio.provisionDigitalOutputPin(mcp.getInstance(),pin,PinState.HIGH));
+            lamp.getOutputPinInstance().setState(true);
 
             mcp = findMcp(lamp.getMcpInput());
             pin = findPin(lamp.getAddressInput());
@@ -52,10 +53,12 @@ public class ConfigurationReader
           Mcp mcp =findMcp(window.getMcpUp());
           Pin pin =findPin(window.getAddressUp());
           window.setUpPinInstanse(SmartHouseApp.gpio.provisionDigitalOutputPin(mcp.getInstance(), pin, PinState.HIGH));
+          window.getUpPinInstanse().setState(true);
 
           mcp =findMcp(window.getMcpDown());
           pin =findPin(window.getAddressDown());
           window.setDownPinInstanse(SmartHouseApp.gpio.provisionDigitalOutputPin(mcp.getInstance(), pin, PinState.HIGH));
+          window.getDownPinInstanse().setState(true);
           }
 
           for(AirConditionner airConditionner : zone.getAirConditionners())
@@ -63,6 +66,7 @@ public class ConfigurationReader
             Mcp mcp = findMcp(airConditionner.getMcpOutput());
             Pin pin = findPin(airConditionner.getAddressOutput());
             airConditionner.setOutputPinInstance(SmartHouseApp.gpio.provisionDigitalOutputPin(mcp.getInstance(), pin, PinState.HIGH));
+            airConditionner.getOutputPinInstance().setState(true);
 
             mcp = findMcp(airConditionner.getMcpInput());
             pin = findPin(airConditionner.getAddressInput());
@@ -91,13 +95,35 @@ public class ConfigurationReader
             SmartHouseApp.gpio.provisionDigitalInputPin(mcp.getInstance(), pin);
         }*/
 
-        Activator activator = SmartHouseApp.lightingConfigurationInstance.getActivator();
-        Mcp mcp =findMcp(activator.getMcp());
-        Pin pin =findPin(activator.getAddress());
-        activator.setOutputPinInstance(SmartHouseApp.gpio.provisionDigitalOutputPin(mcp.getInstance(), pin, PinState.HIGH));
+        for (Zone zone: SmartHouseApp.lightingConfigurationInstance.getZones()){
+
+            for(Lamp lamp : zone.getLamps())
+            {
+                Mcp mcp = findMcp(lamp.getMcpOutput());
+                Pin pin = findPin(lamp.getAddressOutput());
+                lamp.getOutputPinInstance().setState(true);
+   }
+            for (Window window : zone.getWindows())
+            {
+                Mcp mcp =findMcp(window.getMcpUp());
+                Pin pin =findPin(window.getAddressUp());
+                window.getUpPinInstanse().setState(true);
+
+                mcp =findMcp(window.getMcpDown());
+                pin =findPin(window.getAddressDown());
+                window.getDownPinInstanse().setState(true);
+            }
+
+            for(AirConditionner airConditionner : zone.getAirConditionners())
+            {
+                Mcp mcp = findMcp(airConditionner.getMcpOutput());
+                Pin pin = findPin(airConditionner.getAddressOutput());
+                airConditionner.getOutputPinInstance().setState(true);
+            }
+        }
 
 
-}
+    }
 
     private static Pin findPin(String pinAddress)
     {

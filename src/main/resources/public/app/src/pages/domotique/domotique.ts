@@ -47,7 +47,7 @@ export class DomotiquePage
 
     vm.items = [];
 
-    vm.http.get('http://' + vm.serverIP + "/api/switching/lamp/all/status", options)
+    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status", options)
       .map(response => response.json())
       .subscribe(
         function(data){

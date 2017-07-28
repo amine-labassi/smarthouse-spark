@@ -63,7 +63,7 @@ export class LoginPage
     urlSearchParams.append('password', this.password);
     let body = urlSearchParams.toString();
     localStorage.setItem("ip", vm.server);
-    this.http.post('http://' + localStorage.getItem("ip") + '/login', body, {headers:headers})
+    this.http.post('https://' + localStorage.getItem("ip") + '/login', body, {headers:headers})
       .subscribe(function(data){
           localStorage.setItem("token", data.text());
           vm.initializeWebSocket();

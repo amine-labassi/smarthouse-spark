@@ -113,10 +113,10 @@
           "identifier": "1",
           "mcpUp": 32,
           "addressUp": "GPIO A4",
-          "upTime": 22,
+          "upTime": 14650,
           "mcpDown": 32,
           "addressDown": "GPIO A3",
-          "downTime": 26
+          "downTime": 14450
 
         }
 

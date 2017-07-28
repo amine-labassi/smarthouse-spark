@@ -2,6 +2,8 @@ package com.chbinou.smarthouse.app.config.environment;
 
 import spark.utils.StringUtils;
 
+import java.net.URL;
+
 /**
  * Created by amine on 08/07/2017.
  */
@@ -17,7 +19,14 @@ public class Environment
     {
         String keyStoreProp = System.getProperty("keystore.file");
         keyStoreProp = StringUtils.isBlank(keyStoreProp) ? "keystores/keystore.jks" : keyStoreProp;
-        return Environment.class.getClassLoader().getResource(keyStoreProp).getPath();
+        URL url = Environment.class.getClassLoader().getResource(keyStoreProp);
+
+        if(url != null)
+        {
+            return url.getPath();
+        }
+
+        return keyStoreProp;
     }
 
     public static String keyStorePassword()

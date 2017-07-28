@@ -37,4 +37,12 @@ public class WindowsController
         return WindowsManager.switchDownWindowAll();
     };
 
+    public static Route positionWindow = (request,  response) ->
+    {
+        response.header("Content-Type","application/json");
+
+        return WindowsManager.positionWindow(request.params("identifierzone"), request.params("identifier"), request.params("pos"));
+    };
+
+
 }

@@ -135,5 +135,29 @@ public class WindowsManager  {
         return returnedValus;
     }
 
+    public static int positionWindow(String identifierzone, String identifier, String pos)
+    {
+        int returnedValus = 0;
+        Zone zone = SmartHouseApp.lightingConfigurationInstance.getZones().stream().filter(o -> o.getId().equals(identifierzone)).findFirst().get();
+        Window window = zone.getWindows().stream().filter(o -> o.getIdentifier().equals(identifier)).findFirst().get();
+        int value = (window.getUpTime()*Integer.parseInt(pos))/100;
+        if(window.getUpPinInstanse().isHigh() == true && window.getDownPinInstanse().isHigh() == true)
+        {
+            window.getDownPinInstanse().pulse(window.getDownTime(), PinState.LOW, true);
+            window.getUpPinInstanse().pulse(value, PinState.LOW, false);
+            returnedValus = 0;
+        }
+        else if (window.getUpPinInstanse().isHigh() == false)
+        {
+            returnedValus = 1;
+        }
+        else if (window.getDownPinInstanse().isHigh() == false)
+        {
+            returnedValus = 2;
+        }
+        return  returnedValus;
+    }
+
+
 
 }
