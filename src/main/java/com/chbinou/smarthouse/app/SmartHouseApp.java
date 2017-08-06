@@ -47,12 +47,12 @@ public class SmartHouseApp
         Gson gson = GsonConfiguration.getGsonInstance();
 
         lightingConfigurationInstance = ConfigurationReader.parseConfiguration();
-        ConfigurationReader.init();
+        //ConfigurationReader.init();
 
         port(4604);
 
-        //secure(Environment.keyStore(),Environment.keyStorePassword(),Environment.trustStore(),
-         //       Environment.trustStorePassword(), Environment.isSslTwoWay());
+        secure(Environment.keyStore(),Environment.keyStorePassword(),Environment.trustStore(),
+                Environment.trustStorePassword(), Environment.isSslTwoWay());
 
         staticFiles.location("/public");
 

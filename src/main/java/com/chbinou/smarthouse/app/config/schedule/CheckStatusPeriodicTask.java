@@ -3,6 +3,7 @@ package com.chbinou.smarthouse.app.config.schedule;
 import com.chbinou.smarthouse.app.SmartHouseApp;
 import com.chbinou.smarthouse.app.components.lighting.LightingManager;
 import com.chbinou.smarthouse.app.config.GsonConfiguration;
+import com.chbinou.smarthouse.app.config.environment.Environment;
 import com.chbinou.smarthouse.app.config.websocket.CheckStatusWebSocket;
 import org.eclipse.jetty.util.StringUtil;
 import org.eclipse.jetty.websocket.api.Session;
@@ -27,7 +28,10 @@ public class CheckStatusPeriodicTask extends TimerTask
         // compute all status
         try
         {
-            LightingManager.getStatusAllLamps();
+            if(!Environment.isDevEnv())
+            {
+                LightingManager.getStatusAllLamps();
+            }
         }
         catch (InterruptedException ex)
         {

@@ -1,37 +1,35 @@
-<ion-header>
-  <ion-navbar color="secondary">
-    <ion-title>SmartHouse</ion-title>
+<ion-header style="background: linear-gradient(45deg, #00c6ff 0%, #0072ff 98%);">
+  <ion-navbar style="background: linear-gradient(45deg, #00c6ff 0%, #0072ff 98%);">
+    <ion-title style="background: linear-gradient(45deg, #00c6ff 0%, #0072ff 98%);">SmartHouse</ion-title>
     <ion-buttons start>
       <button ion-button icon-only color="black" (click)="openNavConfigurationPage()">
-        <ion-icon name="md-add-circle" ></ion-icon>
+        <ion-icon name="md-add-circle"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <form id="smartHouseForm">
-    <ion-item>
-      <ion-label floating>Username</ion-label>
-      <ion-input type="text" name="username" [(ngModel)]="username"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label floating>Password</ion-label>
-      <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
-    <div padding>
-      <button ion-button icon-left full (click)="doLogin()">
-        <ion-icon name="key"></ion-icon>
-        Entrer
-      </button>
-    </div>
-  </form>
 
-  <ion-list>
-  <ion-item>
-    <ion-label>Maison</ion-label>
-    <ion-select [(ngModel)]="server">
-      <ion-option *ngFor="let server of items" value="{{server.ip}}">{{server.title}}</ion-option>
-    </ion-select>
-  </ion-item>
+  <form id="smartHouseForm">
+    <ion-list>
+      <ion-item>
+        <ion-label>Maison</ion-label>
+        <ion-select name="server" [(ngModel)]="server">
+          <ion-option *ngFor="let server of items" value="{{server.ip}}">{{server.title}}</ion-option>
+        </ion-select>
+      </ion-item>
     </ion-list>
+    <div style="font-size: 2em; text-align: center;">Login</div>
+    <div style="text-align: center;">
+      <input id="passwdInput" type="password" name="password" [(ngModel)]="password" readonly
+              style="letter-spacing: 15px; font-size: 4em; width: 80%; text-align: center;">
+    </div>
+    <ion-digit-keyboard [theme]="numericKeyboardOptions.theme"
+                        [leftActionOptions]="numericKeyboardOptions.leftActionOptions"
+                        [rightActionOptions]="numericKeyboardOptions.rightActionOptions"
+                        [showLetters]="numericKeyboardOptions.showLetters"
+                        (rightActionClick)="doLogin($event)"
+                        (leftActionClick)="removeDigit($event)"
+                        (numberClick)="addDigit($event)"></ion-digit-keyboard>
+  </form>
 </ion-content>
