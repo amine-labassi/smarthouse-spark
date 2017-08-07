@@ -51,8 +51,8 @@ public class SmartHouseApp
 
         port(4504);
 
-        secure(Environment.keyStore(),Environment.keyStorePassword(),Environment.trustStore(),
-              Environment.trustStorePassword(), Environment.isSslTwoWay());
+        //secure(Environment.keyStore(),Environment.keyStorePassword(),Environment.trustStore(),
+         //       Environment.trustStorePassword(), Environment.isSslTwoWay());
 
         staticFiles.location("/public");
 

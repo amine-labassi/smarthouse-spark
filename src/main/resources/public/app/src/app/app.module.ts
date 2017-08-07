@@ -11,10 +11,12 @@ import {HttpModule} from "@angular/http";
 import {SmartHouseAppBroadcaster} from "../config/SmartHouseAppBroadcaster";
 import {IonicStorageModule} from "@ionic/storage";
 import {ConfigurationPage} from "../pages/configuration/configuration";
+import {IonDigitKeyboard} from "../components/ion-digit-keyboard/ion-digit-keyboard";
 
 @NgModule({
   declarations: [
     MyApp,
+    IonDigitKeyboard,
     LoginPage,
     DomotiquePage,
     FavorisPage,
