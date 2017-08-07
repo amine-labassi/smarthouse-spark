@@ -13,7 +13,7 @@ public class LightingController
 
         response.header("Content-Type","application/json");
 
-        LightingManager.getStatusAllLamps();
+        MockLightingManager.mockGetStatusAllLamps();
 
         return SmartHouseApp.lightingConfigurationInstance.getZones();
     };
@@ -22,12 +22,7 @@ public class LightingController
     {
 
         response.header("Content-Type","application/json");
-
-
-
-
-
-        LightingManager.switchOnLamp(request.params("identifierzone"),request.params("identifier"));
+        MockLightingManager.mockSwitchOnLamp(request.params("identifierzone"),request.params("identifier"));
 
         return SmartHouseApp.lightingConfigurationInstance.getZones();
     };
@@ -35,7 +30,7 @@ public class LightingController
     {
         response.header("Content-Type","application/json");
 
-        LightingManager.switchOffLamp(request.params("identifierzone"),request.params("identifier"));
+        MockLightingManager.mockSwitchOffLamp(request.params("identifierzone"),request.params("identifier"));
 
         return SmartHouseApp.lightingConfigurationInstance.getZones() ;
     };
@@ -44,7 +39,7 @@ public class LightingController
     {
         response.header("Content-Type","application/json");
 
-        LightingManager. switchOffLampAll();
+        MockLightingManager.mockSwitchOffLampAll();
 
         return SmartHouseApp.lightingConfigurationInstance.getZones() ;
     };
@@ -53,7 +48,7 @@ public class LightingController
     {
         response.header("Content-Type","application/json");
 
-        LightingManager. switchOnLampAll();
+        MockLightingManager.mockSwitchOnLampAll();
 
         return SmartHouseApp.lightingConfigurationInstance.getZones() ;
     };

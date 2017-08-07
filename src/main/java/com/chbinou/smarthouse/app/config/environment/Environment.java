@@ -18,7 +18,7 @@ public class Environment
     public static String keyStore()
     {
         String keyStoreProp = System.getProperty("keystore.file");
-        keyStoreProp = StringUtils.isBlank(keyStoreProp) ? "keystores/keystore.jks" : keyStoreProp;
+        keyStoreProp = StringUtils.isBlank(keyStoreProp) ? "keystores/Keystore.jks" : keyStoreProp;
         URL url = Environment.class.getClassLoader().getResource(keyStoreProp);
 
         if(url != null)
@@ -32,7 +32,7 @@ public class Environment
     public static String keyStorePassword()
     {
         String keyStorePasswordProp = System.getProperty("keystore.password");
-        return StringUtils.isBlank(keyStorePasswordProp) ? "azertyuiop" : keyStorePasswordProp;
+        return StringUtils.isBlank(keyStorePasswordProp) ? "azerty" : keyStorePasswordProp;
     }
 
     public static String trustStore()

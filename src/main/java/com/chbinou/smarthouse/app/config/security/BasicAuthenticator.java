@@ -46,9 +46,9 @@ public class BasicAuthenticator implements Authenticator<UsernamePasswordCredent
         }
 
         if (CommonHelper.areNotEquals(username, "smartHouseOwner"))
-        {
-            throwsException("Bad credentials");
-        }
+         {
+              throwsException("Bad credentials");
+         }
 
         if (CommonHelper.isBlank(password))
         {

@@ -13,11 +13,9 @@ import static com.chbinou.smarthouse.app.SmartHouseApp.lightingConfigurationInst
  */
 public class WindowsManager  {
 
-    public static int switchUPWindow(String identifierzone,String identifier) throws InterruptedException {
+    public static int switchUPWindow(Window window) throws InterruptedException {
         int returnedValus = 0;
-        Zone zone = SmartHouseApp.lightingConfigurationInstance.getZones().stream().filter(o -> o.getId().equals(identifierzone)).findFirst().get();
-        Window window = zone.getWindows().stream().filter(o -> o.getIdentifier().equals(identifier)).findFirst().get();
-        if(window.getUpPinInstanse().isHigh() == true && window.getDownPinInstanse().isHigh() == true)
+       if(window.getUpPinInstanse().isHigh() == true && window.getDownPinInstanse().isHigh() == true)
         {
             window.getUpPinInstanse().pulse(window.getUpTime(), PinState.LOW, false);
             returnedValus = 0;
@@ -34,11 +32,9 @@ public class WindowsManager  {
         return returnedValus;
     }
 
-    public static int switchDownWindow(String identifierzone,String identifier) throws InterruptedException {
+    public static int switchDownWindow(Window window) throws InterruptedException {
         int returnedValus = 0;
-        Zone zone = SmartHouseApp.lightingConfigurationInstance.getZones().stream().filter(o -> o.getId().equals(identifierzone)).findFirst().get();
-        Window window = zone.getWindows().stream().filter(o -> o.getIdentifier().equals(identifier)).findFirst().get();
-        if(window.getUpPinInstanse().isHigh() == true && window.getDownPinInstanse().isHigh() == true)
+       if(window.getUpPinInstanse().isHigh() == true && window.getDownPinInstanse().isHigh() == true)
         {
             window.getDownPinInstanse().pulse(window.getDownTime(), PinState.LOW, false);
             returnedValus = 0;
@@ -135,11 +131,10 @@ public class WindowsManager  {
         return returnedValus;
     }
 
-    public static int positionWindow(String identifierzone, String identifier, String pos)
+    public static int positionWindow(Window window, String pos)
     {
         int returnedValus = 0;
-        Zone zone = SmartHouseApp.lightingConfigurationInstance.getZones().stream().filter(o -> o.getId().equals(identifierzone)).findFirst().get();
-        Window window = zone.getWindows().stream().filter(o -> o.getIdentifier().equals(identifier)).findFirst().get();
+
         int value = (window.getUpTime()*Integer.parseInt(pos))/100;
         if(window.getUpPinInstanse().isHigh() == true && window.getDownPinInstanse().isHigh() == true)
         {

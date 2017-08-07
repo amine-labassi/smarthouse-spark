@@ -19,10 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class LightingManager
 {
     // provision gpio pin #01 & #03 as an output pins and blink
-    static Activator activator = SmartHouseApp.lightingConfigurationInstance.getActivator();
-    public static boolean switchOnLamp(String identifierzone,String identifier) throws InterruptedException, IOException, I2CFactory.UnsupportedBusNumberException {
-        Zone zone = SmartHouseApp.lightingConfigurationInstance.getZones().stream().filter(o -> o.getId().equals(identifierzone)).findFirst().get();
-        Lamp lamp = zone.getLamps().stream().filter(o -> o.getIdentifier().equals(identifier)).findFirst().get();
+    public static boolean switchOnLamp(Lamp lamp) throws InterruptedException, IOException, I2CFactory.UnsupportedBusNumberException {
         if (gpio.isState(PinState.HIGH,lamp.getInputPinInstance()) == true)
         {
             TimeUnit.MILLISECONDS.sleep(50);
@@ -36,9 +33,7 @@ public class LightingManager
     }
 
 
-    public static boolean  switchOffLamp(String identifierzone,String identifier) throws InterruptedException, IOException, I2CFactory.UnsupportedBusNumberException {
-        Zone zone = SmartHouseApp.lightingConfigurationInstance.getZones().stream().filter(o -> o.getId().equals(identifierzone)).findFirst().get();
-        Lamp lamp = zone.getLamps().stream().filter(o -> o.getIdentifier().equals(identifier)).findFirst().get();
+    public static boolean  switchOffLamp(Lamp lamp) throws InterruptedException, IOException, I2CFactory.UnsupportedBusNumberException {
 
         if (gpio.isState(PinState.HIGH,lamp.getInputPinInstance())==false)
         {
@@ -95,12 +90,14 @@ public class LightingManager
         return true;
     }
 
-    public static void getStatusAllLamps() throws InterruptedException {
+    public static boolean getStatusAllLamps() throws InterruptedException {
 
         for(Zone zone : lightingConfigurationInstance.getZones() )
             for (Lamp lamp : zone.getLamps()) {
                 lamp.setStatus(gpio.isState(PinState.LOW ,lamp.getInputPinInstance()));
             }
+
+        return true;
 
     }
 
