@@ -1,9 +1,14 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'maven:3.5.0-jdk-8'
+    }
+    
+  }
   stages {
-    stage('') {
+    stage('error') {
       steps {
-        sh 'mvn clean install'
+        echo 'Hello'
       }
     }
   }
