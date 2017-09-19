@@ -3,16 +3,7 @@ pipeline {
   stages {
     stage('error') {
       steps {
-        parallel(
-          "build": {
-            sh 'mvn clean install'
-            
-          },
-          "Test": {
-            sh 'mvn test'
-            
-          }
-        )
+        sh 'mvn clean install'
       }
     }
   }
