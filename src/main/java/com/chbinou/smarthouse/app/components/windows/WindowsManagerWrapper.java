@@ -16,7 +16,7 @@ import static com.chbinou.smarthouse.app.components.windows.WindowsManager.*;
 /**
  * Created by Yassine Chbinou on 07/08/2017.
  */
-public class MockWindowsManager {
+public class WindowsManagerWrapper {
     public static int mockSwitchUPWindow(String identifierzone,String identifier) throws InterruptedException, IOException, I2CFactory.UnsupportedBusNumberException {
         Zone zone = SmartHouseApp.lightingConfigurationInstance.getZones().stream().filter(o -> o.getId().equals(identifierzone)).findFirst().get();
         Window window = zone.getWindows().stream().filter(o -> o.getIdentifier().equals(identifier)).findFirst().get();

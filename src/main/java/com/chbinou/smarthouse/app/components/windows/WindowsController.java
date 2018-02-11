@@ -10,39 +10,31 @@ public class WindowsController
     public static Route switchUPWindow  = (request, response) ->
     {
         response.header("Content-Type","application/json");
-
-
-        return  WindowsManager.switchUPWindow(request.params("identifierzone"), request.params("identifier"));
-
+        return  WindowsManagerWrapper.mockSwitchUPWindow(request.params("identifierzone"), request.params("identifier"));
     };
 
     public static Route switchDownWindow  = (request,  response) ->
     {
         response.header("Content-Type","application/json");
-
-        return WindowsManager.switchDownWindow(request.params("identifierzone"), request.params("identifier"));
+        return WindowsManagerWrapper.mockSwitchDownWindow(request.params("identifierzone"), request.params("identifier"));
     };
 
     public static Route switchUpWindowAll  = (request,  response) ->
     {
         response.header("Content-Type","application/json");
-        return  WindowsManager.switchUPWindowAll();
+        return  WindowsManagerWrapper.mockSwitchUPWindowAll();
     };
 
     public static Route switchDownWindowAll  = (request,  response) ->
     {
         response.header("Content-Type","application/json");
-        WindowsManager.switchDownWindowAll();
-
-        return WindowsManager.switchDownWindowAll();
+        return WindowsManagerWrapper.mockSwitchDownWindowAll();
     };
 
     public static Route positionWindow = (request,  response) ->
     {
         response.header("Content-Type","application/json");
-
-        return WindowsManager.positionWindow(request.params("identifierzone"), request.params("identifier"), request.params("pos"));
+        return WindowsManagerWrapper.mockPositionWindow(request.params("identifierzone"), request.params("identifier"), request.params("pos"));
     };
-
 
 }

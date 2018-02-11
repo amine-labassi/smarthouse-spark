@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class MockMCP23017GpioProvider extends MockGpioProvider
 {
-    public static final String NAME = "com.pi4j.gpio.extension.mcp.MCP23017GpioProvider";
+  /*  public static final String NAME = "com.pi4j.gpio.extension.mcp.MCP23017GpioProvider";
     public static final String DESCRIPTION = "MCP23017 GPIO Provider";
     public static final int DEFAULT_ADDRESS = 32;
     public static final int DEFAULT_POLLING_TIME = 50;
@@ -52,19 +52,19 @@ public class MockMCP23017GpioProvider extends MockGpioProvider
     private final I2CDevice device;
     private MCP23017GpioProvider.GpioStateMonitor monitor;
 
-    public MCP23017GpioProvider(int busNumber, int address) throws I2CFactory.UnsupportedBusNumberException, IOException {
+    public MockMCP23017GpioProvider(int busNumber, int address) throws I2CFactory.UnsupportedBusNumberException, IOException {
         this(busNumber, address, 50);
     }
 
-    public MCP23017GpioProvider(int busNumber, int address, int pollingTime) throws IOException, I2CFactory.UnsupportedBusNumberException {
+    public MockMCP23017GpioProvider(int busNumber, int address, int pollingTime) throws IOException, I2CFactory.UnsupportedBusNumberException {
         this(I2CFactory.getInstance(busNumber), address, pollingTime);
     }
 
-    public MCP23017GpioProvider(I2CBus bus, int address) throws IOException {
+    public MockMCP23017GpioProvider(I2CBus bus, int address) throws IOException {
         this(bus, address, 50);
     }
 
-    public MCP23017GpioProvider(I2CBus bus, int address, int pollingTime) throws IOException {
+    public MockMCP23017GpioProvider(I2CBus bus, int address, int pollingTime) throws IOException {
         this.currentStatesA = 0;
         this.currentStatesB = 0;
         this.currentDirectionA = 0;
@@ -415,5 +415,5 @@ public class MockMCP23017GpioProvider extends MockGpioProvider
                 }
             }
         }
-    }
+    }*/
 }

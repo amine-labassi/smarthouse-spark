@@ -70,10 +70,10 @@
                                 <include>lightning_config.json</include>
                                 <include>log4j2.xml</include>
                                 <include>password</include>
-                                <include>public/app/www/**/*</include>
-                                <include>public/appli/**/*</include>
-                                <include>keystores/**/*</include>
-                                <include>Keystore</include>
+                                <!--<include>public/app/www/**/*</include>-->
+                                <!--<include>public/appli/**/*</include>-->
+                                <!--<include>keystores/**/*</include>-->
+                                <!--<include>Keystore</include>-->
                             </includes>
                         </resource>
                     </resources>
