@@ -8,6 +8,8 @@ import com.chbinou.smarthouse.app.components.model.ElectronicInterfaceConfigurat
 import com.chbinou.smarthouse.app.components.windows.WindowsController;
 import com.chbinou.smarthouse.app.config.Constantes;
 import com.chbinou.smarthouse.app.config.GsonConfiguration;
+import com.chbinou.smarthouse.app.config.metrics.InstrumentedFilter;
+import com.chbinou.smarthouse.app.config.metrics.MetricsConfigurer;
 import com.chbinou.smarthouse.app.config.environment.Environment;
 import com.chbinou.smarthouse.app.config.gpio.GpioFactoryAdapater;
 import com.chbinou.smarthouse.app.config.schedule.CheckStatusPeriodicTask;
@@ -38,9 +40,7 @@ public class SmartHouseApp
 
     public static void main(String[] args) throws Exception
     {
-        System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "INFO");
-        System.setProperty(org.slf4j.impl.SimpleLogger.SHOW_SHORT_LOG_NAME_KEY, "true");
-        System.setProperty(org.slf4j.impl.SimpleLogger.SHOW_THREAD_NAME_KEY, "false");
+        MetricsConfigurer.configure();
 
         final Config config = new SmartHouseSecurityConfigFactory().build();
 
@@ -78,6 +78,9 @@ public class SmartHouseApp
 
         before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
+        before(Constantes.Url.ANY, new InstrumentedFilter(InstrumentedFilter.FilterStep.BEFORE));
+        afterAfter(Constantes.Url.ANY, new InstrumentedFilter(InstrumentedFilter.FilterStep.AFTER_AFTER));
+
         before(Constantes.Url.LOGIN, new SecurityFilter(config, "DirectFormClient", "hsts,nosniff,noframe,xssprotection,nocache","excludedPublicResources,securedHttpMethod"));
         before(Constantes.Url.API_SECURE, new SecurityFilter(config, "HeaderClient", "hsts,nosniff,noframe,xssprotection,nocache", "excludedPublicResources,securedHttpMethod"));
 
@@ -101,7 +104,6 @@ public class SmartHouseApp
         get(Constantes.Url.API_SWITCHOFF_CLIMATISEUR, "application/json", AirConditionnerController.switchOffClimatiseur, gson::toJson);
         get(Constantes.Url.API_SWITCHON_CLIMATISEUR, "application/json", AirConditionnerController.switchOnClimatiseurAll, gson::toJson);
         get(Constantes.Url.API_SWITCHOFF_CLIMATISEUR, "application/json", AirConditionnerController.switchOffClimatiseurAll, gson::toJson);
-
 //        // 404
 //        get(Constantes.Url.ANY, "*/*", IndexController.notFoundResponse);
 
