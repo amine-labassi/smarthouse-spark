@@ -9,7 +9,7 @@ import com.chbinou.smarthouse.app.components.windows.WindowsController;
 import com.chbinou.smarthouse.app.config.Constantes;
 import com.chbinou.smarthouse.app.config.GsonConfiguration;
 import com.chbinou.smarthouse.app.config.metrics.InstrumentedFilter;
-import com.chbinou.smarthouse.app.config.metrics.MetricsConfigurer;
+//import com.chbinou.smarthouse.app.config.metrics.MetricsConfigurer;
 import com.chbinou.smarthouse.app.config.environment.Environment;
 import com.chbinou.smarthouse.app.config.gpio.GpioFactoryAdapater;
 import com.chbinou.smarthouse.app.config.schedule.CheckStatusPeriodicTask;
@@ -40,7 +40,7 @@ public class SmartHouseApp
 
     public static void main(String[] args) throws Exception
     {
-        MetricsConfigurer.configure();
+        //MetricsConfigurer.configure();
 
         final Config config = new SmartHouseSecurityConfigFactory().build();
 
