@@ -18,7 +18,7 @@ public class WindowsManager  {
        if(window.getUpPinInstanse().isHigh() == true && window.getDownPinInstanse().isHigh() == true)
         {
             window.getUpPinInstanse().pulse(window.getUpTime(), PinState.LOW, false);
-            returnedValus = 0;
+            returnedValus = 400;
         }
         else if (window.getUpPinInstanse().isHigh() == false)
         {
@@ -37,7 +37,7 @@ public class WindowsManager  {
        if(window.getUpPinInstanse().isHigh() == true && window.getDownPinInstanse().isHigh() == true)
         {
             window.getDownPinInstanse().pulse(window.getDownTime(), PinState.LOW, false);
-            returnedValus = 0;
+            returnedValus = 400;
         }
         else if (window.getUpPinInstanse().isHigh() == false)
         {
@@ -74,7 +74,7 @@ public class WindowsManager  {
             if(window.getUpPinInstanse().isHigh() == true || window.getDownPinInstanse().isHigh() == true)
             {
                 window.getUpPinInstanse().pulse(window.getUpTime(), PinState.LOW, false);
-                returnedValus = 0;
+                returnedValus = 400;
             }
             else if (window.getUpPinInstanse().isHigh() == true)
             {
@@ -113,7 +113,7 @@ public class WindowsManager  {
                     if(window.getUpPinInstanse().isHigh() == true || window.getDownPinInstanse().isHigh() == true)
                     {
                         window.getDownPinInstanse().pulse(window.getDownTime(), PinState.LOW, false);
-                        returnedValus = 0;
+                        returnedValus = 400;
                     }
                     else if (window.getUpPinInstanse().isHigh() == true)
                     {
@@ -140,7 +140,7 @@ public class WindowsManager  {
         {
             window.getDownPinInstanse().pulse(window.getDownTime(), PinState.LOW, true);
             window.getUpPinInstanse().pulse(value, PinState.LOW, false);
-            returnedValus = 0;
+            returnedValus = 400;
         }
         else if (window.getUpPinInstanse().isHigh() == false)
         {

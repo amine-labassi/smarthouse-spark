@@ -47,7 +47,15 @@ public class SmartHouseApp
         Gson gson = GsonConfiguration.getGsonInstance();
 
         lightingConfigurationInstance = ConfigurationReader.parseConfiguration();
-        ConfigurationReader.init();
+        if(Environment.isDevEnv())
+        {
+             System.out.println("components are initialised");
+        }
+        else
+        {
+            ConfigurationReader.init();
+
+        }
 
         port(4504);
 
@@ -59,14 +67,14 @@ public class SmartHouseApp
         // push status web socket
         webSocket(Constantes.Url.API_PUSH_WSOCKET, CheckStatusWebSocket.class);
 
-       /* before((request, response) -> {
+        before((request, response) -> {
             final String url = request.url();
             if (url.startsWith("http://"))
             {
                 final String[] split = url.split("http://");
                 response.redirect("https://" + split[1]);
             }
-        });*/
+        });
 
         timer.schedule(new CheckStatusPeriodicTask(), 0);
 

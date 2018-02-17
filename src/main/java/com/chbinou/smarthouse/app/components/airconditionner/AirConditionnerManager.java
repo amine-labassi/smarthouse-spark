@@ -16,10 +16,8 @@ public class AirConditionnerManager
 
 
 
-    public static boolean  switchOnClimatiseur(String identifierzone,String identifier) throws InterruptedException {
-        Zone zone = SmartHouseApp.lightingConfigurationInstance.getZones().stream().filter(o -> o.getId().equals(identifierzone)).findFirst().get();
-        AirConditionner airConditionner = zone.getAirConditionners().stream().filter(o -> o.getIdentifier().equals(identifier)).findFirst().get();
-        if (SmartHouseApp.gpio.isState(PinState.HIGH, airConditionner.getInputPinInstance())==true)
+    public static boolean  switchOnClimatiseur(AirConditionner airConditionner) throws InterruptedException {
+   if (SmartHouseApp.gpio.isState(PinState.HIGH, airConditionner.getInputPinInstance())==true)
         {
             airConditionner.getOutputPinInstance().pulse(100,PinState.HIGH);
 
@@ -28,10 +26,9 @@ public class AirConditionnerManager
         return true;
     }
 
-    public static boolean  switchOffClimatiseur(String identifierzone,String identifier) throws InterruptedException {
+    public static boolean  switchOffClimatiseur(AirConditionner airConditionner) throws InterruptedException {
 
-        Zone zone = SmartHouseApp.lightingConfigurationInstance.getZones().stream().filter(o -> o.getId().equals(identifierzone)).findFirst().get();
-        AirConditionner airConditionner = zone.getAirConditionners().stream().filter(o -> o.getIdentifier().equals(identifier)).findFirst().get();
+
         if (SmartHouseApp.gpio.isState(PinState.HIGH, airConditionner.getInputPinInstance())==false)
         {
            airConditionner.getOutputPinInstance().pulse(100,PinState.HIGH);

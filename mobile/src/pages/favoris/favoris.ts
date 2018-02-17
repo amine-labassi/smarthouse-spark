@@ -3,7 +3,7 @@ import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {Favoris} from "../../model/Favoris";
 import {Storage} from "@ionic/storage";
 import {ZonePage} from "../zone/zone";
-import {Headers, Http, RequestOptions} from "@angular/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 /*
   Generated class for the Favoris page.
@@ -21,7 +21,7 @@ export class FavorisPage {
   items: any = [];
   serverIP: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public alertCtrl: AlertController, private storage: Storage)
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alertCtrl: AlertController, private storage: Storage)
   {
     var vm = this;
     vm.serverIP = localStorage.getItem("ip");
@@ -35,11 +35,11 @@ export class FavorisPage {
   loadZones()
   {
     var vm = this;
-    var headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-    headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-    let options = new RequestOptions({ headers: headers });
+    var headers = new HttpHeaders()
+      .append('Content-Type', 'application/json')
+      .append('Accept', 'application/json')
+      .append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+
 
     vm.items = [];
     var myList: Array<number> = [];
@@ -48,8 +48,7 @@ export class FavorisPage {
        myList = JSON.parse(val);
       }
     });
-    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status", options)
-      .map(response => response.json())
+    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status", {headers: headers})
       .subscribe(
         function(data){
           var items: any = data;

@@ -24,11 +24,11 @@
   "zones": [
     {
       "id": 1,
-      "title": "Chambre parent",
+      "title": "Chambre 2",
       "lamps": [
         {
           "identifier": "1",
-          "description": "2 Lampes (100Watt) chambre parent",
+          "description": "Lampe 1",
           "status": true,
           "mcpInput": 35,
           "mcpOutput": 32,
@@ -37,7 +37,7 @@
         },
         {
           "identifier": "2",
-          "description": "2 Lampes (100Watt) chambre parent",
+          "description": "Lampe 2",
           "status": true,
           "mcpInput": 35,
           "mcpOutput": 34,
@@ -46,7 +46,7 @@
         },
         {
           "identifier": "3",
-          "description": "2 Lampes (100Watt) chambre parent",
+          "description": "Lampe 3",
           "status": true,
           "mcpInput": 35,
           "mcpOutput": 34,
@@ -55,57 +55,12 @@
         },
         {
           "identifier": "4",
-          "description": "2 Lampes (100Watt) chambre parent",
+          "description": "Lampe 4",
           "status": true,
           "mcpInput": 35,
           "mcpOutput": 34,
           "addressInput": "GPIO A3",
           "addressOutput": "GPIO B5"
-        },
-        {
-          "identifier": "5",
-          "description": "2 Lampes (100Watt) chambre parent",
-          "status": true,
-          "mcpInput": 34,
-          "mcpOutput": 34,
-          "addressInput": "GPIO A3",
-          "addressOutput": "GPIO B4"
-        },
-        {
-          "identifier": "6",
-          "description": "2 Lampes (100Watt) chambre parent",
-          "status": true,
-          "mcpInput": 34,
-          "mcpOutput": 34,
-          "addressInput": "GPIO A4",
-          "addressOutput": "GPIO B3"
-        },
-        {
-          "identifier": "7",
-          "description": "2 Lampes (100Watt) chambre parent",
-          "status": true,
-          "mcpInput": 34,
-          "mcpOutput": 34,
-          "addressInput": "GPIO A5",
-          "addressOutput": "GPIO B2"
-        },
-        {
-          "identifier": "8",
-          "description": "2 Lampes (100Watt) chambre parent",
-          "status": true,
-          "mcpInput": 34,
-          "mcpOutput": 34,
-          "addressInput": "GPIO A6",
-          "addressOutput": "GPIO B1"
-        },
-        {
-          "identifier": "8",
-          "description": "2 Lampes (100Watt) chambre parent",
-          "status": true,
-          "mcpInput": 34,
-          "mcpOutput": 34,
-          "addressInput": "GPIO A7",
-          "addressOutput": "GPIO B0"
         }
       ],
       "windows": [
@@ -118,10 +73,95 @@
           "addressDown": "GPIO A3",
           "downTime": 14450
 
+        },
+        {
+          "identifier": "1",
+          "mcpUp": 33,
+          "addressUp": "GPIO A4",
+          "upTime": 14650,
+          "mcpDown": 33,
+          "addressDown": "GPIO A3",
+          "downTime": 14450
         }
 
-      ],
+          ],
       "airConditionners": [
+        {
+          "identifier": "1",
+          "description": "clim1",
+          "status": true,
+          "mcpInput": 34,
+          "mcpOutput": 34,
+          "addressInput": "GPIO A6",
+          "addressOutput": "GPIO B1"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "title": "Chambre parent",
+      "lamps": [
+        {
+          "identifier": "1",
+          "description": "Lampe 1",
+          "status": true,
+          "mcpInput": 34,
+          "mcpOutput": 34,
+          "addressInput": "GPIO A3",
+          "addressOutput": "GPIO B4"
+        },
+        {
+          "identifier": "2",
+          "description": "Lampe 2",
+          "status": true,
+          "mcpInput": 34,
+          "mcpOutput": 34,
+          "addressInput": "GPIO A4",
+          "addressOutput": "GPIO B3"
+        },
+        {
+          "identifier": "3",
+          "description": "Lampe 3",
+          "status": true,
+          "mcpInput": 34,
+          "mcpOutput": 34,
+          "addressInput": "GPIO A5",
+          "addressOutput": "GPIO B2"
+        }
+      ],
+      "windows": [
+        {
+          "identifier": "1",
+          "mcpUp": 33,
+          "addressUp": "GPIO A5",
+          "upTime": 14650,
+          "mcpDown": 33,
+          "addressDown": "GPIO A6",
+          "downTime": 14450
+
+        },
+        {
+          "identifier": "1",
+          "mcpUp": 33,
+          "addressUp": "GPIO A1",
+          "upTime": 14650,
+          "mcpDown": 33,
+          "addressDown": "GPIO A2",
+          "downTime": 14450
+        }
+
+
+          ],
+      "airConditionners": [
+        {
+          "identifier": "1",
+          "description": "clim1",
+          "status": true,
+          "mcpInput": 34,
+          "mcpOutput": 34,
+          "addressInput": "GPIO A7",
+          "addressOutput": "GPIO B0"
+        }
 
       ]
     }

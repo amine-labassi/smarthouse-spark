@@ -17,7 +17,7 @@ import static com.chbinou.smarthouse.app.components.windows.WindowsManager.*;
  * Created by Yassine Chbinou on 07/08/2017.
  */
 public class WindowsManagerWrapper {
-    public static int mockSwitchUPWindow(String identifierzone,String identifier) throws InterruptedException, IOException, I2CFactory.UnsupportedBusNumberException {
+    public static int switchUPWindowWrapper(String identifierzone, String identifier) throws InterruptedException, IOException, I2CFactory.UnsupportedBusNumberException {
         Zone zone = SmartHouseApp.lightingConfigurationInstance.getZones().stream().filter(o -> o.getId().equals(identifierzone)).findFirst().get();
         Window window = zone.getWindows().stream().filter(o -> o.getIdentifier().equals(identifier)).findFirst().get();
         if(Environment.isDevEnv())
@@ -31,7 +31,7 @@ public class WindowsManagerWrapper {
         }
     }
 
-    public static int mockSwitchDownWindow(String identifierzone,String identifier) throws InterruptedException, IOException, I2CFactory.UnsupportedBusNumberException {
+    public static int switchDownWindowWrapper(String identifierzone, String identifier) throws InterruptedException, IOException, I2CFactory.UnsupportedBusNumberException {
         Zone zone = SmartHouseApp.lightingConfigurationInstance.getZones().stream().filter(o -> o.getId().equals(identifierzone)).findFirst().get();
         Window window = zone.getWindows().stream().filter(o -> o.getIdentifier().equals(identifier)).findFirst().get();
         if(Environment.isDevEnv())
@@ -45,7 +45,7 @@ public class WindowsManagerWrapper {
         }
     }
 
-    public static int mockSwitchUPWindowAll() throws InterruptedException, IOException, I2CFactory.UnsupportedBusNumberException {
+    public static int switchUPWindowAllWrapper() throws InterruptedException, IOException, I2CFactory.UnsupportedBusNumberException {
         if(Environment.isDevEnv())
         {
             System.out.println("All window : Down");
@@ -57,7 +57,7 @@ public class WindowsManagerWrapper {
         }
     }
 
-    public static int mockSwitchDownWindowAll() throws InterruptedException, IOException, I2CFactory.UnsupportedBusNumberException {
+    public static int switchDownWindowAllWrapper() throws InterruptedException, IOException, I2CFactory.UnsupportedBusNumberException {
         if(Environment.isDevEnv())
         {
             System.out.println("All window : Down");
@@ -68,7 +68,7 @@ public class WindowsManagerWrapper {
             return switchDownWindowAll();
         }
     }
-    public  static int mockPositionWindow(String identifierzone, String identifier, String pos) throws InterruptedException {
+    public  static int positionWindowWrapper(String identifierzone, String identifier, String pos) throws InterruptedException {
         Zone zone = SmartHouseApp.lightingConfigurationInstance.getZones().stream().filter(o -> o.getId().equals(identifierzone)).findFirst().get();
         Window window = zone.getWindows().stream().filter(o -> o.getIdentifier().equals(identifier)).findFirst().get();
         if(Environment.isDevEnv())

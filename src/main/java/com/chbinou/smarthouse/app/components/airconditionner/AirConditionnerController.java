@@ -22,7 +22,7 @@ public class AirConditionnerController
     {
 
         response.header("Content-Type","application/json");
-        AirConditionnerManager.switchOnClimatiseur(request.params("identifierzone"),request.params("identifier"));
+        AirConditionnerManagerWrapper.switchOnClimatiseurWrapper(request.params("identifierzone"),request.params("identifier"));
 
         return SmartHouseApp.lightingConfigurationInstance.getZones();
     };
@@ -30,7 +30,7 @@ public class AirConditionnerController
     {
         response.header("Content-Type","application/json");
 
-        AirConditionnerManager.switchOffClimatiseur(request.params("identifierzone"),request.params("identifier"));
+        AirConditionnerManagerWrapper.switchOffClimatiseurWrapper(request.params("identifierzone"),request.params("identifier"));
 
         return SmartHouseApp.lightingConfigurationInstance.getZones() ;
     };
@@ -39,7 +39,7 @@ public class AirConditionnerController
     {
         response.header("Content-Type","application/json");
 
-        AirConditionnerManager.switchOffClimatiseurAll();
+        AirConditionnerManagerWrapper.switchOffClimatiseurAllWrapper();
 
         return SmartHouseApp.lightingConfigurationInstance.getZones() ;
     };
@@ -48,7 +48,7 @@ public class AirConditionnerController
     {
         response.header("Content-Type","application/json");
 
-        AirConditionnerManager.switchOnClimatiseurAll();
+        AirConditionnerManagerWrapper.switchOnClimatiseurAllWrapper();
 
         return SmartHouseApp.lightingConfigurationInstance.getZones() ;
     };
