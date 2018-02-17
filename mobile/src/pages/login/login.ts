@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {NavController, NavParams, AlertController} from 'ionic-angular';
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import {NavController, AlertController, Select} from 'ionic-angular';
 import {DomotiquePage} from "../domotique/domotique";
 import {$WebSocket, WebSocketConfig} from "angular2-websocket/angular2-websocket";
 import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
@@ -9,8 +9,6 @@ import {Storage} from "@ionic/storage";
 import {IonDigitKeyboardOptions} from "../../components/ion-digit-keyboard/ion-digit-keyboard";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 
-
-
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -19,7 +17,7 @@ export class LoginPage
 {
   username;
   password;
-  items:Array<Server> = [];
+  servers:Array<Server> = [];
   server:string;
   numericKeyboardOptions:IonDigitKeyboardOptions = {
     align: 'center',
@@ -36,10 +34,10 @@ export class LoginPage
     roundButtons: false,
     showLetters: false,
     swipeToHide: true,
-    theme: 'messenger'
+    theme: 'opaque-white'
   } as IonDigitKeyboardOptions;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, private storage: Storage)
+  constructor(public navCtrl: NavController, public http: HttpClient, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, private storage: Storage)
   {
     var vm = this;
     storage.get('SmartHomeServer').then((val) =>
@@ -60,7 +58,10 @@ export class LoginPage
       }
       else
         {
-          vm.items = JSON.parse(val);
+          vm.servers = JSON.parse(val);
+          if(vm.servers.length == 1){
+            vm.server = vm.servers[0].ip;
+          }
         }
     });
   }
@@ -78,7 +79,7 @@ export class LoginPage
 
     localStorage.setItem("ip", vm.server);
 
-    this.http.post('https://' + localStorage.getItem("ip") + '/login', body, {headers:headers, responseType: 'text'})
+    this.http.post('https://' + vm.server + '/login', body, {headers:headers, responseType: 'text'})
       .subscribe(
           data => {
             localStorage.setItem("token", data);
@@ -117,7 +118,7 @@ export class LoginPage
     var vm = this;
 
     const webSocketConfig = { reconnectIfNotNormalClose: true } as WebSocketConfig;
-    var ws = new $WebSocket('wss://' + localStorage.getItem("ip") + "/push",null,webSocketConfig);
+    var ws = new $WebSocket('wss://' + vm.server + "/push",null,webSocketConfig);
 
     ws.onMessage(
       (msg: MessageEvent)=> {
