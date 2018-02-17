@@ -3,6 +3,7 @@
 /smarthouse-spark.iml
 /mobile/node_modules/
 /mobile/www/
-
+/mobile/.sourcemaps/
+app-info.log
 /.idea/
 !/src/**/*/.gitkeep
