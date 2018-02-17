@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar color="secondary">
+
+    <ion-buttons >
+      <button ion-button icon-only ion-navbar-start (click)="returnToLogin()">
+        <ion-icon name='md-arrow-back'></ion-icon>
+      </button>
+    </ion-buttons>
+
+
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-card class="cards-configuration">
+
+    <ion-card-header>
+      <strong>Ajouter un SmartHouse</strong>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label fixed>Name</ion-label>
+        <ion-input #title type="text" value=""></ion-input>
+      </ion-item>
+      <hr>
+      <ion-item>
+        <ion-label fixed>Ip</ion-label>
+        <ion-input #ip type="text"></ion-input>
+      </ion-item>
+      <hr>
+      <ion-item>
+          <button  ion-button clear  icon-only item-end (click)="addServer()">
+             <ion-icon name="md-add"></ion-icon>
+          </button>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+
+ <ion-list>
+
+      <ion-item  full *ngFor="let server of items">
+        {{server.title}}
+        <button ion-button clear icon-only item-end (click)="removeItem(server)">
+           <ion-icon name='ios-close-circle-outline'  color="danger" margin-left="10"></ion-icon>
+        </button>
+      </ion-item>
+  </ion-list>
+</ion-content>

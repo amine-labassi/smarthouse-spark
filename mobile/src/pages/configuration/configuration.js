@@ -1,0 +1,78 @@
+/**
+ * Created by Yassine Chbinou on 11/07/2017.
+ */
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Component, ElementRef, ViewChild } from "@angular/core";
+import { NavController, NavParams } from "ionic-angular";
+import { LoginPage } from "../login/login";
+import { Storage } from "@ionic/storage";
+var ConfigurationPage = (function () {
+    function ConfigurationPage(navCtrl, navParams, storage) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.storage = storage;
+        this.items = [];
+        storage.get('SmartHomeServer').then(function (val) {
+            if (val != null) {
+                _this.items = JSON.parse(val);
+            }
+        });
+    }
+    ConfigurationPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ConfigurationPage');
+    };
+    ConfigurationPage.prototype.returnToLogin = function () {
+        this.inputTitle;
+        this.navCtrl.setRoot(LoginPage);
+    };
+    ConfigurationPage.prototype.addServer = function () {
+        var _this = this;
+        var vm = this;
+        vm.storage.get('SmartHomeServer').then(function (val) {
+            if (val != null) {
+                _this.items = JSON.parse(val);
+            }
+            var newServer = {};
+            newServer.title = vm.inputTitle["_value"];
+            newServer.ip = vm.inputIp["_value"];
+            vm.items.push(newServer);
+            vm.storage.set('SmartHomeServer', JSON.stringify(vm.items));
+        });
+    };
+    ConfigurationPage.prototype.removeItem = function (server) {
+        var vm = this;
+        vm.storage.get('SmartHomeServer').then(function (val) {
+            vm.items = JSON.parse(val);
+            vm.items.splice(vm.items.indexOf(server), 1);
+            vm.storage.set('SmartHomeServer', JSON.stringify(vm.items));
+        });
+    };
+    return ConfigurationPage;
+}());
+__decorate([
+    ViewChild('title'),
+    __metadata("design:type", ElementRef)
+], ConfigurationPage.prototype, "inputTitle", void 0);
+__decorate([
+    ViewChild('ip'),
+    __metadata("design:type", ElementRef)
+], ConfigurationPage.prototype, "inputIp", void 0);
+ConfigurationPage = __decorate([
+    Component({
+        selector: 'page-configuration',
+        templateUrl: 'configuration.html',
+        styles: ['configuration.css']
+    }),
+    __metadata("design:paramtypes", [NavController, NavParams, Storage])
+], ConfigurationPage);
+export { ConfigurationPage };
+//# sourceMappingURL=configuration.js.map
