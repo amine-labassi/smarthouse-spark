@@ -30,7 +30,7 @@ public class AuthenticationController
 
     public static Route login = (request, response) ->
     {
-        response.header("Content-Type","application/json");
+        response.header("Content-Type","text/plain");
 
         JwtProfile jwtProfile = new JwtProfile();
         jwtProfile.setId("smartHouseOwner");
