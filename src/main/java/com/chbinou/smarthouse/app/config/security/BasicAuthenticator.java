@@ -74,15 +74,7 @@ public class BasicAuthenticator implements Authenticator<UsernamePasswordCredent
 
     private String readCryptedPassword()
     {
-        String cryptedPassword = DEFAULT_PASSWORD;
-        try
-        {
-            cryptedPassword = IOUtils.toString(this.getClass().getClassLoader().getResourceAsStream("password"));
-        }
-        catch (IOException e)
-        {
-            logger.error("Fail to read crypted password file");
-        }
-        return cryptedPassword;
+        String cryptedPassword = System.getProperty("user.pwd");
+        return cryptedPassword != null ? cryptedPassword : DEFAULT_PASSWORD;
     }
 }
