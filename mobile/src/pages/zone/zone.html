@@ -38,13 +38,10 @@
           <h2>{{ mywindow.title }}</h2>
           <ion-grid>
             <ion-item center>
-              <ion-range min="0" max="100" snaps="true" step="10" [(ngModel)]="value" color="secondary" >
+              <ion-range min="0" max="100" snaps="true" step="10" debounce="2000" (ionChange)="mouve(mywindow)"[(ngModel)]="value"  color="secondary">
                 <ion-icon range-left color="secondary" name="square-outline"></ion-icon>
                 <ion-icon range-right color="secondary" name="square"></ion-icon>
               </ion-range>
-            </ion-item>
-            <ion-item>
-               <button ion-button color="light" round (click)="mouve(mywindow)">BOUGE</button>
             </ion-item>
             <!--  <ion-row center>
               <ion-col width-100>
