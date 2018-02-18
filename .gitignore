@@ -3,6 +3,8 @@
 /mobile/node_modules/
 /mobile/www/
 /mobile/.sourcemaps/
+/mobile/platforms/
 smarthouse.log
+*.js.map
 /.idea/
 !/src/**/*/.gitkeep

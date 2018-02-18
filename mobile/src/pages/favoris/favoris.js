@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { Storage } from "@ionic/storage";
 import { ZonePage } from "../zone/zone";
-import { Headers, Http, RequestOptions } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 /*
   Generated class for the Favoris page.
 
@@ -35,11 +35,10 @@ var FavorisPage = (function () {
     };
     FavorisPage.prototype.loadZones = function () {
         var vm = this;
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        var options = new RequestOptions({ headers: headers });
+        /*var headers = new HttpHeaders()
+          .append('Content-Type', 'application/json')
+          .append('Accept', 'application/json')
+          .append('Authorization', 'Bearer ' + localStorage.getItem("token"));*/
         vm.items = [];
         var myList = [];
         vm.storage.get('favoritsZones').then(function (val) {
@@ -47,8 +46,7 @@ var FavorisPage = (function () {
                 myList = JSON.parse(val);
             }
         });
-        vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status", options)
-            .map(function (response) { return response.json(); })
+        vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status")
             .subscribe(function (data) {
             var items = data;
             for (var i = 0; i < items.length; i++) {
@@ -78,7 +76,7 @@ FavorisPage = __decorate([
         selector: 'page-favoris',
         templateUrl: 'favoris.html'
     }),
-    __metadata("design:paramtypes", [NavController, NavParams, Http, AlertController, Storage])
+    __metadata("design:paramtypes", [NavController, NavParams, HttpClient, AlertController, Storage])
 ], FavorisPage);
 export { FavorisPage };
 //# sourceMappingURL=favoris.js.map

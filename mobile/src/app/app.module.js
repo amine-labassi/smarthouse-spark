@@ -17,9 +17,10 @@ import { FavorisPage } from "../pages/favoris/favoris";
 import { ZonePage } from "../pages/zone/zone";
 import { ConfigurationPage } from "../pages/configuration/configuration";
 import { TitlePipe } from "../pipes/title-pipe";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { IonicStorageModule } from "@ionic/storage";
 import { SmartHouseAppBroadcaster } from "../config/SmartHouseAppBroadcaster";
+import { JwtTokenInterceptor } from "../config/JwtTokenInterceptor";
 var AppModule = (function () {
     function AppModule() {
     }
@@ -59,7 +60,8 @@ AppModule = __decorate([
             StatusBar,
             SplashScreen,
             { provide: ErrorHandler, useClass: IonicErrorHandler },
-            SmartHouseAppBroadcaster
+            SmartHouseAppBroadcaster,
+            [{ provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true }]
         ]
     })
 ], AppModule);

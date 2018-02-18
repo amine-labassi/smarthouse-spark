@@ -20,7 +20,7 @@ public class BasicAuthenticator implements Authenticator<UsernamePasswordCredent
 {
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public static final String DEFAULT_PASSWORD = "e10adc3949ba59abbe56e057f20f883e";
+    public static final String DEFAULT_PASSWORD = "9af15b336e6a9619928537df30b2e6a2376569fcf9d7e773eccede65606529a0";
 
     private String cryptedPassword = null;
 

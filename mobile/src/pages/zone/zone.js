@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Component } from '@angular/core';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
-import { Headers, Http, RequestOptions } from "@angular/http";
 import { SmartHouseAppBroadcaster } from "../../config/SmartHouseAppBroadcaster";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 var ZonePage = (function () {
     function ZonePage(navCtrl, navParams, http, alertCtrl, broadcaster) {
         this.navCtrl = navCtrl;
@@ -33,12 +33,11 @@ var ZonePage = (function () {
     }
     ZonePage.prototype.switchOnLamp = function (lamp) {
         var vm = this;
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        var options = new RequestOptions({ headers: headers });
-        vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/" + vm.zone.id + "/" + lamp.identifier + "/on", options)
+        var headers = new HttpHeaders()
+            .append('Content-Type', 'application/json')
+            .append('Accept', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/" + vm.zone.id + "/" + lamp.identifier + "/on", { headers: headers })
             .subscribe(function (data) {
             lamp.status = true;
         }, function (error) {
@@ -47,12 +46,11 @@ var ZonePage = (function () {
     };
     ZonePage.prototype.switchOffLamp = function (lamp) {
         var vm = this;
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        var options = new RequestOptions({ headers: headers });
-        vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/" + vm.zone.id + "/" + lamp.identifier + "/off", options)
+        var headers = new HttpHeaders()
+            .append('Content-Type', 'application/json')
+            .append('Accept', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/" + vm.zone.id + "/" + lamp.identifier + "/off", { headers: headers })
             .subscribe(function (data) {
             lamp.status = false;
         }, function (error) {
@@ -62,17 +60,16 @@ var ZonePage = (function () {
     };
     ZonePage.prototype.mouve = function (mywindow) {
         var vm = this;
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        var options = new RequestOptions({ headers: headers });
-        vm.http.get('https://' + vm.serverIP + "/api/position/window/" + vm.zone.id + "/" + mywindow.identifier + "/" + vm.value, options)
+        var headers = new HttpHeaders()
+            .append('Content-Type', 'application/json')
+            .append('Accept', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        vm.http.get('https://' + vm.serverIP + "/api/position/window/" + vm.zone.id + "/" + mywindow.identifier + "/" + vm.value, { headers: headers })
             .subscribe(function (data) {
-            if (data["_body"] == "1") {
+            if (data == 1) {
                 vm.showAlert('quelqu\'un est en train d\'ouvrir la fenêtre: ' + vm.zone.title + ':' + mywindow.identifier);
             }
-            else if (data["_body"] == "2") {
+            else if (data == 2) {
                 vm.showAlert('qu\'elle qu\'un entrain de fermer la fenetre : ' + vm.zone.title + ':' + mywindow.identifier);
             }
         }, function (error) {
@@ -81,17 +78,16 @@ var ZonePage = (function () {
     };
     ZonePage.prototype.openTheWindow = function (mywindow) {
         var vm = this;
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        var options = new RequestOptions({ headers: headers });
-        vm.http.get('https://' + vm.serverIP + "/api/switching/window/" + vm.zone.id + "/" + mywindow.identifier + "/up", options)
+        var headers = new HttpHeaders()
+            .append('Content-Type', 'application/json')
+            .append('Accept', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        vm.http.get('https://' + vm.serverIP + "/api/switching/window/" + vm.zone.id + "/" + mywindow.identifier + "/up", { headers: headers })
             .subscribe(function (data) {
-            if (data["_body"] == "1") {
+            if (data == 1) {
                 vm.showAlert('quelqu\'un est en train d\'ouvrir la fenêtre: ' + vm.zone.title + ':' + mywindow.identifier);
             }
-            else if (data["_body"] == "2") {
+            else if (data == 2) {
                 vm.showAlert('qu\'elle qu\'un entrain de fermer la fenetre : ' + vm.zone.title + ':' + mywindow.identifier);
             }
         }, function (error) {
@@ -100,17 +96,16 @@ var ZonePage = (function () {
     };
     ZonePage.prototype.closeTheWindow = function (mywindow) {
         var vm = this;
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        var options = new RequestOptions({ headers: headers });
-        vm.http.get('https://' + vm.serverIP + "/api/switching/window/" + vm.zone.id + "/" + mywindow.identifier + "/down", options)
+        var headers = new HttpHeaders()
+            .append('Content-Type', 'application/json')
+            .append('Accept', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        vm.http.get('https://' + vm.serverIP + "/api/switching/window/" + vm.zone.id + "/" + mywindow.identifier + "/down", { headers: headers })
             .subscribe(function (data) {
-            if (data["_body"] == "1") {
+            if (data == 1) {
                 vm.showAlert('quelqu\'un est en train d\'ouvrir la fenêtre: ' + vm.zone.title + ':' + mywindow.identifier);
             }
-            else if (data["_body"] == "2") {
+            else if (data == 2) {
                 vm.showAlert('qu\'elle qu\'un entrain de fermer la fenetre : ' + vm.zone.title + ':' + mywindow.identifier);
             }
         }, function (error) {
@@ -119,12 +114,11 @@ var ZonePage = (function () {
     };
     ZonePage.prototype.airconditionnerOn = function (airconditionner) {
         var vm = this;
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        var options = new RequestOptions({ headers: headers });
-        vm.http.get('https://' + vm.serverIP + "/api/switching/climatiseur/" + vm.zone.id + "/" + airconditionner.identifier + "/on", options)
+        var headers = new HttpHeaders()
+            .append('Content-Type', 'application/json')
+            .append('Accept', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        vm.http.get('https://' + vm.serverIP + "/api/switching/climatiseur/" + vm.zone.id + "/" + airconditionner.identifier + "/on", { headers: headers })
             .subscribe(function (data) {
             airconditionner.status = true;
         }, function (error) {
@@ -133,12 +127,11 @@ var ZonePage = (function () {
     };
     ZonePage.prototype.airconditionnerOff = function (airconditionner) {
         var vm = this;
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        var options = new RequestOptions({ headers: headers });
-        vm.http.get('https://' + vm.serverIP + "/api/switching/climatiseur/" + vm.zone.id + "/" + airconditionner.identifier + "/off", options)
+        var headers = new HttpHeaders()
+            .append('Content-Type', 'application/json')
+            .append('Accept', 'application/json')
+            .append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+        vm.http.get('https://' + vm.serverIP + "/api/switching/climatiseur/" + vm.zone.id + "/" + airconditionner.identifier + "/off", { headers: headers })
             .subscribe(function (data) {
             airconditionner.status = true;
         }, function (error) {
@@ -161,7 +154,7 @@ ZonePage = __decorate([
         templateUrl: 'zone.html',
         styles: ['zone.scss']
     }),
-    __metadata("design:paramtypes", [NavController, NavParams, Http, AlertController, SmartHouseAppBroadcaster])
+    __metadata("design:paramtypes", [NavController, NavParams, HttpClient, AlertController, SmartHouseAppBroadcaster])
 ], ZonePage);
 export { ZonePage };
 //# sourceMappingURL=zone.js.map

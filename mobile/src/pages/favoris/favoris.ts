@@ -35,10 +35,10 @@ export class FavorisPage {
   loadZones()
   {
     var vm = this;
-    var headers = new HttpHeaders()
+    /*var headers = new HttpHeaders()
       .append('Content-Type', 'application/json')
       .append('Accept', 'application/json')
-      .append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+      .append('Authorization', 'Bearer ' + localStorage.getItem("token"));*/
 
 
     vm.items = [];
@@ -48,7 +48,7 @@ export class FavorisPage {
        myList = JSON.parse(val);
       }
     });
-    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status", {headers: headers})
+    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status")
       .subscribe(
         function(data){
           var items: any = data;
