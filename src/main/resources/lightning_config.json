@@ -79,10 +79,10 @@
           "identifier": "1",
           "title":"Fenetre lit",
           "mcpUp": 33,
-          "addressUp": "GPIO A4",
+          "addressUp": "GPIO B4",
           "upTime": 14650,
           "mcpDown": 33,
-          "addressDown": "GPIO A3",
+          "addressDown": "GPIO B3",
           "downTime": 14450
         }
 

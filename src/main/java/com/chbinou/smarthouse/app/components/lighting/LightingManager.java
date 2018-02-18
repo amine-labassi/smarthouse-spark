@@ -23,7 +23,7 @@ public class LightingManager
         if (gpio.isState(PinState.HIGH,lamp.getInputPinInstance()) == true)
         {
             TimeUnit.MILLISECONDS.sleep(50);
-            lamp.getOutputPinInstance().pulse(100, PinState.LOW, true);
+            lamp.getOutputPinInstance().pulse(150, PinState.LOW, true);
             TimeUnit.MILLISECONDS.sleep(50);
         }
         lamp.setStatus(gpio.isState(PinState.LOW,lamp.getInputPinInstance()));
@@ -38,7 +38,7 @@ public class LightingManager
         if (gpio.isState(PinState.HIGH,lamp.getInputPinInstance())==false)
         {
             TimeUnit.MILLISECONDS.sleep(50);
-            lamp.getOutputPinInstance().pulse(100, PinState.LOW, true);
+            lamp.getOutputPinInstance().pulse(150, PinState.LOW, true);
             TimeUnit.MILLISECONDS.sleep(50);
         }
 
@@ -57,7 +57,7 @@ public class LightingManager
 
                     TimeUnit.MILLISECONDS.sleep(50);
                     lamp.getOutputPinInstance().setState(false);
-                    TimeUnit.MILLISECONDS.sleep(100);
+                    TimeUnit.MILLISECONDS.sleep(150);
                     lamp.getOutputPinInstance().setState(true);
                     TimeUnit.MILLISECONDS.sleep(50);
                 }
@@ -79,7 +79,7 @@ public class LightingManager
             if (gpio.isState(PinState.HIGH,lamp.getInputPinInstance()) == false) {
                 TimeUnit.MILLISECONDS.sleep(50);
                 lamp.getOutputPinInstance().setState(false);
-                TimeUnit.MILLISECONDS.sleep(100);
+                TimeUnit.MILLISECONDS.sleep(150);
                 lamp.getOutputPinInstance().setState(true);
                 TimeUnit.MILLISECONDS.sleep(50);
             }
