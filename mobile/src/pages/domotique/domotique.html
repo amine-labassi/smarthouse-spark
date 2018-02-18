@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="secondary">
+  <ion-navbar>
     <ion-title>SmartHouse</ion-title>
     <ion-buttons start>
       <button ion-button icon-only color="red" (click)="openNavFavorisPage(item)">
@@ -7,16 +7,13 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
-
 <ion-content>
-  <ion-searchbar [(ngModel)]="searchFilter" [showCancelButton]="true">
+  <ion-searchbar placeholder="Rechercher..." [(ngModel)]="searchFilter" [showCancelButton]="true">
   </ion-searchbar>
-  <ion-list>
-    <button ion-item *ngFor="let item of (items | titlePipe:searchFilter)" (click)="openNavZonePage(item)">
+  <ion-list style="margin: 10px;">
+    <button ion-item *ngFor="let item of (items | titlePipe:searchFilter)" (click)="openNavZonePage(item, $event)">
       {{ item.title }}
-
       <button  ion-button clear  icon-only item-end (click)="setUnsetFavorits(item, $event)" >
         <ion-icon name="heart" color="secondary" [ngClass]="{'inFav' : item.favoris, 'outOfFav' : !item.favoris}" ></ion-icon>
       </button>

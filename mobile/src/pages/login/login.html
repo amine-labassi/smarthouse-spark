@@ -12,16 +12,16 @@
   <form id="smartHouseForm">
     <ion-list>
       <ion-item>
-        <ion-label>Maison</ion-label>
+        <ion-label>{{ server ? 'Maison' : 'Choisir une maison...'}}</ion-label>
         <ion-select name="server" [(ngModel)]="server">
           <ion-option *ngFor="let server of servers" value="{{server.ip}}">{{server.title}}</ion-option>
         </ion-select>
       </ion-item>
     </ion-list>
-    <div style="color: white; margin-top: 100px;font-size: 2em; text-align: center;">Login</div>
+    <div style="color: white; margin-top: 100px;font-size: 2em; text-align: center; margin-bottom: 15px;">Login</div>
     <div style="text-align: center;">
       <input id="passwdInput" type="password" name="password" [(ngModel)]="password" readonly
-              style="letter-spacing: 15px; font-size: 4em; width: 80%; text-align: center;">
+              style="color: white; border: none;background-color: transparent;letter-spacing: 15px; font-size: 4em; width: 80%; text-align: center;">
     </div>
     <ion-digit-keyboard [theme]="numericKeyboardOptions.theme"
                         [leftActionOptions]="numericKeyboardOptions.leftActionOptions"

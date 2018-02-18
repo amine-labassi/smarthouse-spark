@@ -37,21 +37,21 @@
         <ion-slide *ngFor="let mywindow of zone.windows">
           <h2>{{ mywindow.title }}</h2>
           <ion-grid>
-            <ion-item center (click)="a()">
-              <ion-range min="0" max="100" step="10" snaps="true" [(ngModel)]="value" color="danger" >
-                <ion-icon range-left small color="danger" name="square"></ion-icon>
-                <ion-icon range-right color="danger" name="square-outline"></ion-icon>
+            <ion-item center>
+              <ion-range min="0" max="100" snaps="true" step="10" [(ngModel)]="value" color="secondary" >
+                <ion-icon range-left color="secondary" name="square-outline"></ion-icon>
+                <ion-icon range-right color="secondary" name="square"></ion-icon>
               </ion-range>
             </ion-item>
             <ion-item>
                <button ion-button color="light" round (click)="mouve(mywindow)">BOUGE</button>
             </ion-item>
-              <ion-row center>
+            <!--  <ion-row center>
               <ion-col width-100>
                 <ion-icon *ngIf="mywindow.status" name="square-outline" color="bright" class="window-opened"></ion-icon>
                 <ion-icon *ngIf="!mywindow.status" name="square" color="bright" class="window-closed"></ion-icon>
               </ion-col>
-            </ion-row>
+            </ion-row>-->
             <ion-row center>
               <ion-col width-50>
                 <button ion-button color="light" round (click)="openTheWindow(mywindow)">OUVRIR</button>

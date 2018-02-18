@@ -1,24 +1,30 @@
 .cards-list-zone-lamps ion-card-header
 {
-  background-color: yellow;
+  background: #ffe259;
+  background: -webkit-linear-gradient(to right, #ffe259, #ffa751);
+  background: linear-gradient(to right, #ffe259, #ffa751);
   margin-bottom: 15px;
 }
 
 .cards-list-zone-windows ion-card-header
 {
-  background-color: lightskyblue;
+  background: #ffe259;
+  background: -webkit-linear-gradient(to right, #ffe259, #ffa751);
+  background: linear-gradient(to right, #ffe259, #ffa751);
   margin-bottom: 15px;
 }
 
 .cards-list-zone-airconditionners ion-card-header
 {
-  background-color: springgreen;
+  background: #ffe259;
+  background: -webkit-linear-gradient(to right, #ffe259, #ffa751);
+  background: linear-gradient(to right, #ffe259, #ffa751);
   margin-bottom: 15px;
 }
 
 .lamp-on
 {
-  color: yellow;
+  color: #ffe259;
 }
 
 .lamp-off

@@ -23,8 +23,6 @@ $app-direction: ltr;
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
 
-
-
 // Named Color Variables
 // --------------------------------------------------
 // Named colors makes it easy to reuse colors on various components.
@@ -35,7 +33,7 @@ $app-direction: ltr;
 
 $colors: (
   primary:    #488aff,
-  secondary:  #32db64,
+  secondary:  #ffe259,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222
@@ -86,3 +84,17 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+.toolbar-background {
+  background: #ffe259 !important;
+  background: -webkit-linear-gradient(to right, #ffe259, #ffa751) !important;
+  background: linear-gradient(to right, #ffe259, #ffa751) !important;
+}
+
+@font-face {
+  font-family: 'customFont';
+  src: url(../assets/fonts/Dosis-Regular.ttf);
+}
+
+$font-family-md-base: "customFont";
+

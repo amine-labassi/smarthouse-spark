@@ -54,8 +54,10 @@ export class DomotiquePage
       );
   }
 
-  openNavZonePage(item)
+  openNavZonePage(item, $event)
   {
+    $event.preventDefault();
+    $event.stopPropagation();
     this.navCtrl.push(ZonePage, { 'item': item });
   }
 
