@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { DomotiquePage } from "../domotique/domotique";
 import { $WebSocket } from "angular2-websocket/angular2-websocket";
 import { SmartHouseAppBroadcaster } from "../../config/SmartHouseAppBroadcaster";
@@ -16,15 +16,14 @@ import { ConfigurationPage } from "../configuration/configuration";
 import { Storage } from "@ionic/storage";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 var LoginPage = (function () {
-    function LoginPage(navCtrl, navParams, http, alertCtrl, broadcaster, storage) {
+    function LoginPage(navCtrl, http, alertCtrl, broadcaster, storage) {
         var _this = this;
         this.navCtrl = navCtrl;
-        this.navParams = navParams;
         this.http = http;
         this.alertCtrl = alertCtrl;
         this.broadcaster = broadcaster;
         this.storage = storage;
-        this.items = [];
+        this.servers = [];
         this.numericKeyboardOptions = {
             align: 'center',
             visible: true,
@@ -40,7 +39,7 @@ var LoginPage = (function () {
             roundButtons: false,
             showLetters: false,
             swipeToHide: true,
-            theme: 'messenger'
+            theme: 'opaque-white'
         };
         var vm = this;
         storage.get('SmartHomeServer').then(function (val) {
@@ -58,7 +57,10 @@ var LoginPage = (function () {
                 alert_1.present();
             }
             else {
-                vm.items = JSON.parse(val);
+                vm.servers = JSON.parse(val);
+                if (vm.servers.length == 1) {
+                    vm.server = vm.servers[0].ip;
+                }
             }
         });
     }
@@ -70,7 +72,7 @@ var LoginPage = (function () {
             .set('username', 'smartHouseOwner')
             .set('password', this.password);
         localStorage.setItem("ip", vm.server);
-        this.http.post('https://' + localStorage.getItem("ip") + '/login', body, { headers: headers })
+        this.http.post('https://' + vm.server + '/login', body, { headers: headers, responseType: 'text' })
             .subscribe(function (data) {
             localStorage.setItem("token", data);
             vm.initializeWebSocket();
@@ -96,7 +98,7 @@ var LoginPage = (function () {
     LoginPage.prototype.initializeWebSocket = function () {
         var vm = this;
         var webSocketConfig = { reconnectIfNotNormalClose: true };
-        var ws = new $WebSocket('wss://' + localStorage.getItem("ip") + "/push", null, webSocketConfig);
+        var ws = new $WebSocket('wss://' + vm.server + "/push", null, webSocketConfig);
         ws.onMessage(function (msg) {
             vm.broadcaster.broadcast('configObject', msg.data);
         }, { autoApply: false });
@@ -123,7 +125,7 @@ LoginPage = __decorate([
         selector: 'page-login',
         templateUrl: 'login.html'
     }),
-    __metadata("design:paramtypes", [NavController, NavParams, HttpClient, AlertController, SmartHouseAppBroadcaster, Storage])
+    __metadata("design:paramtypes", [NavController, HttpClient, AlertController, SmartHouseAppBroadcaster, Storage])
 ], LoginPage);
 export { LoginPage };
 //# sourceMappingURL=login.js.map

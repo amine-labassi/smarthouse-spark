@@ -39,6 +39,8 @@ public class IndexController
             response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
         }
 
+        response.header("Access-Control-Allow-Origin", "*");
+
         return "OK";
     };
 }

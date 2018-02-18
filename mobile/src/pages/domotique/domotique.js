@@ -10,11 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { ZonePage } from "../zone/zone";
-import { Headers, Http, RequestOptions } from "@angular/http";
 import 'rxjs/Rx';
 import { SmartHouseAppBroadcaster } from "../../config/SmartHouseAppBroadcaster";
 import { FavorisPage } from "../favoris/favoris";
 import { Storage } from "@ionic/storage";
+import { HttpClient } from "@angular/common/http";
 var DomotiquePage = (function () {
     function DomotiquePage(navCtrl, navParams, http, alertCtrl, broadcaster, storage) {
         this.navCtrl = navCtrl;
@@ -36,14 +36,12 @@ var DomotiquePage = (function () {
     }
     DomotiquePage.prototype.loadZones = function () {
         var vm = this;
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('Accept', 'application/json');
-        headers.append('Authorization', 'Bearer ' + localStorage.getItem("token"));
-        var options = new RequestOptions({ headers: headers });
+        /*let headers = new HttpHeaders()
+               .append('Content-Type', 'application/json')
+               .append('Accept', 'application/json')
+               .append('Authorization', 'Bearer ' + localStorage.getItem("token"));*/
         vm.items = [];
-        vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status", options)
-            .map(function (response) { return response.json(); })
+        vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status")
             .subscribe(function (data) {
             vm.items = data;
             vm.drawFavoritsIcon();
@@ -51,7 +49,9 @@ var DomotiquePage = (function () {
             vm.showAlert('Je n\'arrive pas à m\'initialiser');
         });
     };
-    DomotiquePage.prototype.openNavZonePage = function (item) {
+    DomotiquePage.prototype.openNavZonePage = function (item, $event) {
+        $event.preventDefault();
+        $event.stopPropagation();
         this.navCtrl.push(ZonePage, { 'item': item });
     };
     DomotiquePage.prototype.openNavFavorisPage = function () {
@@ -111,7 +111,7 @@ DomotiquePage = __decorate([
         selector: 'page-domotique',
         templateUrl: 'domotique.html'
     }),
-    __metadata("design:paramtypes", [NavController, NavParams, Http, AlertController, SmartHouseAppBroadcaster, Storage])
+    __metadata("design:paramtypes", [NavController, NavParams, HttpClient, AlertController, SmartHouseAppBroadcaster, Storage])
 ], DomotiquePage);
 export { DomotiquePage };
 //# sourceMappingURL=domotique.js.map

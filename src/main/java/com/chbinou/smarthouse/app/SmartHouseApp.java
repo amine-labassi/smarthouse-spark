@@ -50,15 +50,12 @@ public class SmartHouseApp
         else
         {
             ConfigurationReader.init();
-
         }
 
-        port(4504);
+        port(Environment.port());
 
         secure(Environment.keyStore(),Environment.keyStorePassword(),Environment.trustStore(),
                 Environment.trustStorePassword(), Environment.isSslTwoWay());
-
-//        staticFiles.location("/public");
 
         // push status web socket
         webSocket(Constantes.Url.API_PUSH_WSOCKET, CheckStatusWebSocket.class);
@@ -78,9 +75,11 @@ public class SmartHouseApp
             exception.printStackTrace();
         });
 
-        options("*//*",  IndexController.optionsResponse);
+        options("*",  IndexController.optionsResponse);
 
-        before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
+        /*before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
+        before((request, response) -> response.header("Access-Control-Allow-Methods", "GET,POST,OPTIONS"));
+        before((request, response) -> response.header("Access-Control-Allow-Headers", "Authorization"));*/
 
         before(Constantes.Url.LOGIN, new SecurityFilter(config, "DirectFormClient", "hsts,nosniff,noframe,xssprotection,nocache","excludedPublicResources,securedHttpMethod"));
         before(Constantes.Url.API_SECURE, new SecurityFilter(config, "HeaderClient", "hsts,nosniff,noframe,xssprotection,nocache", "excludedPublicResources,securedHttpMethod"));

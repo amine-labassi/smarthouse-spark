@@ -62,4 +62,10 @@ public class Environment
         }
         return isSslTwoWay;
     }
+
+    public static int port()
+    {
+        String port = System.getProperty("server.port");
+        return StringUtils.isBlank(port) ? 4504 : Integer.valueOf(port);
+    }
 }

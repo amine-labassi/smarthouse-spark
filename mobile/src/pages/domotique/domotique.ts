@@ -35,14 +35,14 @@ export class DomotiquePage
   {
     var vm = this;
 
-    let headers = new HttpHeaders()
+    /*let headers = new HttpHeaders()
            .append('Content-Type', 'application/json')
            .append('Accept', 'application/json')
-           .append('Authorization', 'Bearer ' + localStorage.getItem("token"));
+           .append('Authorization', 'Bearer ' + localStorage.getItem("token"));*/
 
     vm.items = [];
 
-    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status", { headers: headers })
+    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status")
       .subscribe(
         data => {
           vm.items = data;
