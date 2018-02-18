@@ -10,6 +10,8 @@ public class Window {
     @Expose
     private String identifier;
     @Expose
+    private String title;
+    @Expose
     private int mcpUp;
     @Expose
     private int mcpDown;
@@ -97,5 +99,13 @@ public class Window {
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
