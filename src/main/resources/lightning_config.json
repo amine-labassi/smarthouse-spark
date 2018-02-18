@@ -66,6 +66,7 @@
       "windows": [
         {
           "identifier": "1",
+          "title":"Fenetre Face",
           "mcpUp": 32,
           "addressUp": "GPIO A4",
           "upTime": 14650,
@@ -76,6 +77,7 @@
         },
         {
           "identifier": "1",
+          "title":"Fenetre lit",
           "mcpUp": 33,
           "addressUp": "GPIO A4",
           "upTime": 14650,
