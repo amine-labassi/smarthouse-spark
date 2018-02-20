@@ -11,6 +11,7 @@
         <ion-slide *ngFor="let lamp of zone.lamps">
           <h2>{{ lamp.description }}</h2>
           <ion-grid>
+
             <ion-row center>
               <ion-col width-100>
                 <ion-icon name="bulb" color="bright" [ngClass]="{'lamp-on' : lamp.status, 'lamp-off' : !lamp.status}"
@@ -38,7 +39,7 @@
           <h2>{{ mywindow.title }}</h2>
           <ion-grid>
             <ion-item center>
-              <ion-range min="0" max="100" snaps="true" step="10" debounce="2000" (ionChange)="mouve(mywindow)"[(ngModel)]="value"  color="secondary">
+              <ion-range min="0" max="100" snaps="true" step="10" debounce="1500" (ionChange)="mouve(mywindow)"[(ngModel)]="mywindow.value"  color="secondary">
                 <ion-icon range-left color="secondary" name="square-outline"></ion-icon>
                 <ion-icon range-right color="secondary" name="square"></ion-icon>
               </ion-range>
@@ -62,17 +63,16 @@
       </ion-slides>
     </ion-card-content>
   </ion-card>
-  <ion-card class="cards-list-zone-airconditionners" *ngIf="zone.airconditionners && zone.airconditionners.length > 0">
+  <ion-card class="cards-list-zone-airconditionners" *ngIf="zone.airConditionners && zone.airConditionners.length > 0">
     <ion-card-header>Climatisation</ion-card-header>
     <ion-card-content>
       <ion-slides [pager]="true">
-        <ion-slide *ngFor="let airconditionner of zone.airconditionners">
+        <ion-slide *ngFor="let airconditionner of zone.airConditionners">
           <h2>{{ airconditionner.title }}</h2>
           <ion-grid>
             <ion-row center>
               <ion-col width-100>
                 <ion-icon name="thermometer" color="bright" style="font-size: 2em;"></ion-icon>
-                <span style="font-size: 4em;">{{airconditionner.temperature + '°'}}</span>
               </ion-col>
             </ion-row>
             <ion-row center>

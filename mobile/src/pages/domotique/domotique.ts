@@ -35,11 +35,6 @@ export class DomotiquePage
   {
     var vm = this;
 
-    /*let headers = new HttpHeaders()
-           .append('Content-Type', 'application/json')
-           .append('Accept', 'application/json')
-           .append('Authorization', 'Bearer ' + localStorage.getItem("token"));*/
-
     vm.items = [];
 
     vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status")

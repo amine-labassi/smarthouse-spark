@@ -34,7 +34,7 @@
 
  <ion-list style="margin: 10px;">
       <ion-item  full *ngFor="let server of servers">
-        {{server.title}}
+        {{server.title + ' (' + server.ip + ')'}}
         <button ion-button clear icon-only item-end (click)="removeItem(server)">
            <ion-icon name='trash'  margin-left="10"></ion-icon>
         </button>

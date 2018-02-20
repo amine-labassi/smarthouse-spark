@@ -7,7 +7,7 @@ export class Zone {
     public title:string,
     public windows:Window[],
     public lamps:Lamp[],
-    public airConditionners:AirConditionner,
+    public airConditionners:AirConditionner[],
     public favoris:boolean
   ){}
 }
