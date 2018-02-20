@@ -4,7 +4,6 @@ import {Zone} from "../../model/Zone";
 import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import construct = Reflect.construct;
-import {RequestAuthorizationOptions} from "ionic-native";
 import {LoginPage} from "../login/login";
 
 @Component({
@@ -45,10 +44,11 @@ export class ZonePage {
         data => {
           lamp.status = true;
           loader.dismissAll();
+
         },
         error => {
           loader.dismissAll();
-          vm.connectionInterrupted();
+          vm.connectionInterrupted()
         }
       );
 
@@ -199,7 +199,7 @@ export class ZonePage {
 
   connectionInterrupted() {
     let alert = this.alertCtrl.create({
-      title: '',
+      title: 'Oops!!',
       subTitle: "Connection perdue",
       buttons: [{
         text: 'Login',
@@ -208,13 +208,18 @@ export class ZonePage {
         }
       }]
     });
+    alert.present();
   }
 
   showAlert(msg: string) {
     let alert = this.alertCtrl.create({
       title: 'Oops!!',
       subTitle: msg,
-      buttons: ['OK']
+      buttons: [{
+        text: 'Login',
+        handler: data => {
+          this.navCtrl.setRoot(LoginPage)
+        }}]
     });
     alert.present();
   }

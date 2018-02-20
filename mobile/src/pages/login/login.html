@@ -13,7 +13,7 @@
     <ion-list>
       <ion-item>
         <ion-label>{{ server ? 'Maison' : 'Choisir une maison...'}}</ion-label>
-        <ion-select name="server" [(ngModel)]="server">
+        <ion-select multiple="false" name="server" [(ngModel)]="server">
           <ion-option *ngFor="let server of servers" value="{{server.ip}}">{{server.title}}</ion-option>
         </ion-select>
       </ion-item>

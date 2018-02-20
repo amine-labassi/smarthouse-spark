@@ -40,6 +40,7 @@ export class LoginPage
   constructor(public navCtrl: NavController, public http: HttpClient, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, private storage: Storage, public loadingCtrl: LoadingController)
   {
     var vm = this;
+    vm.server = localStorage.getItem("ip")
     storage.get('SmartHomeServer').then((val) =>
     {
       if(val == null || val == "[]")
