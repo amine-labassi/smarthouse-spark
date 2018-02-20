@@ -23,6 +23,9 @@ export class DomotiquePage
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, private storage: Storage, public loadingCtrl: LoadingController)
   {
     var vm = this;
+    if (!navigator.onLine) {
+      vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+    }
     vm.serverIP = localStorage.getItem("ip");
     vm.loadZones();
     vm.broadcaster.on<string>('configObject')
@@ -50,7 +53,12 @@ export class DomotiquePage
         },
         error => {
           loader.dismissAll();
-          vm.connectionInterrupted()
+          if (!navigator.onLine) {
+            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          }
+          else {
+            vm.connectionInterrupted();
+          }
         }
       );
   }

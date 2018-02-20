@@ -13,13 +13,12 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
   selector: 'page-login',
   templateUrl: 'login.html'
 })
-export class LoginPage
-{
+export class LoginPage {
   username;
   password;
-  servers:Array<Server> = [];
-  server:string;
-  numericKeyboardOptions:IonDigitKeyboardOptions = {
+  servers: Array<Server> = [];
+  server: string;
+  numericKeyboardOptions: IonDigitKeyboardOptions = {
     align: 'center',
     visible: true,
     leftActionOptions: {
@@ -37,14 +36,14 @@ export class LoginPage
     theme: 'opaque-white'
   } as IonDigitKeyboardOptions;
 
-  constructor(public navCtrl: NavController, public http: HttpClient, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, private storage: Storage, public loadingCtrl: LoadingController)
-  {
+  constructor(public navCtrl: NavController, public http: HttpClient, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, private storage: Storage, public loadingCtrl: LoadingController) {
     var vm = this;
+    if (!navigator.onLine) {
+      vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+    }
     vm.server = localStorage.getItem("ip")
-    storage.get('SmartHomeServer').then((val) =>
-    {
-      if(val == null || val == "[]")
-      {
+    storage.get('SmartHomeServer').then((val) => {
+      if (val == null || val == "[]") {
         let alert = this.alertCtrl.create({
           title: '',
           subTitle: "Veuillez ajouter un SmartHome",
@@ -57,18 +56,16 @@ export class LoginPage
         });
         alert.present();
       }
-      else
-        {
-          vm.servers = JSON.parse(val);
-          if(vm.servers.length == 1){
-            vm.server = vm.servers[0].ip;
-          }
+      else {
+        vm.servers = JSON.parse(val);
+        if (vm.servers.length == 1) {
+          vm.server = vm.servers[0].ip;
         }
+      }
     });
   }
 
-  doLogin($event)
-  {
+  doLogin($event) {
     var vm = this;
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
@@ -83,70 +80,67 @@ export class LoginPage
 
     localStorage.setItem("ip", vm.server);
 
-    this.http.post('https://' + vm.server + '/login', body, {headers:headers, responseType: 'text'})
+    this.http.post('https://' + vm.server + '/login', body, {headers: headers, responseType: 'text'})
       .subscribe(
-          data => {
-            localStorage.setItem("token", data);
-            vm.initializeWebSocket();
-            loader.dismissAll();
-            vm.navCtrl.setRoot(DomotiquePage);
-          },
-          error => {
-            // TODO
-            loader.dismissAll();
+        data => {
+          localStorage.setItem("token", data);
+          vm.initializeWebSocket();
+          loader.dismissAll();
+          vm.navCtrl.setRoot(DomotiquePage);
+        },
+        error => {
+          // TODO
+          loader.dismissAll();
+          if (!navigator.onLine) {
+            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          }
+          else {
             vm.showAlert('La domotique est indisponible');
           }
-        );
+
+        }
+      );
   }
 
-  addDigit(digit)
-  {
-    if(!this.password)
-    {
+  addDigit(digit) {
+    if (!this.password) {
       this.password = '' + digit;
     }
-    else if(this.password && this.password.length < 6)
-    {
+    else if (this.password && this.password.length < 6) {
       this.password = this.password + digit;
     }
   }
 
-  removeDigit($event)
-  {
-    if(this.password && this.password.length > 0)
-    {
-      this.password = this.password.slice(0,-1);
+  removeDigit($event) {
+    if (this.password && this.password.length > 0) {
+      this.password = this.password.slice(0, -1);
     }
   }
 
-  initializeWebSocket()
-  {
+  initializeWebSocket() {
     var vm = this;
 
-    const webSocketConfig = { reconnectIfNotNormalClose: true } as WebSocketConfig;
-    var ws = new $WebSocket('wss://' + vm.server + "/push",null,webSocketConfig);
+    const webSocketConfig = {reconnectIfNotNormalClose: true} as WebSocketConfig;
+    var ws = new $WebSocket('wss://' + vm.server + "/push", null, webSocketConfig);
 
     ws.onMessage(
-      (msg: MessageEvent)=> {
-        vm.broadcaster.broadcast('configObject',msg.data);
+      (msg: MessageEvent) => {
+        vm.broadcaster.broadcast('configObject', msg.data);
       },
       {autoApply: false}
     );
   }
 
-  ionViewDidLoad()
-  {
+  ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  openNavConfigurationPage()
-  {
+  openNavConfigurationPage() {
     var vm = this;
     vm.navCtrl.setRoot(ConfigurationPage);
   }
 
-  showAlert(msg: string)
-  {
+  showAlert(msg: string) {
     let alert = this.alertCtrl.create({
       title: 'Oops!!',
       subTitle: msg,

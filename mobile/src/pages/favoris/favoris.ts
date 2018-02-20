@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {Favoris} from "../../model/Favoris";
 import {Storage} from "@ionic/storage";
 import {ZonePage} from "../zone/zone";
@@ -22,7 +22,7 @@ export class FavorisPage {
   items: any = [];
   serverIP: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alertCtrl: AlertController, private storage: Storage)
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alertCtrl: AlertController, private storage: Storage, public loadingCtrl: LoadingController)
   {
     var vm = this;
     vm.serverIP = localStorage.getItem("ip");
@@ -35,7 +35,16 @@ export class FavorisPage {
 
   loadZones()
   {
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+    loader.present();
+
     var vm = this;
+
+    if (!navigator.onLine) {
+      vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+    }
 
     vm.items = [];
     var myList: Array<number> = [];
@@ -44,9 +53,11 @@ export class FavorisPage {
        myList = JSON.parse(val);
       }
     });
+
     vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status")
       .subscribe(
         function(data){
+          loader.dismissAll();
           var items: any = data;
           for (var i = 0; i < items.length; i++)
           {
@@ -56,7 +67,13 @@ export class FavorisPage {
           }
         },
         function (error) {
-          vm.connectionInterrupted();
+          loader.dismissAll();
+          if (!navigator.onLine) {
+            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          }
+          else {
+            vm.connectionInterrupted();
+          }
         }
       );
   }

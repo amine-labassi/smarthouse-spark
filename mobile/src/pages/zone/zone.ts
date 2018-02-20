@@ -19,6 +19,9 @@ export class ZonePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, public loadingCtrl: LoadingController) {
 
     var vm = this;
+    if (!navigator.onLine) {
+      vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+    }
     vm.serverIP = localStorage.getItem("ip");
     vm.zone = navParams.get('item');
     vm.broadcaster.on<string>('configObject')
@@ -48,7 +51,12 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          vm.connectionInterrupted()
+          if (!navigator.onLine) {
+            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          }
+          else {
+            vm.connectionInterrupted();
+          }
         }
       );
 
@@ -68,7 +76,12 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          vm.connectionInterrupted();
+          if (!navigator.onLine) {
+            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          }
+          else {
+            vm.connectionInterrupted();
+          }
         }
       );
     lamp.status = false;
@@ -98,7 +111,12 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          vm.connectionInterrupted();
+          if (!navigator.onLine) {
+            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          }
+          else {
+            vm.connectionInterrupted();
+          }
         }
       );
   }
@@ -128,7 +146,12 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          vm.connectionInterrupted();
+          if (!navigator.onLine) {
+            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          }
+          else {
+            vm.connectionInterrupted();
+          }
         }
       );
   }
@@ -154,7 +177,12 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          vm.connectionInterrupted();
+          if (!navigator.onLine) {
+            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          }
+          else {
+            vm.connectionInterrupted();
+          }
         }
       );
   }
@@ -173,7 +201,12 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          vm.connectionInterrupted();
+          if (!navigator.onLine) {
+            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          }
+          else {
+            vm.connectionInterrupted();
+          }
         }
       );
   }
@@ -192,7 +225,13 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          vm.connectionInterrupted();
+          if (!navigator.onLine) {
+            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          }
+          else {
+            vm.connectionInterrupted();
+          }
+
         }
       );
   }
