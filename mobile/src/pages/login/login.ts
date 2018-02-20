@@ -1,5 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {NavController, AlertController, Select} from 'ionic-angular';
+import {NavController, AlertController, Select, LoadingController} from 'ionic-angular';
 import {DomotiquePage} from "../domotique/domotique";
 import {$WebSocket, WebSocketConfig} from "angular2-websocket/angular2-websocket";
 import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
@@ -37,7 +37,7 @@ export class LoginPage
     theme: 'opaque-white'
   } as IonDigitKeyboardOptions;
 
-  constructor(public navCtrl: NavController, public http: HttpClient, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, private storage: Storage)
+  constructor(public navCtrl: NavController, public http: HttpClient, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, private storage: Storage, public loadingCtrl: LoadingController)
   {
     var vm = this;
     storage.get('SmartHomeServer').then((val) =>
@@ -69,7 +69,10 @@ export class LoginPage
   doLogin($event)
   {
     var vm = this;
-
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+    loader.present();
     var headers = new HttpHeaders();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
@@ -84,10 +87,12 @@ export class LoginPage
           data => {
             localStorage.setItem("token", data);
             vm.initializeWebSocket();
+            loader.dismissAll();
             vm.navCtrl.setRoot(DomotiquePage);
           },
           error => {
             // TODO
+            loader.dismissAll();
             vm.showAlert('La domotique est indisponible');
           }
         );

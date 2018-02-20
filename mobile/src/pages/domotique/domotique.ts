@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {ZonePage} from "../zone/zone";
 import 'rxjs/Rx';
 import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
@@ -19,7 +19,7 @@ export class DomotiquePage
   searchFilter: string = '';
   serverIP:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, private storage: Storage)
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, private storage: Storage, public loadingCtrl: LoadingController)
   {
     var vm = this;
     vm.serverIP = localStorage.getItem("ip");
@@ -34,16 +34,21 @@ export class DomotiquePage
   loadZones()
   {
     var vm = this;
-
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+    loader.present();
     vm.items = [];
 
     vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status")
       .subscribe(
         data => {
+          loader.dismissAll();
           vm.items = data;
           vm.drawFavoritsIcon();
         },
         error => {
+          loader.dismissAll();
           vm.showAlert('Je n\'arrive pas à m\'initialiser');
         }
       );
