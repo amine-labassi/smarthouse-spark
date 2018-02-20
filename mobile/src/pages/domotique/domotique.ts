@@ -7,6 +7,7 @@ import {Zone} from "../../model/Zone";
 import {FavorisPage} from "../favoris/favoris";
 import {Storage} from "@ionic/storage";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {LoginPage} from "../login/login";
 
 @Component({
   selector: 'page-domotique',
@@ -49,7 +50,7 @@ export class DomotiquePage
         },
         error => {
           loader.dismissAll();
-          vm.showAlert('Je n\'arrive pas à m\'initialiser');
+          vm.connectionInterrupted()
         }
       );
   }
@@ -65,15 +66,7 @@ export class DomotiquePage
   {
     this.navCtrl.push(FavorisPage);
   }
-  showAlert(msg: string)
-  {
-    let alert = this.alertCtrl.create({
-      title: 'Oops!!',
-      subTitle: msg,
-      buttons: ['OK']
-    });
-    alert.present();
-  }
+
   drawFavoritsIcon()
   {
     var vm = this;
@@ -122,5 +115,26 @@ export class DomotiquePage
 
     });
 
+  }
+  connectionInterrupted() {
+    let alert = this.alertCtrl.create({
+      title: '',
+      subTitle: "Connection perdue",
+      buttons: [{
+        text: 'Login',
+        handler: data => {
+          this.navCtrl.setRoot(LoginPage)
+        }
+      }]
+    });
+  }
+  showAlert(msg: string)
+  {
+    let alert = this.alertCtrl.create({
+      title: 'Oops!!',
+      subTitle: msg,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

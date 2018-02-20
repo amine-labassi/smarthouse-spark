@@ -4,6 +4,7 @@ import {Favoris} from "../../model/Favoris";
 import {Storage} from "@ionic/storage";
 import {ZonePage} from "../zone/zone";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {LoginPage} from "../login/login";
 
 /*
   Generated class for the Favoris page.
@@ -35,11 +36,6 @@ export class FavorisPage {
   loadZones()
   {
     var vm = this;
-    /*var headers = new HttpHeaders()
-      .append('Content-Type', 'application/json')
-      .append('Accept', 'application/json')
-      .append('Authorization', 'Bearer ' + localStorage.getItem("token"));*/
-
 
     vm.items = [];
     var myList: Array<number> = [];
@@ -60,7 +56,7 @@ export class FavorisPage {
           }
         },
         function (error) {
-          vm.showAlert('Je n\'arrive pas à m\'initialiser');
+          vm.connectionInterrupted();
         }
       );
   }
@@ -70,6 +66,18 @@ export class FavorisPage {
     this.navCtrl.push(ZonePage, { 'item': item });
   }
 
+  connectionInterrupted() {
+    let alert = this.alertCtrl.create({
+      title: '',
+      subTitle: "Connection perdue",
+      buttons: [{
+        text: 'Login',
+        handler: data => {
+          this.navCtrl.setRoot(LoginPage)
+        }
+      }]
+    });
+  }
   showAlert(msg: string)
   {
     let alert = this.alertCtrl.create({

@@ -4,6 +4,8 @@ import {Zone} from "../../model/Zone";
 import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import construct = Reflect.construct;
+import {RequestAuthorizationOptions} from "ionic-native";
+import {LoginPage} from "../login/login";
 
 @Component({
   selector: 'page-zone',
@@ -46,7 +48,7 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          vm.showAlert('Problem d\'allumage de la lampe : ' + vm.zone.title + ':' + lamp.id);
+          vm.connectionInterrupted();
         }
       );
 
@@ -66,7 +68,7 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          vm.showAlert('Erreur d\'extinction de la lampe : ' + vm.zone.title + ':' + lamp.id);
+          vm.connectionInterrupted();
         }
       );
     lamp.status = false;
@@ -96,7 +98,7 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          vm.showAlert('Erreur de baisser la fenetre : ' + vm.zone.title + ':' + mywindow.identifier);
+          vm.connectionInterrupted();
         }
       );
   }
@@ -126,7 +128,7 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          vm.showAlert('Erreur d\'ouvrir la fenetre : ' + vm.zone.title + ':' + mywindow.identifier);
+          vm.connectionInterrupted();
         }
       );
   }
@@ -152,7 +154,7 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          vm.showAlert('Erreur de baisser la fenetre : ' + vm.zone.title + ':' + mywindow.identifier);
+          vm.connectionInterrupted();
         }
       );
   }
@@ -171,7 +173,7 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          vm.showAlert('Erreur d\'allumage du climatiseur : ' + vm.zone.title + ':' + airconditionner.identifier);
+          vm.connectionInterrupted();
         }
       );
   }
@@ -190,9 +192,22 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          vm.showAlert('Erreur de fermer du climatiseur : ' + vm.zone.title + ':' + airconditionner.identifier);
+          vm.connectionInterrupted();
         }
       );
+  }
+
+  connectionInterrupted() {
+    let alert = this.alertCtrl.create({
+      title: '',
+      subTitle: "Connection perdue",
+      buttons: [{
+        text: 'Login',
+        handler: data => {
+          this.navCtrl.setRoot(LoginPage)
+        }
+      }]
+    });
   }
 
   showAlert(msg: string) {
