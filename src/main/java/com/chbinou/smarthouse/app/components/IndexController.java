@@ -11,11 +11,6 @@ import spark.Spark;
  */
 public class IndexController
 {
-    public static Route serveDefaultPage = (Request request, Response response) ->
-    {
-        response.redirect(Constantes.Views.INDEX_PAGE, 301);
-        return null;
-    };
 
     public static Route notFoundResponse = (Request request, Response response) ->
     {
@@ -25,22 +20,10 @@ public class IndexController
 
     public static Route optionsResponse = (Request request, Response response) ->
     {
-        String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
-
-        if (accessControlRequestHeaders != null)
-        {
-            response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
-        }
-
-        String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-
-        if (accessControlRequestMethod != null)
-        {
-            response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
-        }
-
+        response.header("Access-Control-Allow-Headers", "Authorization");
+        response.header("Access-Control-Allow-Methods", "GET,POST");
         response.header("Access-Control-Allow-Origin", "*");
-
+        response.status(204);
         return "OK";
     };
 }
