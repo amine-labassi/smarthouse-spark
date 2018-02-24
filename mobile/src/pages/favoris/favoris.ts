@@ -54,7 +54,7 @@ export class FavorisPage {
       }
     });
 
-    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status")
+    vm.http.get('http://' + vm.serverIP + "/api/switching/lamp/all/status")
       .subscribe(
         function(data){
           loader.dismissAll();

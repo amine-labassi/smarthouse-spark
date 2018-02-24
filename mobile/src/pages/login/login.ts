@@ -1,5 +1,5 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import {NavController, AlertController, Select, LoadingController} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, AlertController, LoadingController} from 'ionic-angular';
 import {DomotiquePage} from "../domotique/domotique";
 import {$WebSocket, WebSocketConfig} from "angular2-websocket/angular2-websocket";
 import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
@@ -80,7 +80,7 @@ export class LoginPage {
 
     localStorage.setItem("ip", vm.server);
 
-    this.http.post('https://' + vm.server + '/login', body, {headers: headers, responseType: 'text'})
+    this.http.post("http://" + vm.server + '/api/login', body, {headers:headers, responseType: 'text'})
       .subscribe(
         data => {
           localStorage.setItem("token", data);

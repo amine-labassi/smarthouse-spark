@@ -42,7 +42,7 @@ export class ZonePage {
     });
     var vm = this;
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/" + vm.zone.id + "/" + lamp.identifier + "/on",)
+    vm.http.get('http://' + vm.serverIP + "/api/switching/lamp/" + vm.zone.id + "/" + lamp.identifier + "/on",)
       .subscribe(
         data => {
           lamp.status = true;
@@ -68,7 +68,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/" + vm.zone.id + "/" + lamp.identifier + "/off",)
+    vm.http.get('http://' + vm.serverIP + "/api/switching/lamp/" + vm.zone.id + "/" + lamp.identifier + "/off",)
       .subscribe(
         data => {
           lamp.status = false;
@@ -93,7 +93,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/position/window/" + vm.zone.id + "/" + mywindow.identifier + "/" + mywindow.value)
+    vm.http.get('http://' + vm.serverIP + "/api/position/window/" + vm.zone.id + "/" + mywindow.identifier + "/" + mywindow.value)
       .subscribe(
         data => {
           if (data == 1) {
@@ -127,7 +127,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/switching/window/" + vm.zone.id + "/" + mywindow.identifier + "/up")
+    vm.http.get('http://' + vm.serverIP + "/api/switching/window/" + vm.zone.id + "/" + mywindow.identifier + "/up")
       .subscribe(
         data => {
 
@@ -162,7 +162,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/switching/window/" + vm.zone.id + "/" + mywindow.identifier + "/down")
+    vm.http.get('http://' + vm.serverIP + "/api/switching/window/" + vm.zone.id + "/" + mywindow.identifier + "/down")
       .subscribe(
         data => {
 
@@ -193,7 +193,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/switching/climatiseur/" + vm.zone.id + "/" + airconditionner.identifier + "/on")
+    vm.http.get('http://' + vm.serverIP + "/api/switching/climatiseur/" + vm.zone.id + "/" + airconditionner.identifier + "/on")
       .subscribe(
         data => {
           airconditionner.status = true;
@@ -217,7 +217,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/switching/climatiseur/" + vm.zone.id + "/" + airconditionner.identifier + "/off")
+    vm.http.get('http://' + vm.serverIP + "/api/switching/climatiseur/" + vm.zone.id + "/" + airconditionner.identifier + "/off")
       .subscribe(
         data => {
           airconditionner.status = true;
