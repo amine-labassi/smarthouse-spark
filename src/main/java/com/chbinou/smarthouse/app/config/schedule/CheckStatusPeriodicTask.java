@@ -5,8 +5,6 @@ import com.chbinou.smarthouse.app.components.lighting.LightingManager;
 import com.chbinou.smarthouse.app.config.GsonConfiguration;
 import com.chbinou.smarthouse.app.config.environment.Environment;
 import com.chbinou.smarthouse.app.config.websocket.CheckStatusWebSocket;
-import org.eclipse.jetty.util.StringUtil;
-import org.eclipse.jetty.websocket.api.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +14,7 @@ import java.util.TimerTask;
 /**
  * Created by amine on 02/07/2017.
  */
+
 public class CheckStatusPeriodicTask extends TimerTask
 {
     protected Logger logger = LoggerFactory.getLogger(getClass());
@@ -56,23 +55,5 @@ public class CheckStatusPeriodicTask extends TimerTask
             });
         }
 
-        // -Dsmarthouse.periodcheck.duration=10
-        String durationProperty = System.getProperty("smarthouse.periodcheck.duration");
-
-        int duration = 4;
-
-        try
-        {
-            duration = Integer.valueOf(durationProperty);
-        }
-        catch (NumberFormatException ex)
-        {
-            if(StringUtil.isNotBlank(durationProperty))
-            {
-                logger.error("Property [smarthouse.periodcheck.duration=" + durationProperty + "] can't be parsed as number. default to 4sec.", ex);
-            }
-        }
-
-        SmartHouseApp.timer.schedule(new CheckStatusPeriodicTask(), duration * 1000);
     }
 }

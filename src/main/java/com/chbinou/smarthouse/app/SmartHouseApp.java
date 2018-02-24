@@ -1,7 +1,11 @@
 package com.chbinou.smarthouse.app;
 
 import com.chbinou.smarthouse.app.components.IndexController;
+import com.chbinou.smarthouse.app.components.airconditionner.AirConditionnerController;
+import com.chbinou.smarthouse.app.components.auth.AuthenticationController;
+import com.chbinou.smarthouse.app.components.lighting.LightingController;
 import com.chbinou.smarthouse.app.components.model.ElectronicInterfaceConfiguration;
+import com.chbinou.smarthouse.app.components.windows.WindowsController;
 import com.chbinou.smarthouse.app.config.Constantes;
 import com.chbinou.smarthouse.app.config.GsonConfiguration;
 import com.chbinou.smarthouse.app.config.environment.Environment;
@@ -56,7 +60,7 @@ public class SmartHouseApp
                 Environment.trustStorePassword(), Environment.isSslTwoWay());
 
         webSocket(Constantes.Url.API_PUSH_WSOCKET, CheckStatusWebSocket.class);
-        timer.schedule(new CheckStatusPeriodicTask(), 0);
+        timer.schedule(new CheckStatusPeriodicTask(), 0, Environment.period());
         Spark.exception(Exception.class, (exception, request, response) -> {
             exception.printStackTrace();
         });
