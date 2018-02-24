@@ -22,7 +22,7 @@ public class IndexController
     {
         response.header("Access-Control-Allow-Headers", "Authorization");
         response.header("Access-Control-Allow-Methods", "GET,POST");
-        response.header("Access-Control-Allow-Origin", "*");
+        response.header("Access-Control-Allow-Origin", request.headers("Origin"));
         response.status(204);
         return "OK";
     };
