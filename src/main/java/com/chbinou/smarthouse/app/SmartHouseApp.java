@@ -69,7 +69,7 @@ public class SmartHouseApp
             }
         });
 
-        timer.schedule(new CheckStatusPeriodicTask(), 0);
+        timer.schedule(new CheckStatusPeriodicTask(), 0, Environment.period());
 
         Spark.exception(Exception.class, (exception, request, response) -> {
             exception.printStackTrace();

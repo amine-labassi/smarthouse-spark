@@ -1,5 +1,8 @@
 package com.chbinou.smarthouse.app.config.environment;
 
+import org.eclipse.jetty.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.utils.StringUtils;
 
 import java.net.URL;
@@ -9,6 +12,8 @@ import java.net.URL;
  */
 public class Environment
 {
+    protected static Logger logger = LoggerFactory.getLogger(Environment.class);
+
     public static boolean isDevEnv()
     {
         String envName = System.getProperty("env.name");
@@ -67,5 +72,26 @@ public class Environment
     {
         String port = System.getProperty("server.port");
         return StringUtils.isBlank(port) ? 4504 : Integer.valueOf(port);
+    }
+
+    public static int period()
+    {
+        // -Dsmarthouse.periodcheck.duration=10
+        String durationProperty = System.getProperty("smarthouse.periodcheck.duration");
+
+        int duration = 3000;
+
+        try
+        {
+            duration = Integer.valueOf(durationProperty);
+        }
+        catch (NumberFormatException ex)
+        {
+            if(StringUtil.isNotBlank(durationProperty))
+            {
+                logger.error("Property [smarthouse.periodcheck.duration=" + durationProperty + "] can't be parsed as number. default to 4sec.", ex);
+            }
+        }
+        return duration;
     }
 }
