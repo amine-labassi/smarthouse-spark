@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Menu</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-card>
+    <ion-list>
+      <button ion-item (click)="openFavorisPage()">
+        <ion-icon name="heart" item-start></ion-icon>
+        Favoris
+      </button>
+      <button ion-item (click)="openDomotiquePage()">
+        <ion-icon name="home" item-start ></ion-icon>
+        Domotiques
+      </button>
+      <button ion-item (click)="openProceduresPage()">
+        <ion-icon name="list-box" item-start></ion-icon>
+        Procédures
+      </button>
+    </ion-list>
+  </ion-card>
+</ion-content>

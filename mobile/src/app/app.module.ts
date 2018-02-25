@@ -15,11 +15,17 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {IonicStorageModule} from "@ionic/storage";
 import {SmartHouseAppBroadcaster} from "../config/SmartHouseAppBroadcaster";
 import {JwtTokenInterceptor} from "../config/JwtTokenInterceptor";
+import {MenuPage} from "../pages/menu/menu";
+import {ProceduresPage} from "../pages/procedures/procedures";
+import {ProcedurePage} from "../pages/procedure/procedure";
 
 @NgModule({
   declarations: [
     MyApp,
     IonDigitKeyboard,
+    ProcedurePage,
+    ProceduresPage,
+    MenuPage,
     LoginPage,
     ConfigurationPage,
     DomotiquePage,
@@ -39,6 +45,9 @@ import {JwtTokenInterceptor} from "../config/JwtTokenInterceptor";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    ProcedurePage,
+    ProceduresPage,
+    MenuPage,
     LoginPage,
     ConfigurationPage,
     DomotiquePage,

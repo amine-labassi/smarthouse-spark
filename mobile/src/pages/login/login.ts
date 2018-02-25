@@ -8,6 +8,7 @@ import {Server} from "../../model/Server";
 import {Storage} from "@ionic/storage";
 import {IonDigitKeyboardOptions} from "../../components/ion-digit-keyboard/ion-digit-keyboard";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {MenuPage} from "../menu/menu";
 
 @Component({
   selector: 'page-login',
@@ -80,13 +81,13 @@ export class LoginPage {
 
     localStorage.setItem("ip", vm.server);
 
-    this.http.post("http://" + vm.server + '/api/login', body, {headers:headers, responseType: 'text'})
+    this.http.post("https://" + vm.server + '/api/login', body, {headers:headers, responseType: 'text'})
       .subscribe(
         data => {
           localStorage.setItem("token", data);
           vm.initializeWebSocket();
           loader.dismissAll();
-          vm.navCtrl.setRoot(DomotiquePage);
+          vm.navCtrl.setRoot(MenuPage);
         },
         error => {
           // TODO
