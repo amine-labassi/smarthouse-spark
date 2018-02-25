@@ -4,17 +4,5 @@
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  },
-  "proxies": [
-    {
-      "path": "/api",
-      "proxyUrl": "https://localhost:4504/api",
-      "rejectUnauthorized": false
-    },
-    {
-      "path": "/push",
-      "proxyUrl": "https://localhost:4504/push",
-      "rejectUnauthorized": false
-    }
-  ]
+  }
 }
