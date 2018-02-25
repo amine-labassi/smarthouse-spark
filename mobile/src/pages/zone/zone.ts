@@ -2,8 +2,7 @@ import {Component} from '@angular/core';
 import {AlertController, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {Zone} from "../../model/Zone";
 import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import construct = Reflect.construct;
+import {HttpClient} from "@angular/common/http";
 import {LoginPage} from "../login/login";
 
 @Component({

@@ -6,7 +6,7 @@ import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
 import {Zone} from "../../model/Zone";
 import {FavorisPage} from "../favoris/favoris";
 import {Storage} from "@ionic/storage";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {LoginPage} from "../login/login";
 
 @Component({
@@ -125,7 +125,7 @@ export class DomotiquePage
 
   }
   connectionInterrupted() {
-    let alert = this.alertCtrl.create({
+    this.alertCtrl.create({
       title: '',
       subTitle: "Connection perdue",
       buttons: [{

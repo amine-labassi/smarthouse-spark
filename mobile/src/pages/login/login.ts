@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {NavController, AlertController, LoadingController} from 'ionic-angular';
-import {DomotiquePage} from "../domotique/domotique";
 import {$WebSocket, WebSocketConfig} from "angular2-websocket/angular2-websocket";
 import {SmartHouseAppBroadcaster} from "../../config/SmartHouseAppBroadcaster";
 import {ConfigurationPage} from "../configuration/configuration";
@@ -43,7 +42,7 @@ export class LoginPage {
       vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
     }
     vm.server = localStorage.getItem("ip")
-    storage.get('SmartHomeServer').then((val) => {
+    this.storage.get('SmartHomeServer').then((val) => {
       if (val == null || val == "[]") {
         let alert = this.alertCtrl.create({
           title: '',

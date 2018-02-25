@@ -3,7 +3,7 @@ import {AlertController, LoadingController, NavController, NavParams} from 'ioni
 import {Favoris} from "../../model/Favoris";
 import {Storage} from "@ionic/storage";
 import {ZonePage} from "../zone/zone";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {LoginPage} from "../login/login";
 
 /*
@@ -84,7 +84,7 @@ export class FavorisPage {
   }
 
   connectionInterrupted() {
-    let alert = this.alertCtrl.create({
+    this.alertCtrl.create({
       title: '',
       subTitle: "Connection perdue",
       buttons: [{
