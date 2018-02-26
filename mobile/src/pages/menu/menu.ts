@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {AlertController, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {DomotiquePage} from "../domotique/domotique";
 import {FavorisPage} from "../favoris/favoris";
 import {ProceduresPage} from "../procedures/procedures";
+import {Items} from "../../config/Items";
+import {HttpClient} from "@angular/common/http";
+import {LoginPage} from "../login/login";
 
 //@IonicPage()
 @Component({
@@ -11,8 +14,40 @@ import {ProceduresPage} from "../procedures/procedures";
 })
 export class MenuPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  serverIP:string;
 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public http: HttpClient, public alertCtrl: AlertController) {
+    var vm = this;
+    vm.serverIP = localStorage.getItem("ip");
+    vm.loadZones()
+
+
+  }
+  loadZones()
+  {
+    var vm = this;
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+    loader.present();
+
+    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status")
+      .subscribe(
+        data => {
+          loader.dismissAll();
+          Items.items = data;
+
+        },
+        error => {
+          loader.dismissAll();
+          if (!navigator.onLine) {
+            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          }
+          else {
+            vm.connectionInterrupted();
+          }
+        }
+      );
   }
 
   ionViewDidLoad() {
@@ -32,5 +67,26 @@ export class MenuPage {
   openProceduresPage()
   {
     this.navCtrl.push(ProceduresPage);
+  }
+  connectionInterrupted() {
+    this.alertCtrl.create({
+      title: '',
+      subTitle: "Connection perdue",
+      buttons: [{
+        text: 'Login',
+        handler: data => {
+          this.navCtrl.setRoot(LoginPage)
+        }
+      }]
+    });
+  }
+  showAlert(msg: string)
+  {
+    let alert = this.alertCtrl.create({
+      title: 'Oops!!',
+      subTitle: msg,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

@@ -253,11 +253,7 @@ export class ZonePage {
     let alert = this.alertCtrl.create({
       title: 'Oops!!',
       subTitle: msg,
-      buttons: [{
-        text: 'Login',
-        handler: data => {
-          this.navCtrl.setRoot(LoginPage)
-        }}]
+      buttons: ['OK']
     });
     alert.present();
   }

@@ -168,20 +168,162 @@
       ]
     }
   ],
-  "activator": {
-    "mcp": 32,
-    "address": "GPIO A7"
-  },
+
   "notUsedOutputs": [
     {
-      "mcp": 35,
-      "pin": null
+      "mcp": 32,
+      "pin": "GPIO A7"
+    },
+    {
+      "mcp": 32,
+      "pin": "GPIO A6"
+    },
+
+    {
+      "mcp": 32,
+      "pin": "GPIO A2"
+    },
+    {
+      "mcp": 32,
+      "pin": "GPIO A1"
+    },
+    {
+      "mcp": 32,
+      "pin": "GPIO B7"
+    },
+    {
+      "mcp": 32,
+      "pin": "GPIO B6"
+    },
+    {
+      "mcp": 32,
+      "pin": "GPIO B5"
+    },
+    {
+      "mcp": 32,
+      "pin": "GPIO B4"
+    },
+    {
+      "mcp": 32,
+      "pin": "GPIO B3"
+    },
+    {
+      "mcp": 32,
+      "pin": "GPIO B2"
+    },
+    {
+      "mcp": 32,
+      "pin": "GPIO B1"
+    },
+    {
+      "mcp": 33,
+      "pin": "GPIO A7"
+    },
+    {
+      "mcp": 33,
+      "pin": "GPIO A4"
+    },
+    {
+      "mcp": 33,
+      "pin": "GPIO A3"
+    },
+    {
+      "mcp": 33,
+      "pin": "GPIO B7"
+    },
+    {
+      "mcp": 33,
+      "pin": "GPIO B6"
+    },
+    {
+      "mcp": 33,
+      "pin": "GPIO B5"
+    },
+    {
+      "mcp": 33,
+      "pin": "GPIO B2"
+    },
+    {
+      "mcp": 33,
+      "pin": "GPIO B1"
+    },
+    {
+      "mcp": 33,
+      "pin": "GPIO A0"
+    },
+    {
+      "mcp": 33,
+      "pin": "GPIO B0"
+    },
+    {
+      "mcp": 32,
+      "pin": "GPIO A0"
+    },
+    {
+      "mcp": 32,
+      "pin": "GPIO B0"
     }
   ],
   "notUsedInputs": [
     {
-      "mcp": null,
-      "pin": null
+      "mcp": 35,
+      "pin": "GPIO A7"
+    },
+    {
+      "mcp": 35,
+      "pin": "GPIO A6"
+    },
+    {
+      "mcp": 35,
+      "pin": "GPIO A5"
+    },
+    {
+      "mcp": 35,
+      "pin": "GPIO A4"
+    },
+    {
+      "mcp": 35,
+      "pin": "GPIO B7"
+    },
+    {
+      "mcp": 35,
+      "pin": "GPIO B6"
+    },
+    {
+      "mcp": 35,
+      "pin": "GPIO B5"
+    },
+    {
+      "mcp": 35,
+      "pin": "GPIO B4"
+    },
+    {
+      "mcp": 35,
+      "pin": "GPIO B3"
+    },
+    {
+      "mcp": 35,
+      "pin": "GPIO B2"
+    },
+    {
+      "mcp": 35,
+      "pin": "GPIO B1"
+    },
+    {
+      "mcp": 35,
+      "pin": "GPIO B0"
+    },
+    {
+      "mcp": 34,
+      "pin": "GPIO A2"
+    },
+    {
+      "mcp": 34,
+      "pin": "GPIO A1"
+    },
+    {
+      "mcp": 34,
+      "pin": "GPIO A0"
     }
   ]
 }

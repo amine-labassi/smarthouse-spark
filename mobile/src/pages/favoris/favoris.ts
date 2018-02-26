@@ -5,6 +5,7 @@ import {Storage} from "@ionic/storage";
 import {ZonePage} from "../zone/zone";
 import {HttpClient} from "@angular/common/http";
 import {LoginPage} from "../login/login";
+import {Items} from "../../config/Items";
 
 /*
   Generated class for the Favoris page.
@@ -20,62 +21,39 @@ export class FavorisPage {
 
   favoris:Favoris;
   items: any = [];
-  serverIP: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alertCtrl: AlertController, private storage: Storage, public loadingCtrl: LoadingController)
   {
     var vm = this;
-    vm.serverIP = localStorage.getItem("ip");
-    vm.loadZones();
+
+    vm.loadFav();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FavorisPage');
   }
 
-  loadZones()
+  loadFav()
   {
-    let loader = this.loadingCtrl.create({
-      content: "Please wait...",
-    });
-    loader.present();
 
     var vm = this;
 
-    if (!navigator.onLine) {
-      vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
-    }
-
     vm.items = [];
-    var myList: Array<number> = [];
+    var myList = [];
+    var items: any = Items.items;
     vm.storage.get('favoritsZones').then((val) => {
       if (val != null) {
        myList = JSON.parse(val);
+        for (var i = 0; i < items.length; i++)
+        {
+          if (myList.indexOf(items[i].id) != -1) {
+            vm.items.push(items[i]);
+          }
+        }
       }
     });
 
-    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status")
-      .subscribe(
-        function(data){
-          loader.dismissAll();
-          var items: any = data;
-          for (var i = 0; i < items.length; i++)
-          {
-            if (myList.indexOf(items[i].id) != -1) {
-              vm.items.push(items[i]);
-            }
-          }
-        },
-        function (error) {
-          loader.dismissAll();
-          if (!navigator.onLine) {
-            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
-          }
-          else {
-            vm.connectionInterrupted();
-          }
-        }
-      );
+
   }
   openNavZonePage(item)
   {
@@ -83,18 +61,7 @@ export class FavorisPage {
     this.navCtrl.push(ZonePage, { 'item': item });
   }
 
-  connectionInterrupted() {
-    this.alertCtrl.create({
-      title: '',
-      subTitle: "Connection perdue",
-      buttons: [{
-        text: 'Login',
-        handler: data => {
-          this.navCtrl.setRoot(LoginPage)
-        }
-      }]
-    });
-  }
+
   showAlert(msg: string)
   {
     let alert = this.alertCtrl.create({

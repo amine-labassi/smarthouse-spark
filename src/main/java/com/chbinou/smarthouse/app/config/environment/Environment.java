@@ -77,6 +77,7 @@ public class Environment
     public static int period()
     {
         // -Dsmarthouse.periodcheck.duration=10
+
         String durationProperty = System.getProperty("smarthouse.periodcheck.duration");
 
         int duration = 3000;

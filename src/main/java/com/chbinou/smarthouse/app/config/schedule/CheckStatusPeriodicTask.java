@@ -15,14 +15,21 @@ import java.util.TimerTask;
  * Created by amine on 02/07/2017.
  */
 
-public class CheckStatusPeriodicTask extends TimerTask
+public class CheckStatusPeriodicTask extends Thread
+
 {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Override
     public void run()
     {
-        boolean notifyClientApp = true;
+      while (true){
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            boolean notifyClientApp = true;
 
         // compute all status
         try
@@ -55,5 +62,6 @@ public class CheckStatusPeriodicTask extends TimerTask
             });
         }
 
+    }
     }
 }

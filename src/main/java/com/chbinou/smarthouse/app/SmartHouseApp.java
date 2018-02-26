@@ -1,7 +1,12 @@
 package com.chbinou.smarthouse.app;
 
+import com.chbinou.smarthouse.app.components.IndexController;
+import com.chbinou.smarthouse.app.components.airconditionner.AirConditionnerController;
+import com.chbinou.smarthouse.app.components.auth.AuthenticationController;
+import com.chbinou.smarthouse.app.components.lighting.LightingController;
 import com.chbinou.smarthouse.app.components.model.ElectronicInterfaceConfiguration;
 import com.chbinou.smarthouse.app.config.Constantes.Url;
+import com.chbinou.smarthouse.app.config.GsonConfiguration;
 import com.chbinou.smarthouse.app.config.environment.Environment;
 import com.chbinou.smarthouse.app.config.gpio.GpioFactoryAdapater;
 import com.chbinou.smarthouse.app.config.schedule.CheckStatusPeriodicTask;
@@ -47,10 +52,10 @@ public class SmartHouseApp
     public static void main(String[] args) throws Exception
     {
         final Config config = new SmartHouseSecurityConfigFactory().build();
-        Gson gson = getGsonInstance();
-        lightingConfigurationInstance = parseConfiguration();
-        if(isDevEnv()) {
-            System.out.println("[DEV] components are initialised");
+        Gson gson = GsonConfiguration.getGsonInstance();
+        lightingConfigurationInstance = ConfigurationReader.parseConfiguration();
+        if(Environment.isDevEnv()) {
+             System.out.println("components are initialised");
         } else {
             ConfigurationReader.init();
         }
@@ -59,11 +64,13 @@ public class SmartHouseApp
         secure(keyStore(), keyStorePassword(), trustStore(), trustStorePassword(), isSslTwoWay());
 
         webSocket(Url.API_PUSH_WSOCKET, CheckStatusWebSocket.class);
-        timer.schedule(new CheckStatusPeriodicTask(), 0, period());
+
+        CheckStatusPeriodicTask a = new CheckStatusPeriodicTask();
+        a.start();
+        //timer.schedule(new CheckStatusPeriodicTask(), 0, period());
         Spark.exception(Exception.class, (exception, request, response) -> {
             logger.error("SmartHouseApp main error", exception);
         });
-
         options("*",  optionsResponse);
         path(Url.PATH_API, () -> {
             before(Url.LOGIN, new SecurityFilter(config, "DirectFormClient", AUTHORIZERS, MATCHERS));

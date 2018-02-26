@@ -77,39 +77,30 @@ public class ConfigurationReader {
             }
         }
 
-        /*for(NotUsedInput notUsedInput : SmartHouseApp.lightingConfigurationInstance.getNotUsedInputs()){
+        for(NotUsedInput notUsedInput : SmartHouseApp.lightingConfigurationInstance.getNotUsedInputs()){
         Mcp mcp = findMcp(notUsedInput.getMcp());
         Pin pin = findPin(notUsedInput.getPin());
         SmartHouseApp.gpio.provisionDigitalInputPin(mcp.getInstance(), pin);
-        }*/
+        }
 
-        /*for(NotUsedOutput notUsedOutput : SmartHouseApp.lightingConfigurationInstance.getNotUsedOutputs())
+        for(NotUsedOutput notUsedOutput : SmartHouseApp.lightingConfigurationInstance.getNotUsedOutputs())
        {
             Mcp mcp = findMcp(notUsedOutput.getMcp());
             Pin pin = findPin(notUsedOutput.getPin());
             SmartHouseApp.gpio.provisionDigitalInputPin(mcp.getInstance(), pin);
-        }*/
+        }
 
         for (Zone zone : SmartHouseApp.lightingConfigurationInstance.getZones()) {
 
             for (Lamp lamp : zone.getLamps()) {
-                Mcp mcp = findMcp(lamp.getMcpOutput());
-                Pin pin = findPin(lamp.getAddressOutput());
                 lamp.getOutputPinInstance().setState(true);
             }
             for (Window window : zone.getWindows()) {
-                Mcp mcp = findMcp(window.getMcpUp());
-                Pin pin = findPin(window.getAddressUp());
                 window.getUpPinInstanse().setState(true);
-
-                mcp = findMcp(window.getMcpDown());
-                pin = findPin(window.getAddressDown());
                 window.getDownPinInstanse().setState(true);
             }
 
             for (AirConditionner airConditionner : zone.getAirConditionners()) {
-                Mcp mcp = findMcp(airConditionner.getMcpOutput());
-                Pin pin = findPin(airConditionner.getAddressOutput());
                 airConditionner.getOutputPinInstance().setState(true);
             }
         }

@@ -12,11 +12,7 @@ import spark.Spark;
 public class IndexController
 {
 
-    public static Route notFoundResponse = (Request request, Response response) ->
-    {
-        Spark.halt(404,"Page non trouvée");
-        return null;
-    };
+
 
     public static Route optionsResponse = (Request request, Response response) ->
     {

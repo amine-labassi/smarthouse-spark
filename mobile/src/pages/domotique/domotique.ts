@@ -8,6 +8,7 @@ import {FavorisPage} from "../favoris/favoris";
 import {Storage} from "@ionic/storage";
 import {HttpClient} from "@angular/common/http";
 import {LoginPage} from "../login/login";
+import {Items} from "../../config/Items";
 
 @Component({
   selector: 'page-domotique',
@@ -18,7 +19,7 @@ export class DomotiquePage
 
   items: any = [];
   searchFilter: string = '';
-  serverIP:string;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, private storage: Storage, public loadingCtrl: LoadingController)
   {
@@ -26,8 +27,9 @@ export class DomotiquePage
     if (!navigator.onLine) {
       vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
     }
-    vm.serverIP = localStorage.getItem("ip");
-    vm.loadZones();
+    vm.items= Items.items;
+    vm.drawFavoritsIcon();
+
     vm.broadcaster.on<string>('configObject')
       .subscribe(msg => {
         vm.items = JSON.parse(msg);
@@ -35,33 +37,6 @@ export class DomotiquePage
       });
   }
 
-  loadZones()
-  {
-    var vm = this;
-    let loader = this.loadingCtrl.create({
-      content: "Please wait...",
-    });
-    loader.present();
-    vm.items = [];
-
-    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status")
-      .subscribe(
-        data => {
-          loader.dismissAll();
-          vm.items = data;
-          vm.drawFavoritsIcon();
-        },
-        error => {
-          loader.dismissAll();
-          if (!navigator.onLine) {
-            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
-          }
-          else {
-            vm.connectionInterrupted();
-          }
-        }
-      );
-  }
 
   openNavZonePage(item, $event)
   {
