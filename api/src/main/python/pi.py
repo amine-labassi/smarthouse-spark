@@ -23,7 +23,7 @@ jwt = JWT(app, BasicAuthenticator.authenticate, BasicAuthenticator.identity)
 @jwt_required()
 def protected():
     return 'yyyyy'
-
+# dfsdfs
 if __name__ == '__main__':
     PeriodicTask.job()
     app.run(host='0.0.0.0', ssl_context=(Environment.getCert(), Environment.getKey()), port=5000)
