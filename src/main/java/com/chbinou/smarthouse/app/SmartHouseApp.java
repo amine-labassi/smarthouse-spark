@@ -68,9 +68,13 @@ public class SmartHouseApp
         CheckStatusPeriodicTask a = new CheckStatusPeriodicTask();
         a.start();
         //timer.schedule(new CheckStatusPeriodicTask(), 0, period());
+
         Spark.exception(Exception.class, (exception, request, response) -> {
             logger.error("SmartHouseApp main error", exception);
         });
+
+
+
         options("*",  optionsResponse);
         path(Url.PATH_API, () -> {
             before(Url.LOGIN, new SecurityFilter(config, "DirectFormClient", AUTHORIZERS, MATCHERS));

@@ -19,7 +19,7 @@ public class AirConditionnerManager
     public static boolean  switchOnClimatiseur(AirConditionner airConditionner) throws InterruptedException {
    if (SmartHouseApp.gpio.isState(PinState.HIGH, airConditionner.getInputPinInstance())==true)
         {
-            airConditionner.getOutputPinInstance().pulse(150,PinState.HIGH);
+            airConditionner.getOutputPinInstance().pulse(150,PinState.LOW);
 
         }
         airConditionner.setStatus(SmartHouseApp.gpio.isState(PinState.HIGH, airConditionner.getInputPinInstance()));
@@ -31,7 +31,7 @@ public class AirConditionnerManager
 
         if (SmartHouseApp.gpio.isState(PinState.HIGH, airConditionner.getInputPinInstance())==false)
         {
-           airConditionner.getOutputPinInstance().pulse(150,PinState.HIGH);
+           airConditionner.getOutputPinInstance().pulse(150,PinState.LOW);
         }
         airConditionner.setStatus(SmartHouseApp.gpio.isState(PinState.HIGH, airConditionner.getInputPinInstance()));
         return true;
@@ -41,7 +41,7 @@ public class AirConditionnerManager
         for(Zone zone : lightingConfigurationInstance.getZones()){
         for (AirConditionner airConditionner : zone.getAirConditionners()) {
             if (SmartHouseApp.gpio.isState(PinState.HIGH, airConditionner.getInputPinInstance()) == true) {
-                airConditionner.getOutputPinInstance().pulse(150, PinState.HIGH);
+                airConditionner.getOutputPinInstance().pulse(150, PinState.LOW);
             }
         }
         }
@@ -53,7 +53,7 @@ public class AirConditionnerManager
         for (AirConditionner airConditionner : zone.getAirConditionners()){
             if (SmartHouseApp.gpio.isState(PinState.HIGH, airConditionner.getInputPinInstance())==false)
             {
-               airConditionner.getOutputPinInstance().pulse(150,PinState.HIGH);
+               airConditionner.getOutputPinInstance().pulse(150,PinState.LOW);
             }
         }}
 

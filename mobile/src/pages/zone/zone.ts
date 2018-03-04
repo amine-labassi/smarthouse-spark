@@ -92,7 +92,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/position/window/" + vm.zone.id + "/" + mywindow.identifier + "/" + mywindow.value)
+    vm.http.get('https://' + vm.serverIP + "/api/window/" + vm.zone.id + "/" + mywindow.identifier + "/" + mywindow.value)
       .subscribe(
         data => {
           if (data == 1) {
@@ -172,6 +172,11 @@ export class ZonePage {
           else if (data == 2) {
             loader.dismissAll();
             vm.showAlert('qu\'elle qu\'un entrain de fermer la fenetre : ' + vm.zone.title + ':' + mywindow.identifier);
+          }
+          else {
+            loader.dismissAll();
+
+
           }
         },
         error => {

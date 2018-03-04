@@ -68,22 +68,22 @@
     <ion-card-content>
       <ion-slides [pager]="true">
         <ion-slide *ngFor="let airconditionner of zone.airConditionners">
-          <h2>{{ airconditionner.title }}</h2>
+          <h2>{{ airconditionner.status }}</h2>
           <ion-grid>
             <ion-row center>
               <ion-col width-100>
-                <ion-icon name="thermometer" color="bright" style="font-size: 2em;"></ion-icon>
+                <ion-icon name="thermometer" color="bright"  style="font-size: 2em;"></ion-icon>
               </ion-col>
             </ion-row>
             <ion-row center>
               <ion-col width-50>
                 <button ion-button color="light" round (click)="airconditionnerOn(airconditionner)">
-                  <ion-icon name="add"></ion-icon>
+                  I
                 </button>
               </ion-col>
               <ion-col width-50>
                 <button ion-button color="light" round (click)="airconditionnerOff(airconditionner)">
-                  <ion-icon name="remove"></ion-icon>
+                  O
                 </button>
               </ion-col>
             </ion-row>
