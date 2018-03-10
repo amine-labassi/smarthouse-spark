@@ -63,23 +63,23 @@ var ConfigurationPage = (function () {
             vm.storage.set('SmartHomeServer', JSON.stringify(vm.servers));
         });
     };
+    __decorate([
+        ViewChild('title'),
+        __metadata("design:type", TextInput)
+    ], ConfigurationPage.prototype, "inputTitle", void 0);
+    __decorate([
+        ViewChild('ip'),
+        __metadata("design:type", TextInput)
+    ], ConfigurationPage.prototype, "inputIp", void 0);
+    ConfigurationPage = __decorate([
+        Component({
+            selector: 'page-configuration',
+            templateUrl: 'configuration.html',
+            styles: ['configuration.css']
+        }),
+        __metadata("design:paramtypes", [NavController, NavParams, Storage])
+    ], ConfigurationPage);
     return ConfigurationPage;
 }());
-__decorate([
-    ViewChild('title'),
-    __metadata("design:type", TextInput)
-], ConfigurationPage.prototype, "inputTitle", void 0);
-__decorate([
-    ViewChild('ip'),
-    __metadata("design:type", TextInput)
-], ConfigurationPage.prototype, "inputIp", void 0);
-ConfigurationPage = __decorate([
-    Component({
-        selector: 'page-configuration',
-        templateUrl: 'configuration.html',
-        styles: ['configuration.css']
-    }),
-    __metadata("design:paramtypes", [NavController, NavParams, Storage])
-], ConfigurationPage);
 export { ConfigurationPage };
 //# sourceMappingURL=configuration.js.map

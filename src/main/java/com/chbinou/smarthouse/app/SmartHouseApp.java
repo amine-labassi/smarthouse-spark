@@ -59,7 +59,6 @@ public class SmartHouseApp
         } else {
             ConfigurationReader.init();
         }
-
         port(Environment.port());
         secure(keyStore(), keyStorePassword(), trustStore(), trustStorePassword(), isSslTwoWay());
 

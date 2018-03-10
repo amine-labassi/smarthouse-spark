@@ -5,6 +5,7 @@
 /mobile/.sourcemaps/
 /mobile/platforms/
 smarthouse.log
+backend/.idea/
 *.js.map
 /.idea/
 !/src/**/*/.gitkeep

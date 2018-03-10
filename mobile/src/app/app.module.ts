@@ -19,6 +19,8 @@ import {MenuPage} from "../pages/menu/menu";
 import {ProceduresPage} from "../pages/procedures/procedures";
 import {ProcedurePage} from "../pages/procedure/procedure";
 
+
+
 @NgModule({
   declarations: [
     MyApp,

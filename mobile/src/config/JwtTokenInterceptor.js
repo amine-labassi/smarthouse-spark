@@ -13,15 +13,19 @@ var JwtTokenInterceptor = (function () {
     }
     JwtTokenInterceptor.prototype.intercept = function (req, next) {
         var jwt = localStorage.getItem("token");
-        if (typeof jwt !== 'undefined') {
-            req.headers.append('Authorization', 'Bearer ' + jwt);
+        if (!req.url.endsWith("/login") && typeof jwt !== 'undefined') {
+            req = req.clone({
+                setHeaders: {
+                    Authorization: 'JWT ' + jwt
+                }
+            });
         }
         return next.handle(req);
     };
+    JwtTokenInterceptor = __decorate([
+        Injectable()
+    ], JwtTokenInterceptor);
     return JwtTokenInterceptor;
 }());
-JwtTokenInterceptor = __decorate([
-    Injectable()
-], JwtTokenInterceptor);
 export { JwtTokenInterceptor };
 //# sourceMappingURL=JwtTokenInterceptor.js.map

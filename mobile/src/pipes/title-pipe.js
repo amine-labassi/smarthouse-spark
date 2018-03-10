@@ -13,13 +13,13 @@ var TitlePipe = (function () {
             return zone.title.toLowerCase().indexOf(args.toLowerCase()) != -1;
         });
     };
+    TitlePipe = __decorate([
+        Pipe({
+            name: 'titlePipe'
+        }),
+        Injectable()
+    ], TitlePipe);
     return TitlePipe;
 }());
-TitlePipe = __decorate([
-    Pipe({
-        name: 'titlePipe'
-    }),
-    Injectable()
-], TitlePipe);
 export { TitlePipe };
 //# sourceMappingURL=title-pipe.js.map

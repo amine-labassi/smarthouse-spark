@@ -9,6 +9,8 @@ import {Storage} from "@ionic/storage";
 import {IonDigitKeyboardOptions} from "../../components/ion-digit-keyboard/ion-digit-keyboard";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {MenuPage} from "../menu/menu";
+import {SocketIoConfig} from "ng-socket-io";
+import io from "socket.io-client"
 
 @Component({
   selector: 'page-login',
@@ -72,6 +74,30 @@ export class LoginPage {
       content: "Please wait...",
     });
     loader.present();
+    // let body = {'username': 'smartHouseOwner', 'password': this.password};
+    // localStorage.setItem("ip", vm.server);
+    //
+    // this.http.post("https://" + vm.server + '/api/login', body)
+    //   .subscribe(
+    //     data => {
+    //
+    //       localStorage.setItem("token", data["access_token"]);
+    //       vm.initializeWebSocket();
+    //       loader.dismissAll();
+    //       vm.navCtrl.setRoot(MenuPage);
+    //     },
+    //     error => {
+    //       // TODO
+    //       loader.dismissAll();
+    //       if (!navigator.onLine) {
+    //         vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+    //       }
+    //       else {
+    //         vm.showAlert('La domotique est indisponible');
+    //       }
+    //
+    //     }
+    //   );
     var headers = new HttpHeaders();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
@@ -121,8 +147,15 @@ export class LoginPage {
   initializeWebSocket() {
     var vm = this;
 
+    // var socket = io.connect('https://' + vm.server + '/push');
+    // socket.on('my response', function(msg) {
+    //   console.log(msg.data)
+    //
+    // });
+
+
     const webSocketConfig = {reconnectIfNotNormalClose: true} as WebSocketConfig;
-    var ws = new $WebSocket('wss://' + vm.server + '/push', null, webSocketConfig);
+    var ws = new $WebSocket('ws://' + vm.server + '/push', null, webSocketConfig);
 
     ws.onMessage(
       (msg: MessageEvent) => {
@@ -130,6 +163,8 @@ export class LoginPage {
       },
       {autoApply: false}
     );
+
+
   }
 
   ionViewDidLoad() {

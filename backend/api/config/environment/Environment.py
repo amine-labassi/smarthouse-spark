@@ -2,10 +2,10 @@
 import sys,  getopt
 
 cert        = ''
-defaultCert = '../resources/cert.pem'
+defaultCert = 'api/resources/cert.pem'
 
 key         = ''
-defaultKey  = '../resources/key.pem' 
+defaultKey  = 'api/resources/key.pem'
 
 password        = ''
 defaultpassword = '0a1d18a485f77dcee53ea81f1010276b67153b745219afc4eac4288045f5ca3d' 

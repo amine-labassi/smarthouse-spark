@@ -8,47 +8,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { AlertController, NavController, NavParams } from 'ionic-angular';
+import { AlertController, LoadingController, NavController, NavParams } from 'ionic-angular';
 import { ZonePage } from "../zone/zone";
 import 'rxjs/Rx';
 import { SmartHouseAppBroadcaster } from "../../config/SmartHouseAppBroadcaster";
 import { FavorisPage } from "../favoris/favoris";
 import { Storage } from "@ionic/storage";
 import { HttpClient } from "@angular/common/http";
+import { LoginPage } from "../login/login";
+import { Items } from "../../config/Items";
 var DomotiquePage = (function () {
-    function DomotiquePage(navCtrl, navParams, http, alertCtrl, broadcaster, storage) {
+    function DomotiquePage(navCtrl, navParams, http, alertCtrl, broadcaster, storage, loadingCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.http = http;
         this.alertCtrl = alertCtrl;
         this.broadcaster = broadcaster;
         this.storage = storage;
+        this.loadingCtrl = loadingCtrl;
         this.items = [];
         this.searchFilter = '';
         var vm = this;
-        vm.serverIP = localStorage.getItem("ip");
-        vm.loadZones();
+        if (!navigator.onLine) {
+            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+        }
+        vm.items = Items.items;
+        vm.drawFavoritsIcon();
         vm.broadcaster.on('configObject')
             .subscribe(function (msg) {
             vm.items = JSON.parse(msg);
             vm.drawFavoritsIcon();
         });
     }
-    DomotiquePage.prototype.loadZones = function () {
-        var vm = this;
-        /*let headers = new HttpHeaders()
-               .append('Content-Type', 'application/json')
-               .append('Accept', 'application/json')
-               .append('Authorization', 'Bearer ' + localStorage.getItem("token"));*/
-        vm.items = [];
-        vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status")
-            .subscribe(function (data) {
-            vm.items = data;
-            vm.drawFavoritsIcon();
-        }, function (error) {
-            vm.showAlert('Je n\'arrive pas à m\'initialiser');
-        });
-    };
     DomotiquePage.prototype.openNavZonePage = function (item, $event) {
         $event.preventDefault();
         $event.stopPropagation();
@@ -56,14 +47,6 @@ var DomotiquePage = (function () {
     };
     DomotiquePage.prototype.openNavFavorisPage = function () {
         this.navCtrl.push(FavorisPage);
-    };
-    DomotiquePage.prototype.showAlert = function (msg) {
-        var alert = this.alertCtrl.create({
-            title: 'Oops!!',
-            subTitle: msg,
-            buttons: ['OK']
-        });
-        alert.present();
     };
     DomotiquePage.prototype.drawFavoritsIcon = function () {
         var vm = this;
@@ -104,14 +87,35 @@ var DomotiquePage = (function () {
             vm.storage.set('favoritsZones', JSON.stringify(myList));
         });
     };
+    DomotiquePage.prototype.connectionInterrupted = function () {
+        var _this = this;
+        this.alertCtrl.create({
+            title: '',
+            subTitle: "Connection perdue",
+            buttons: [{
+                    text: 'Login',
+                    handler: function (data) {
+                        _this.navCtrl.setRoot(LoginPage);
+                    }
+                }]
+        });
+    };
+    DomotiquePage.prototype.showAlert = function (msg) {
+        var alert = this.alertCtrl.create({
+            title: 'Oops!!',
+            subTitle: msg,
+            buttons: ['OK']
+        });
+        alert.present();
+    };
+    DomotiquePage = __decorate([
+        Component({
+            selector: 'page-domotique',
+            templateUrl: 'domotique.html'
+        }),
+        __metadata("design:paramtypes", [NavController, NavParams, HttpClient, AlertController, SmartHouseAppBroadcaster, Storage, LoadingController])
+    ], DomotiquePage);
     return DomotiquePage;
 }());
-DomotiquePage = __decorate([
-    Component({
-        selector: 'page-domotique',
-        templateUrl: 'domotique.html'
-    }),
-    __metadata("design:paramtypes", [NavController, NavParams, HttpClient, AlertController, SmartHouseAppBroadcaster, Storage])
-], DomotiquePage);
 export { DomotiquePage };
 //# sourceMappingURL=domotique.js.map

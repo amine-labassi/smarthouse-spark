@@ -1,8 +1,3 @@
-import sys
-sys.path.insert(0, '/home/pi/smartHouse/src/main/python/config/environment')
-import Environment
-
-
 
 class User(object):
     def __init__(self, id, username, password):
