@@ -6,6 +6,7 @@
 /mobile/platforms/
 smarthouse.log
 backend/.idea/
+backend/dist/
 *.js.map
 /.idea/
 !/src/**/*/.gitkeep
