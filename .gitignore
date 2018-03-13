@@ -1,6 +1,7 @@
 /target/
 /smarthouse-spark.iml
 /mobile/node_modules/
+/backend/node_modules/
 /mobile/www/
 /mobile/.sourcemaps/
 /mobile/platforms/
