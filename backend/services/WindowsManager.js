@@ -1,26 +1,9 @@
+var WindowsManager = function(){
 
+};
 
-export class Windows {
+WindowsManager.prototype.sayHello = function () {
+  return "hello";
+};
 
-  constructur(){
-
-  }
-
-  switchUpWindow(){
-    return new Promise((resolve, reject) => {
-
-        //algo
-        // ok
-        gpio.offPort(
-          functon(){
-
-          }, function(){
-            
-          });
-        resolve("ok");
-//algo
-      //ko
-      reject(ko);
-    });
-  }
-}
+module.exports = new WindowsManager();
