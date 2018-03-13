@@ -1,9 +1,10 @@
-var WindowsManager = function(){
+class WindowsManager {
 
-};
+  constructor(){}
 
-WindowsManager.prototype.sayHello = function () {
-  return "hello";
-};
+  sayHello(){
+    return 'hello';
+  }
+}
 
 module.exports = new WindowsManager();
