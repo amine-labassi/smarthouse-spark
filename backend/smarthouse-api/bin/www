@@ -9,8 +9,8 @@ var debug = require('debug')('smarthouse-api:server');
 var https = require('https');
 
 var options = {
-    key: fs.readFileSync('./bin/key.pem'),
-    cert: fs.readFileSync( './bin/cert.pem' )
+    key: fs.readFileSync('./ressources/key.pem'),
+    cert: fs.readFileSync( './ressources/cert.pem' )
 };
 
 /**
