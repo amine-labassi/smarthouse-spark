@@ -1,8 +1,11 @@
 class WindowsManager {
 
-  constructor(){}
+  constructor(){
+    this.gpioAdapter = GpioAdapaterFactory.instance();
+  }
 
   sayHello(){
+    this.gpioAdapter.getState();
     return 'hello';
   }
 }
