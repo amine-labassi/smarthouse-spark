@@ -14,36 +14,35 @@ class GpioAdapter {
             self.i2c1.writeByteSync(elem.address, 0x12, 0x00);
             self.i2c1.writeByteSync(elem.address, 0x00, elem.portb);
             self.i2c1.writeByteSync(elem.address, 0x13, 0x00);
-        })
+        });
     }
 
-    setState(mcp, pin, status){
+    setState(mcp, pin, delay){
+        var self = this;
         if (pin < 8){
             portData = this.i2c1.readByteSync(mcp, 0x12);
-            if(status == true){
-                portData = portData | (1<<pin);
-                this.i2c1.writeByteSync(mcp, 0x12, portData);
-                return true;
-            }
-            else {
+
                 portData = portData & (255 - (255 & (1<< pin)))
                 this.i2c1.writeByteSync(mcp, 0x12, portData);
-                return false;
-            }
+                setTimeout(function () {
+                    portData = portData | (1<<pin);
+                    this.i2c1.writeByteSync(mcp, 0x12, portData);
+                },delay);
+                return true;
+
+
         }
         else {
             pin = pin - 8;
             portData = this.i2c1.readByteSync(mcp, 0x13);
-            if(status == true){
+            portData = portData & (255 - (255 & (1<< pin)))
+            this.i2c1.writeByteSync(mcp, 0x13, portData);
+            setTimeout(function () {
                 portData = portData | (1<<pin);
                 this.i2c1.writeByteSync(mcp, 0x13, portData);
-                return true;
-            }
-            else {
-                portData = portData & (255 - (255 & (1<< pin)))
-                this.i2c1.writeByteSync(mcp, 0x13, portData);
-                return false;
-            }
+            },delay);
+            return true;
+
         }
     }
 
