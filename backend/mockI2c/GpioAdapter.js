@@ -1,4 +1,7 @@
 /**
+ * Created by Yassine Chbinou on 14/03/2018.
+ */
+/**
  * Created by Yassine Chbinou on 13/03/2018.
  */
 
@@ -15,8 +18,9 @@ GpioAdapter.prototype.setState = function (mcp, pin, status) {
     if (pin < 8){
         portData = i2c1.readByteSync(mcp, 0x12);
         if(status == true){
-          portData = portData | (1<<pin);
-          i2c1.writeByteSync(mcp, 0x12, portData);
+            portData = portData | (1<<pin);
+            i2c1.writeByteSync(mcp, 0x12, portData);
+
             return true;
         }
         else {
