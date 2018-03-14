@@ -45,12 +45,13 @@ class WindowsManager {
         return true;
     }
     mouveWindow(window, pos) {
-        this.gpioAdapter.getState();
+
+
         return 'hello';
     }
 
     mouveWindowAll(pos) {
-        this.gpioAdapter.getState();
+
         return 'hello';
     }
 
