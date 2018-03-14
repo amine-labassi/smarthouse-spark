@@ -16,7 +16,9 @@
     "express-jwt-2": "^1.0.0",
     "jsonwebtoken": "^8.2.0",
     "morgan": "~1.9.0",
+    "node-gyp": "^3.6.2",
     "node.jwt": "^0.1.5",
+    "rebuild": "^0.1.2",
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
