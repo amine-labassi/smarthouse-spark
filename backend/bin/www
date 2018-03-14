@@ -8,8 +8,8 @@ const debug = require('debug')('smarthouse-api:server');
 const https = require('https');
 
 const options = {
-    key: fs.readFileSync('./ressources/key.pem'),
-    cert: fs.readFileSync( './ressources/cert.pem' )
+    key: fs.readFileSync('./resources/key.pem'),
+    cert: fs.readFileSync( './resources/cert.pem' )
 };
 
 const port = normalizePort(process.env.PORT || '3000');
