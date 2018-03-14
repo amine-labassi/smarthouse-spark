@@ -1,7 +1,7 @@
 class WindowsManager {
 
   constructor(){
-    this.gpioAdapter = GpioAdapaterFactory.instance();
+    this.gpioAdapter = require('../i2c/GpioAdapaterFactory');
   }
 
   sayHello(){

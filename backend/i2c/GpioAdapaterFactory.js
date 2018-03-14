@@ -1,13 +1,5 @@
-class GpioAdapaterFactory {
-
-    static instance(){
-        if(process.env.ENV === 'prod'){
-            return new require('./GpioAdapter');
-        } else {
-            return new require('./GpioAdapterMock');
-        }
-    }
-
+if(process.env.ENV === 'prod'){
+    module.exports = new require('./GpioAdapter');
+} else {
+    module.exports  = new require('./GpioAdapterMock');
 }
-
-module.exports = GpioAdapaterFactory;
