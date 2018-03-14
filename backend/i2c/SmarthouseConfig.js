@@ -1,4 +1,4 @@
-{
+module.exports = {
   "mcps": [
     {
       "address": 32,
@@ -169,7 +169,6 @@
       ]
     }
   ],
-
   "notUsedOutputs": [
     {
       "mcp": 32,
@@ -327,4 +326,4 @@
       "pin": "GPIO A0"
     }
   ]
-}
+};

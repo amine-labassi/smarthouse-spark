@@ -5,8 +5,16 @@
 class GpioAdapter {
 
     constructor(){
+        var self = this;
         this.i2c = require('i2c-bus');
         this.i2c1 = this.i2c.openSync(1);
+        this.config = require('./SmarthouseConfig');
+        this.config.mcps.forEach((elem) => {
+            self.i2c1.writeByteSync(elem.address, 0x00, elem.porta);
+            self.i2c1.writeByteSync(elem.address, 0x12, 0x00);
+            self.i2c1.writeByteSync(elem.address, 0x00, elem.portb);
+            self.i2c1.writeByteSync(elem.address, 0x13, 0x00);
+        })
     }
 
     setState(mcp, pin, status){
