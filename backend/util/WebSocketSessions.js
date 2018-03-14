@@ -14,10 +14,13 @@ class WebSocketSessions {
         delete this.sessoins[session.socket.server.sessionIdContext];
     }
 
-    notifyAllClients(data){
-        Object.values(this.sessoins).forEach((session) => {
-            session.send(data);
-        });
+    notifyAllClients(func){
+        var self = this;
+        setInterval(function () {
+            Object.values(this.sessoins).forEach((session) => {
+                session.send(func());
+            });
+        }, 3000);
     }
 }
 
