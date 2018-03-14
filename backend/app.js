@@ -17,7 +17,7 @@ var windows = require('./routes/windows');
 var app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
 app.use(cors());
@@ -28,7 +28,7 @@ app.use('/api/lamps', lamps);
 app.use('/api/windows', windows);
 app.use('/api/coolers', coolers);
 
-console.log(JSON.stringify(listEndpoints(app),null,2));
+console.log(JSON.stringify(listEndpoints(app), null, 2));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
