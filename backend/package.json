@@ -7,19 +7,19 @@
     "test": "mocha **/**.spec.js"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.15.5",
     "express-jwt-2": "^1.0.0",
     "jsonwebtoken": "^8.2.0",
+    "list-endpoints-express": "^1.0.1",
     "morgan": "~1.9.0",
-    "node-gyp": "^3.6.2",
     "node.jwt": "^0.1.5",
-    "rebuild": "^0.1.2",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "websocket": "^1.0.25"
   },
   "devDependencies": {
     "chai": "^4.1.2",
