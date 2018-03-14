@@ -31,7 +31,7 @@ export class MenuPage {
     });
     loader.present();
 
-    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status")
+    vm.http.get('https://' + vm.serverIP + "/api/lamps/status")
       .subscribe(
         data => {
           loader.dismissAll();

@@ -81,7 +81,7 @@ export class LoginPage {
 
     localStorage.setItem("ip", vm.server);
 
-    this.http.post("https://" + vm.server + '/api/login', body, {headers:headers, responseType: 'text'})
+    this.http.post("https://" + vm.server + '/login', body, {headers:headers, responseType: 'text'})
       .subscribe(
         data => {
           localStorage.setItem("token", data);
@@ -122,7 +122,7 @@ export class LoginPage {
     var vm = this;
 
     const webSocketConfig = {reconnectIfNotNormalClose: true} as WebSocketConfig;
-    var ws = new $WebSocket('wss://' + vm.server + '/push', null, webSocketConfig);
+    var ws = new $WebSocket('wss://' + vm.server, null, webSocketConfig);
 
     ws.onMessage(
       (msg: MessageEvent) => {
