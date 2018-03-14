@@ -1,17 +1,5 @@
 var router = require('express').Router();
 
-router.get('/status', function(req, res) {
-    res.json(
-        {"data":"dcsdc"}
-    ).end();
-});
-
-router.get('/:zoneid/:id/status', function(req, res) {
-    res.json(
-        {"data":"dcsdc"}
-    ).end();
-});
-
 router.get('/open', function(req, res) {
     res.json(
         {"data":"dcsdc"}

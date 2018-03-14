@@ -10,6 +10,7 @@ var cors = require('cors');
 var index = require('./routes/index');
 var auth = require('./middlewares/auth');
 var lamps = require('./routes/lamps');
+var any = require('./routes/any');
 var coolers = require('./routes/coolers');
 var windows = require('./routes/windows');
 
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use(cors());
 app.use('/', index);
 app.use('/api', auth);
+app.use('/api', any);
 app.use('/api/lamps', lamps);
 app.use('/api/windows', windows);
 app.use('/api/coolers', coolers);

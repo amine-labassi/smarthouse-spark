@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "ENV=prod node ./bin/www",
-    "dev": "ENV=dev node ./bin/www",
+    "start": "SET NODE_ENV=production & node ./bin/www",
+    "dev": "SET NODE_ENV=development  & node ./bin/www",
     "test": "mocha **/**.spec.js"
   },
   "dependencies": {
