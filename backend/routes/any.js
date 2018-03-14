@@ -3,7 +3,7 @@ var SmarthouseConfig = require('../i2c/SmarthouseConfig');
 
 router.get('/status', function(req, res) {
     res.json(
-        SmarthouseConfig
+        SmarthouseConfig.zones
     ).end();
 });
 
