@@ -81,10 +81,10 @@ export class LoginPage {
 
     localStorage.setItem("ip", vm.server);
 
-    this.http.post("https://" + vm.server + '/login', body, {headers:headers, responseType: 'text'})
+    this.http.post("https://" + vm.server + '/login', body, {headers:headers})
       .subscribe(
         data => {
-          localStorage.setItem("token", data);
+          localStorage.setItem('token', (data as any).jwt);
           vm.initializeWebSocket();
           loader.dismissAll();
           vm.navCtrl.setRoot(MenuPage);
