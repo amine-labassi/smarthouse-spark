@@ -25,8 +25,8 @@ class LampsManager {
     openLampAll(){
         config.forEach((elem) => {
             elem.lamps.forEach((elem) => {
-                if (this.gpioAdapter.getState(lamp.mcpOutput, lamp.addressOutput) == true) {
-                    this.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, true, 200);
+                if (this.gpioAdapter.getState(elem.mcpOutput, elem.addressOutput) == true) {
+                    this.gpioAdapter.setState(elem.mcpOutput, elem.addressOutput, true, 200);
                 }
             });
         });

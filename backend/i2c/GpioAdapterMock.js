@@ -6,7 +6,7 @@ class GpioAdapterMock {
 
     constructor(){}
 
-    setState(mcp, pin, status){
+    setState(mcp, pin, delay){
         return status;
     }
 
