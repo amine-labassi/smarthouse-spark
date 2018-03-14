@@ -19,10 +19,11 @@
     "list-endpoints-express": "^1.0.1",
     "morgan": "~1.9.0",
     "node.jwt": "^0.1.5",
+    "npm-platform-dependencies": "^0.1.0",
     "serve-favicon": "~2.4.5",
     "websocket": "^1.0.25"
   },
-  "optionalDependencies": {
+  "linuxDependencies": {
     "i2c-bus": "^3.0.0"
   },
   "devDependencies": {
