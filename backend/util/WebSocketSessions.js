@@ -14,13 +14,12 @@ class WebSocketSessions {
         delete this.sessoins[session.socket.server.sessionIdContext];
     }
 
-    notifyAllClients(func){
-        var self = this;
-        setInterval(function () {
+    notifyAllClients(data){
+        if(typeof data === 'string' && data.length > 0){
             Object.values(this.sessoins).forEach((session) => {
-                session.send(func());
+                session.send(data);
             });
-        }, 3000);
+        }
     }
 }
 
