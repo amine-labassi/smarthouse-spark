@@ -1,20 +1,45 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
-var app = require('../app');
-var debug = require('debug')('smarthouse-api:server');
-var https = require('https');
+const fs = require('fs');
+const WebSocketServer = require('websocket').server;
+const WebSocketSessions = require('../util/WebSocketSessions');
+const app = require('../app');
+const debug = require('debug')('smarthouse-api:server');
+const https = require('https');
 
-var options = {
+const options = {
     key: fs.readFileSync('./ressources/key.pem'),
     cert: fs.readFileSync( './ressources/cert.pem' )
 };
 
-var port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-var server = https.createServer(options, app);
+const server = https.createServer(options, app);
 server.listen(port);
+
+const wsserver = new WebSocketServer({
+    httpServer: server,
+    autoAcceptConnections: true
+});
+/*
+
+wsserver.on('request', function(request) {
+    try {
+        var connection = request.accepts();
+    } catch (e){
+        console.error('error on ws connection accept', JSON.stringify(e, null, '\t'));
+    }
+});
+*/
+
+wsserver.on('connect', function(wsc) {
+    WebSocketSessions.addSession(wsc);
+});
+
+wsserver.on('close', function(wsc, reason, desc) {
+    WebSocketSessions.removeSession(wsc);
+});
 
 server.on('error', (error) => {
 

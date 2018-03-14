@@ -2,7 +2,7 @@ var router = require('express').Router();
 
 router.get('/status', function(req, res) {
     res.json(
-        {"data":"dcsdc"}
+        {"data":toto.sdsds}
     ).end();
 });
 

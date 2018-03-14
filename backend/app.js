@@ -14,13 +14,13 @@ var coolers = require('./routes/coolers');
 var windows = require('./routes/windows');
 
 var app = express();
-app.use(cors);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(index);
+app.use(cors());
+app.use('/', index);
 app.use('/api', auth);
 app.use('/api/lamps', lamps);
 app.use('/api/windows', windows);
