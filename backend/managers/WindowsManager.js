@@ -14,7 +14,7 @@ class WindowsManager {
         return false;
     }
 
-    colseWindow(window) {
+    closeWindow(window) {
         if (this.gpioAdapter.getState(window.mcpUp, window.addressUp) == true || this.gpioAdapter.getState(window.mcpDown, window.addressDown) == true) {
             this.gpioAdapter.setState(window.mcpDown, window.addressDown, true, window.downTime);
             return true;
@@ -34,7 +34,7 @@ class WindowsManager {
         return true;
     }
 
-    colseWindowAll() {
+    closeWindowAll() {
         config.forEach((elem) => {
          elem.windows.forEach((elem) => {
             if (this.gpioAdapter.getState(elem.mcpUp, elem.addressUp) == true || this.gpioAdapter.getState(elem.mcpDown, elem.addressDown) == true) {
@@ -45,6 +45,7 @@ class WindowsManager {
     });
         return true;
     }
+
     mouveWindow(window, pos) {
 
 

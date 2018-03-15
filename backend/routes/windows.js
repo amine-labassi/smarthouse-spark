@@ -1,40 +1,44 @@
 var router = require('express').Router();
+var zones = require("../i2c/SmarthouseConfig").zones;
+var windowMgr = require('../managers/WindowsManager');
 
 router.get('/open', function(req, res) {
-    res.json(
-        {"data":"dcsdc"}
-    ).end();
+    windowMgr.openWindowAll();
+    res.sendStatus(200);
 });
 
 router.get('/close', function(req, res) {
-    res.json(
-        {"data":"dcsdc"}
-    ).end();
+    windowMgr.closeWindowAll();
+    res.sendStatus(200);
 });
 
 router.get('/:zoneid/:id/open/:val', function(req, res) {
     var zoneid = req.params.zoneid;
     var id = req.params.id;
     var val = req.params.val;
-    res.json(
-        {"data":"dcsdc"}
-    ).end();
+    windowMgr.mouveWindow(
+        zones.filter(z => z.id === zoneid).windows.filter(w => w.identifier === id)[0],
+        parseInt(val)
+    );
+    res.sendStatus(200);
 });
 
 router.get('/:zoneid/:id/open', function(req, res) {
     var zoneid = req.params.zoneid;
     var id = req.params.id;
-    res.json(
-        {"data":"dcsdc"}
-    ).end();
+    windowMgr.openWindow(
+        zones.filter(z => z.id === zoneid).windows.filter(w => w.identifier === id)[0]
+    );
+    res.sendStatus(200);
 });
 
 router.get('/:zoneid/:id/close', function(req, res) {
     var zoneid = req.params.zoneid;
     var id = req.params.id;
-    res.json(
-        {"data":"dcsdc"}
-    ).end();
+    windowMgr.closeWindow(
+        zones.filter(z => z.id === zoneid).windows.filter(w => w.identifier === id)[0]
+    );
+    res.sendStatus(200);
 });
 
 module.exports = router;
