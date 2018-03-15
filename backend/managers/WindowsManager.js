@@ -29,7 +29,7 @@ class WindowsManager {
     openWindowAll() {
         config.forEach((elem) => {
             elem.windows.forEach((elem) => {
-                if (this.gpioAdapter.getState(elem.mcpUp, elem.addressUp) == true || this.gpioAdapter.getState(elem.mcpDown, elem.addressDown) == true) {
+                if (this.gpioAdapter.getState(elem.mcpUp, elem.addressUp) == true || this.gpioAdapter.getState(elem.mcpDown, elem.addressDown)) {
                     this.gpioAdapter.setState(elem.mcpUp, elem.addressUp, true, elem.upTime);
                     return true;
                 }
@@ -41,7 +41,7 @@ class WindowsManager {
     colseWindowAll() {
         config.forEach((elem) => {
          elem.windows.forEach((elem) => {
-            if (this.gpioAdapter.getState(elem.mcpUp, elem.addressUp) == true || this.gpioAdapter.getState(elem.mcpDown, elem.addressDown) == true) {
+            if (this.gpioAdapter.getState(elem.mcpUp, elem.addressUp) || this.gpioAdapter.getState(elem.mcpDown, elem.addressDown)) {
                 this.gpioAdapter.setState(elem.mcpDown, elem.addressUp, true, elem.downTime);
                 return true;
             }
