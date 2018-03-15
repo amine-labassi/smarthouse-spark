@@ -8,16 +8,25 @@ class CoolersManager {
         this.gpioAdapter = require('../i2c/GpioAdapaterFactory');
     }
 
+    setStatus(){
+        config.forEach((elem) => {
+            elem.coolers.forEach((elem) => {
+                elem.status = this.gpioAdapter.getState(elem.mcpInput, elem.addressInput)
+
+
+            });
+        });
+    }
     openCooler(cooler){
-        if (this.gpioAdapter.getState(cooler.mcpOutput, cooler.addressOutput)) {
-            this.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, true, 200);
+        if (this.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput)) {
+            this.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, 200);
         }
         return true;
     }
 
     closeCooler(cooler){
-        if (this.gpioAdapter.getState(cooler.mcpOutput, cooler.addressOutput)) {
-            this.gpioAdapter.setState(cooler.mcpInput, cooler.addressInput, false, 200);
+        if (!this.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput)) {
+            this.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, 200);
         }
         return true;
     }
@@ -25,23 +34,23 @@ class CoolersManager {
     openCoolerAll(){
         config.forEach((elem) => {
             elem.coolers.forEach((elem) => {
-                if (this.gpioAdapter.getState(elem.mcpOutput, elem.addressOutput)) {
-                    this.gpioAdapter.setState(elem.mcpOutput, elem.addressOutput, true, 200);
+                if (this.gpioAdapter.getState(elem.mcpInput, elem.addressInput)) {
+                    this.gpioAdapter.setState(elem.mcpOutput, elem.addressOutput, 200);
                 }
             });
         });
-        return 'hello';
+        return true;
     }
 
     closeCoolerAll(){
         config.forEach((elem) => {
             elem.coolers.forEach((elem) => {
-                if (this.gpioAdapter.getState(elem.mcpOutput, elem.addressOutput)) {
-                    this.gpioAdapter.setState(elem.mcpOutput, elem.addressOutput, true, 200);
+                if (this.gpioAdapter.getState(elem.mcpInput, elem.addressInput)) {
+                    this.gpioAdapter.setState(elem.mcpOutput, elem.addressOutput, 200);
                 }
             });
         });
-        return 'hello';
+        return true;
     }
 
 

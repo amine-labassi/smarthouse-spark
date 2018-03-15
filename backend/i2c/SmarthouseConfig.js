@@ -32,8 +32,8 @@ module.exports = {
           "status": true,
           "mcpInput": 35,
           "mcpOutput": 32,
-          "addressInput": "GPIO A0",
-          "addressOutput": "GPIO A5"
+          "addressInput": 0,
+          "addressOutput": 5
         },
         {
           "identifier": "2",
@@ -41,8 +41,8 @@ module.exports = {
           "status": true,
           "mcpInput": 35,
           "mcpOutput": 34,
-          "addressInput": "GPIO A1",
-          "addressOutput": "GPIO B7"
+          "addressInput": 1,
+          "addressOutput": 15
         },
         {
           "identifier": "3",
@@ -50,8 +50,8 @@ module.exports = {
           "status": true,
           "mcpInput": 35,
           "mcpOutput": 34,
-          "addressInput": "GPIO A2",
-          "addressOutput": "GPIO B6"
+          "addressInput": 2,
+          "addressOutput": 14
         },
         {
           "identifier": "4",
@@ -59,8 +59,8 @@ module.exports = {
           "status": true,
           "mcpInput": 35,
           "mcpOutput": 34,
-          "addressInput": "GPIO A3",
-          "addressOutput": "GPIO B5"
+          "addressInput": 3,
+          "addressOutput": 13
         }
       ],
       "windows": [
@@ -68,10 +68,10 @@ module.exports = {
           "identifier": "1",
           "title":"Fenetre Face",
           "mcpUp": 32,
-          "addressUp": "GPIO A4",
+          "addressUp": 4,
           "upTime": 14650,
           "mcpDown": 32,
-          "addressDown": "GPIO A3",
+          "addressDown": 3,
           "downTime": 14450
 
         },
@@ -80,10 +80,10 @@ module.exports = {
           "identifier": "1",
           "title":"Fenetre lit",
           "mcpUp": 33,
-          "addressUp": "GPIO B4",
+          "addressUp": 12,
           "upTime": 14650,
           "mcpDown": 33,
-          "addressDown": "GPIO B3",
+          "addressDown": 11,
           "downTime": 14450
         }
 
@@ -95,8 +95,8 @@ module.exports = {
           "status": true,
           "mcpInput": 34,
           "mcpOutput": 34,
-          "addressInput": "GPIO A6",
-          "addressOutput": "GPIO B1"
+          "addressInput": 6,
+          "addressOutput": 9
         }
       ]
     },
@@ -110,8 +110,8 @@ module.exports = {
           "status": true,
           "mcpInput": 34,
           "mcpOutput": 34,
-          "addressInput": "GPIO A3",
-          "addressOutput": "GPIO B4"
+          "addressInput": 3,
+          "addressOutput": 12
         },
         {
           "identifier": "2",
@@ -119,8 +119,8 @@ module.exports = {
           "status": true,
           "mcpInput": 34,
           "mcpOutput": 34,
-          "addressInput": "GPIO A4",
-          "addressOutput": "GPIO B3"
+          "addressInput": 4,
+          "addressOutput": 11
         },
         {
           "identifier": "3",
@@ -128,28 +128,28 @@ module.exports = {
           "status": true,
           "mcpInput": 34,
           "mcpOutput": 34,
-          "addressInput": "GPIO A5",
-          "addressOutput": "GPIO B2"
+          "addressInput": 5,
+          "addressOutput": 10
         }
       ],
       "windows": [
         {
           "identifier": "1",
           "mcpUp": 33,
-          "addressUp": "GPIO A5",
+          "addressUp": 5,
           "upTime": 14650,
           "mcpDown": 33,
-          "addressDown": "GPIO A6",
+          "addressDown": 6,
           "downTime": 14450
 
         },
         {
           "identifier": "1",
           "mcpUp": 33,
-          "addressUp": "GPIO A1",
+          "addressUp": 1,
           "upTime": 14650,
           "mcpDown": 33,
-          "addressDown": "GPIO A2",
+          "addressDown": 2,
           "downTime": 14450
         }
 
@@ -162,168 +162,11 @@ module.exports = {
           "status": true,
           "mcpInput": 34,
           "mcpOutput": 34,
-          "addressInput": "GPIO A7",
-          "addressOutput": "GPIO B0"
+          "addressInput": 7,
+          "addressOutput": 8
         }
 
       ]
-    }
-  ],
-  "notUsedOutputs": [
-    {
-      "mcp": 32,
-      "pin": "GPIO A7"
-    },
-    {
-      "mcp": 32,
-      "pin": "GPIO A6"
-    },
-
-    {
-      "mcp": 32,
-      "pin": "GPIO A2"
-    },
-    {
-      "mcp": 32,
-      "pin": "GPIO A1"
-    },
-    {
-      "mcp": 32,
-      "pin": "GPIO B7"
-    },
-    {
-      "mcp": 32,
-      "pin": "GPIO B6"
-    },
-    {
-      "mcp": 32,
-      "pin": "GPIO B5"
-    },
-    {
-      "mcp": 32,
-      "pin": "GPIO B4"
-    },
-    {
-      "mcp": 32,
-      "pin": "GPIO B3"
-    },
-    {
-      "mcp": 32,
-      "pin": "GPIO B2"
-    },
-    {
-      "mcp": 32,
-      "pin": "GPIO B1"
-    },
-    {
-      "mcp": 33,
-      "pin": "GPIO A7"
-    },
-    {
-      "mcp": 33,
-      "pin": "GPIO A4"
-    },
-    {
-      "mcp": 33,
-      "pin": "GPIO A3"
-    },
-    {
-      "mcp": 33,
-      "pin": "GPIO B7"
-    },
-    {
-      "mcp": 33,
-      "pin": "GPIO B6"
-    },
-    {
-      "mcp": 33,
-      "pin": "GPIO B5"
-    },
-    {
-      "mcp": 33,
-      "pin": "GPIO B2"
-    },
-    {
-      "mcp": 33,
-      "pin": "GPIO B1"
-    },
-    {
-      "mcp": 33,
-      "pin": "GPIO A0"
-    },
-    {
-      "mcp": 33,
-      "pin": "GPIO B0"
-    },
-    {
-      "mcp": 32,
-      "pin": "GPIO A0"
-    },
-    {
-      "mcp": 32,
-      "pin": "GPIO B0"
-    }
-  ],
-  "notUsedInputs": [
-    {
-      "mcp": 35,
-      "pin": "GPIO A7"
-    },
-    {
-      "mcp": 35,
-      "pin": "GPIO A6"
-    },
-    {
-      "mcp": 35,
-      "pin": "GPIO A5"
-    },
-    {
-      "mcp": 35,
-      "pin": "GPIO A4"
-    },
-    {
-      "mcp": 35,
-      "pin": "GPIO B7"
-    },
-    {
-      "mcp": 35,
-      "pin": "GPIO B6"
-    },
-    {
-      "mcp": 35,
-      "pin": "GPIO B5"
-    },
-    {
-      "mcp": 35,
-      "pin": "GPIO B4"
-    },
-    {
-      "mcp": 35,
-      "pin": "GPIO B3"
-    },
-    {
-      "mcp": 35,
-      "pin": "GPIO B2"
-    },
-    {
-      "mcp": 35,
-      "pin": "GPIO B1"
-    },
-    {
-      "mcp": 35,
-      "pin": "GPIO B0"
-    },
-    {
-      "mcp": 34,
-      "pin": "GPIO A2"
-    },
-    {
-      "mcp": 34,
-      "pin": "GPIO A1"
-    },
-    {
-      "mcp": 34,
-      "pin": "GPIO A0"
     }
   ]
 };
