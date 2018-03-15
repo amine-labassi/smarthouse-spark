@@ -15,7 +15,7 @@ class CoolersManager {
         return true;
     }
 
-    colseCooler(cooler){
+    closeCooler(cooler){
         if (this.gpioAdapter.getState(cooler.mcpOutput, cooler.addressOutput) == false) {
             this.gpioAdapter.setState(cooler.mcpInput, cooler.addressInput, false, 200);
         }
@@ -33,7 +33,7 @@ class CoolersManager {
         return 'hello';
     }
 
-    colseCoolerAll(){
+    closeCoolerAll(){
         config.forEach((elem) => {
             elem.lamps.forEach((elem) => {
                 if (this.gpioAdapter.getState(elem.mcpOutput, elem.addressOutput) == false) {

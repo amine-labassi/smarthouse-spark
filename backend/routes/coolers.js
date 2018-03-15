@@ -13,12 +13,16 @@ router.get('/off', function(req, res) {
 });
 
 router.get('/:zoneid/:id/on', function(req, res) {
+    var zoneid = req.params.zoneid;
+    var id = req.params.id;
     res.json(
         {"data":"dcsdc"}
     ).end();
 });
 
 router.get('/:zoneid/:id/off', function(req, res) {
+    var zoneid = req.params.zoneid;
+    var id = req.params.id;
     res.json(
         {"data":"dcsdc"}
     ).end();

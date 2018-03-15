@@ -9,10 +9,10 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <!--<ion-searchbar placeholder="Rechercher..." [(ngModel)]="searchFilter" [showCancelButton]="true">
-  </ion-searchbar>-->
+  <<ion-searchbar placeholder="Rechercher..." [(ngModel)]="searchFilter" [showCancelButton]="true">
+  </ion-searchbar>
   <ion-list style="margin: 10px;">
-    <button ion-item *ngFor="let item of items" (click)="openNavZonePage(item, $event)">
+    <button ion-item *ngFor="let item of (items | titlePipe:searchFilter)" (click)="openNavZonePage(item, $event)">
       {{ item.title }}
       <button  ion-button clear  icon-only item-end (click)="setUnsetFavorits(item, $event)" >
         <ion-icon name="heart" color="secondary" [ngClass]="{'inFav' : item.favoris, 'outOfFav' : !item.favoris}" ></ion-icon>
