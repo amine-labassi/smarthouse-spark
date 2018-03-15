@@ -49,6 +49,7 @@ class WindowsManager {
     });
         return true;
     }
+
     mouveWindow(window, pos) {
         let windowIsUp = this.gpioAdapter.getState(window.mcpUp, window.addressUp);
         let windowIsDown = this.gpioAdapter.getState(window.mcpDown, window.addressDown);

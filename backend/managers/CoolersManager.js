@@ -9,14 +9,14 @@ class CoolersManager {
     }
 
     openCooler(cooler){
-        if (this.gpioAdapter.getState(cooler.mcpOutput, cooler.addressOutput) == true) {
+        if (this.gpioAdapter.getState(cooler.mcpOutput, cooler.addressOutput)) {
             this.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, true, 200);
         }
         return true;
     }
 
     closeCooler(cooler){
-        if (this.gpioAdapter.getState(cooler.mcpOutput, cooler.addressOutput) == false) {
+        if (this.gpioAdapter.getState(cooler.mcpOutput, cooler.addressOutput)) {
             this.gpioAdapter.setState(cooler.mcpInput, cooler.addressInput, false, 200);
         }
         return true;
@@ -24,8 +24,8 @@ class CoolersManager {
 
     openCoolerAll(){
         config.forEach((elem) => {
-            elem.lamps.forEach((elem) => {
-                if (this.gpioAdapter.getState(elem.mcpOutput, elem.addressOutput) == true) {
+            elem.coolers.forEach((elem) => {
+                if (this.gpioAdapter.getState(elem.mcpOutput, elem.addressOutput)) {
                     this.gpioAdapter.setState(elem.mcpOutput, elem.addressOutput, true, 200);
                 }
             });
@@ -35,8 +35,8 @@ class CoolersManager {
 
     closeCoolerAll(){
         config.forEach((elem) => {
-            elem.lamps.forEach((elem) => {
-                if (this.gpioAdapter.getState(elem.mcpOutput, elem.addressOutput) == false) {
+            elem.coolers.forEach((elem) => {
+                if (this.gpioAdapter.getState(elem.mcpOutput, elem.addressOutput)) {
                     this.gpioAdapter.setState(elem.mcpOutput, elem.addressOutput, true, 200);
                 }
             });
