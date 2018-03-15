@@ -6,10 +6,10 @@ class LampsManager {
         this.gpioAdapter = require('../i2c/GpioAdapaterFactory');
     }
 
-    setStatus(){
-        config.forEach((elem) => {
-            elem.lamps.forEach((elem) => {
-                elem.status = this.gpioAdapter.getState(elem.mcpInput, elem.addressInput)
+    getStatus(){
+        zones.forEach((zone) => {
+            zone.lamps.forEach((lamp) => {
+                lamp.status = this.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)
 
 
             });
@@ -41,10 +41,10 @@ class LampsManager {
     }
 
     closeLampAll() {
-        zones.forEach((elem) => {
-            elem.lamps.forEach((elem) => {
-                if (this.gpioAdapter.getState(elem.mcpInput, elem.addressInput)) {
-                    this.gpioAdapter.setState(elem.mcpOutput, elem.addressOutput, 200);
+        zones.forEach((zone) => {
+            zone.lamps.forEach((lamp) => {
+                if (this.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
+                    this.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
                 }
             });
         });

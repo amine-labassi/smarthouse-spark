@@ -27,10 +27,10 @@ class WindowsManager {
     }
 
     openWindowAll() {
-        zones.forEach((elem) => {
-            elem.windows.forEach((elem) => {
-                if (this.gpioAdapter.getState(elem.mcpUp, elem.addressUp) == true || this.gpioAdapter.getState(elem.mcpDown, elem.addressDown)) {
-                    this.gpioAdapter.setState(elem.mcpUp, elem.addressUp, true, elem.upTime);
+        zones.forEach((zone) => {
+            zone.windows.forEach((window) => {
+                if (this.gpioAdapter.getState(window.mcpUp, window.addressUp) == true || this.gpioAdapter.getState(window.mcpDown, window.addressDown)) {
+                    this.gpioAdapter.setState(window.mcpUp, window.addressUp, true, window.upTime);
                     return true;
                 }
             });
@@ -39,10 +39,10 @@ class WindowsManager {
     }
 
     colseWindowAll() {
-        zones.forEach((elem) => {
-         elem.windows.forEach((elem) => {
-            if (this.gpioAdapter.getState(elem.mcpUp, elem.addressUp) || this.gpioAdapter.getState(elem.mcpDown, elem.addressDown)) {
-                this.gpioAdapter.setState(elem.mcpDown, elem.addressUp, true, elem.downTime);
+        zones.forEach((zone) => {
+         zone.windows.forEach((window) => {
+            if (this.gpioAdapter.getState(window.mcpUp, window.addressUp) || this.gpioAdapter.getState(window.mcpDown, window.addressDown)) {
+                this.gpioAdapter.setState(window.mcpDown, window.addressUp, true, window.downTime);
                 return true;
             }
         });
@@ -76,16 +76,16 @@ class WindowsManager {
 
     mouveWindowAll(pos) {
 
-        zones.forEach((elem) => {
-            elem.windows.forEach((elem) => {
-                let windowIsUp = this.gpioAdapter.getState(elem.mcpUp, elem.addressUp);
-                let windowIsDown = this.gpioAdapter.getState(elem.mcpDown, elem.addressDown);
+        zones.forEach((zone) => {
+            zone.windows.forEach((window) => {
+                let windowIsUp = this.gpioAdapter.getState(window.mcpUp, window.addressUp);
+                let windowIsDown = this.gpioAdapter.getState(window.mcpDown, window.addressDown);
                 let upTime = (elem.upTime * pos)/100;
                 if (!windowIsUp || !windowIsDown) {
-                    this.gpioAdapter.setState(elem.mcpDown, elem.addressDown, elem.downTime)
+                    this.gpioAdapter.setState(window.mcpDown, window.addressDown, window.downTime)
                         .then(
                             function (success) {
-                                this.gpioAdapter.setState(elem.mcpUp, elem.addressUp, upTime)
+                                this.gpioAdapter.setState(window.mcpUp, window.addressUp, upTime)
                                     .then(
                                         function (success) {},
                                         function (error) {
@@ -94,7 +94,7 @@ class WindowsManager {
                                     )
                             },
                             function (error) {
-                                console.error('enable to close window ' + elem.identifier);
+                                console.error('enable to close window ' + window.identifier);
                             }
                         );
                 }

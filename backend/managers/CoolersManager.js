@@ -1,6 +1,7 @@
 /**
  * Created by Yassine Chbinou on 14/03/2018.
  */
+const zones = require("./../i2c/SmarthouseConfig").zones;
 
 class CoolersManager {
 
@@ -8,12 +9,10 @@ class CoolersManager {
         this.gpioAdapter = require('../i2c/GpioAdapaterFactory');
     }
 
-    setStatus(){
-        config.forEach((elem) => {
-            elem.coolers.forEach((elem) => {
-                elem.status = this.gpioAdapter.getState(elem.mcpInput, elem.addressInput)
-
-
+    getStatus(){
+        zones.forEach((zone) => {
+            zone.coolers.forEach((cooler) => {
+                cooler.status = this.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput);
             });
         });
     }
@@ -32,10 +31,10 @@ class CoolersManager {
     }
 
     openCoolerAll(){
-        config.forEach((elem) => {
-            elem.coolers.forEach((elem) => {
-                if (this.gpioAdapter.getState(elem.mcpInput, elem.addressInput)) {
-                    this.gpioAdapter.setState(elem.mcpOutput, elem.addressOutput, 200);
+        zones.forEach((zone) => {
+            zone.coolers.forEach((cooler) => {
+                if (this.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput)) {
+                    this.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, 200);
                 }
             });
         });
@@ -43,10 +42,10 @@ class CoolersManager {
     }
 
     closeCoolerAll(){
-        config.forEach((elem) => {
-            elem.coolers.forEach((elem) => {
-                if (this.gpioAdapter.getState(elem.mcpInput, elem.addressInput)) {
-                    this.gpioAdapter.setState(elem.mcpOutput, elem.addressOutput, 200);
+        zones.forEach((zone) => {
+            zone.coolers.forEach((cooler) => {
+                if (this.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput)) {
+                    this.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, 200);
                 }
             });
         });
