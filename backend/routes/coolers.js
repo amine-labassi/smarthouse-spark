@@ -14,18 +14,18 @@ router.get('/off', function(req, res) {
 
 router.get('/:zoneid/:id/on', function(req, res) {
     var zoneid = parseInt(req.params.zoneid);
-    var id = parseInt(req.params.id);
+    var id = req.params.id;
     coolerMgr.openCooler(
-        zones.filter(z => z.id === zoneid).coolers.filter(w => w.identifier === id)[0]
+        zones.filter(z => z.id === zoneid)[0].coolers.filter(w => w.identifier === id)[0]
     );
     res.sendStatus(200);
 });
 
 router.get('/:zoneid/:id/off', function(req, res) {
     var zoneid = parseInt(req.params.zoneid);
-    var id = parseInt(req.params.id);
+    var id = req.params.id;
     coolerMgr.closeCooler(
-        zones.filter(z => z.id === zoneid).coolers.filter(w => w.identifier === id)[0]
+        zones.filter(z => z.id === zoneid)[0].coolers.filter(w => w.identifier === id)[0]
     );
     res.sendStatus(200);
 });

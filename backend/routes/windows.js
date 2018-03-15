@@ -14,10 +14,10 @@ router.get('/close', function(req, res) {
 
 router.get('/:zoneid/:id/open/:val', function(req, res) {
     var zoneid = parseInt(req.params.zoneid);
-    var id = parseInt(req.params.id);
+    var id = req.params.id;
     var val = parseInt(req.params.val);
     windowMgr.mouveWindow(
-        zones.filter(z => z.id === zoneid).windows.filter(w => w.identifier === id)[0],
+        zones.filter(z => z.id === zoneid)[0].windows.filter(w => w.identifier === id)[0],
         val
     );
     res.sendStatus(200);
@@ -25,18 +25,18 @@ router.get('/:zoneid/:id/open/:val', function(req, res) {
 
 router.get('/:zoneid/:id/open', function(req, res) {
     var zoneid = parseInt(req.params.zoneid);
-    var id = parseInt(req.params.id);
+    var id = req.params.id;
     windowMgr.openWindow(
-        zones.filter(z => z.id === zoneid).windows.filter(w => w.identifier === id)[0]
+        zones.filter(z => z.id === zoneid)[0].windows.filter(w => w.identifier === id)[0]
     );
     res.sendStatus(200);
 });
 
 router.get('/:zoneid/:id/close', function(req, res) {
     var zoneid = parseInt(req.params.zoneid);
-    var id = parseInt(req.params.id);
+    var id = req.params.id;
     windowMgr.closeWindow(
-        zones.filter(z => z.id === zoneid).windows.filter(w => w.identifier === id)[0]
+        zones.filter(z => z.id === zoneid)[0].windows.filter(w => w.identifier === id)[0]
     );
     res.sendStatus(200);
 });
