@@ -1,4 +1,5 @@
 const  config = require("./../i2c/SmarthouseConfig").zones;
+
 class WindowsManager {
 
     constructor() {
@@ -57,4 +58,4 @@ class WindowsManager {
 
 }
 
-    module.exports = new WindowsManager();
+module.exports = new WindowsManager();

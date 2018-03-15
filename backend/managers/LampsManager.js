@@ -1,28 +1,26 @@
-/**
- * Created by Yassine Chbinou on 14/03/2018.
- */
-const  config = require("./../i2c/SmarthouseConfig").zones;
+const config = require("./../i2c/SmarthouseConfig").zones;
+
 class LampsManager {
 
-    constructor(){
+    constructor() {
         this.gpioAdapter = require('../i2c/GpioAdapaterFactory');
     }
 
-    openLamp(lamp){
+    openLamp(lamp) {
         if (this.gpioAdapter.getState(lamp.mcpOutput, lamp.addressOutput) == true) {
             this.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, true, 200);
         }
         return true;
     }
 
-    closeLamp(lamp){
+    closeLamp(lamp) {
         if (this.gpioAdapter.getState(lamp.mcpOutput, lamp.addressOutput) == false) {
             this.gpioAdapter.setState(lamp.mcpInput, lamp.addressInput, false, 200);
         }
         return true;
     }
 
-    openLampAll(){
+    openLampAll() {
         config.forEach((elem) => {
             elem.lamps.forEach((elem) => {
                 if (this.gpioAdapter.getState(elem.mcpOutput, elem.addressOutput) == true) {
@@ -33,7 +31,7 @@ class LampsManager {
         return true;
     }
 
-    closeLampAll(){
+    closeLampAll() {
         config.forEach((elem) => {
             elem.lamps.forEach((elem) => {
                 if (this.gpioAdapter.getState(elem.mcpOutput, elem.addressOutput) == true) {
@@ -41,8 +39,8 @@ class LampsManager {
                 }
             });
         });
-    return true;
-}
+        return true;
+    }
 
 }
 
