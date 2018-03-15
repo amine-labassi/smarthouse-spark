@@ -13,15 +13,15 @@ router.get('/off', function(req, res) {
 });
 
 router.get('/:zoneid/:id/on', function(req, res) {
-    var zoneid = req.params.zoneid;
-    var id = req.params.id;
+    var zoneid = parseInt(req.params.zoneid);
+    var id = parseInt(req.params.id);
     lampMgr.openLamp(zones.filter(z => z.id === zoneid).lamps.filter(l => l.identifier === id)[0]);
     res.sendStatus(200);
 });
 
 router.get('/:zoneid/:id/off', function(req, res) {
-    var zoneid = req.params.zoneid;
-    var id = req.params.id;
+    var zoneid = parseInt(req.params.zoneid);
+    var id = parseInt(req.params.id);
     lampMgr.closeLamp(zones.filter(z => z.id === zoneid).lamps.filter(l => l.identifier === id)[0]);
     res.sendStatus(200);
 });

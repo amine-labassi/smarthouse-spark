@@ -50,12 +50,7 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          if (!navigator.onLine) {
-            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
-          }
-          else {
-            vm.connectionInterrupted();
-          }
+          vm.showAlert("Erreur");
         }
       );
 

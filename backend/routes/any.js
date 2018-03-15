@@ -1,7 +1,7 @@
 var router = require('express').Router();
 var zones = require('../i2c/SmarthouseConfig').zones;
 var omitDeep = require('omit-deep');
-var WebSocketService = require('../util/WebSocketSessions');
+var WebSocketService = require('../util/WebSocketService');
 var lampMgr = require('../managers/LampsManager');
 var coolerMgr = require('../managers/CoolersManager');
 

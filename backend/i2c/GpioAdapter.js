@@ -11,9 +11,9 @@ class GpioAdapter {
         this.config = require('./SmarthouseConfig');
         this.config.mcps.forEach((elem) => {
             self.i2c1.writeByteSync(elem.address, 0x00, elem.porta);
-            self.i2c1.writeByteSync(elem.address, 0x12, 0x00);
+            self.i2c1.writeByteSync(elem.address, 0x12, 0xff);
             self.i2c1.writeByteSync(elem.address, 0x00, elem.portb);
-            self.i2c1.writeByteSync(elem.address, 0x13, 0x00);
+            self.i2c1.writeByteSync(elem.address, 0x13, 0xff);
         });
     }
 

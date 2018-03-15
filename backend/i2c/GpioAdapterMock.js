@@ -15,4 +15,4 @@ class GpioAdapterMock {
     }
 }
 
-module.exports = new GpioAdapter();
+module.exports = new GpioAdapterMock();

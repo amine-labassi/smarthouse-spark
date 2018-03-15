@@ -13,8 +13,8 @@ router.get('/off', function(req, res) {
 });
 
 router.get('/:zoneid/:id/on', function(req, res) {
-    var zoneid = req.params.zoneid;
-    var id = req.params.id;
+    var zoneid = parseInt(req.params.zoneid);
+    var id = parseInt(req.params.id);
     coolerMgr.openCooler(
         zones.filter(z => z.id === zoneid).coolers.filter(w => w.identifier === id)[0]
     );
@@ -22,8 +22,8 @@ router.get('/:zoneid/:id/on', function(req, res) {
 });
 
 router.get('/:zoneid/:id/off', function(req, res) {
-    var zoneid = req.params.zoneid;
-    var id = req.params.id;
+    var zoneid = parseInt(req.params.zoneid);
+    var id = parseInt(req.params.id);
     coolerMgr.closeCooler(
         zones.filter(z => z.id === zoneid).coolers.filter(w => w.identifier === id)[0]
     );
