@@ -10,7 +10,7 @@ class WindowsManager {
         let windowIsUp = this.gpioAdapter.getState(window.mcpUp, window.addressUp);
         let windowIsDown = this.gpioAdapter.getState(window.mcpDown, window.addressDown);
         if (!windowIsDown || !windowIsUp) {
-            this.gpioAdapter.setState(window.mcpUp, window.addressUp, true, window.upTime);
+            this.gpioAdapter.setState(window.mcpUp, window.addressUp, window.upTime);
             return true;
         }
         return false;
@@ -20,7 +20,7 @@ class WindowsManager {
         let windowIsUp = this.gpioAdapter.getState(window.mcpUp, window.addressUp);
         let windowIsDown = this.gpioAdapter.getState(window.mcpDown, window.addressDown);
         if (!windowIsDown || !windowIsUp) {
-            this.gpioAdapter.setState(window.mcpDown, window.addressDown, true, window.downTime);
+            this.gpioAdapter.setState(window.mcpDown, window.addressDown, window.downTime);
             return true;
         }
         return false;
@@ -30,7 +30,7 @@ class WindowsManager {
         zones.forEach((zone) => {
             zone.windows.forEach((window) => {
                 if (this.gpioAdapter.getState(window.mcpUp, window.addressUp) == true || this.gpioAdapter.getState(window.mcpDown, window.addressDown)) {
-                    this.gpioAdapter.setState(window.mcpUp, window.addressUp, true, window.upTime);
+                    this.gpioAdapter.setState(window.mcpUp, window.addressUp, window.upTime);
                     return true;
                 }
             });
@@ -42,7 +42,7 @@ class WindowsManager {
         zones.forEach((zone) => {
          zone.windows.forEach((window) => {
             if (this.gpioAdapter.getState(window.mcpUp, window.addressUp) || this.gpioAdapter.getState(window.mcpDown, window.addressDown)) {
-                this.gpioAdapter.setState(window.mcpDown, window.addressUp, true, window.downTime);
+                this.gpioAdapter.setState(window.mcpDown, window.addressUp, window.downTime);
                 return true;
             }
         });
@@ -55,7 +55,7 @@ class WindowsManager {
         let windowIsDown = this.gpioAdapter.getState(window.mcpDown, window.addressDown);
         let upTime = (window.upTime * pos)/100;
         if (!windowIsUp || !windowIsDown) {
-            this.gpioAdapter.setState(window.mcpDown, window.addressDown, true, window.downTime)
+            this.gpioAdapter.setState(window.mcpDown, window.addressDown, window.downTime)
                 .then(
                     function (success) {
                         this.gpioAdapter.setState(window.mcpUp, window.addressUp, upTime)
