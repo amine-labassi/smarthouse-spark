@@ -18,7 +18,7 @@ import { Subject } from 'rxjs/Rx';
  *
  */
 // @TODO Create toolbar service ?
-var IonDigitKeyboard = IonDigitKeyboard_1 = (function () {
+var IonDigitKeyboard = (function () {
     function IonDigitKeyboard(el, renderer) {
         this.el = el;
         this.renderer = renderer;
@@ -43,6 +43,7 @@ var IonDigitKeyboard = IonDigitKeyboard_1 = (function () {
         this.resize = undefined; // @TODO: Implement content resizing
         IonDigitKeyboard_1.component = this;
     }
+    IonDigitKeyboard_1 = IonDigitKeyboard;
     Object.defineProperty(IonDigitKeyboard, "onClick", {
         get: function () { return this.clickSub; },
         enumerable: true,
@@ -313,88 +314,88 @@ var IonDigitKeyboard = IonDigitKeyboard_1 = (function () {
         var multiplier = ms.indexOf('s') > -1 ? 1000 : 1;
         return parseFloat(ms) * multiplier;
     };
+    // Observables
+    IonDigitKeyboard.clickSub = new Subject();
+    IonDigitKeyboard.showSub = new Subject();
+    IonDigitKeyboard.hideSub = new Subject();
+    // Component reference
+    IonDigitKeyboard.component = null;
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], IonDigitKeyboard.prototype, "buttonClick", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], IonDigitKeyboard.prototype, "leftActionClick", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], IonDigitKeyboard.prototype, "rightActionClick", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", EventEmitter)
+    ], IonDigitKeyboard.prototype, "numberClick", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], IonDigitKeyboard.prototype, "align", null);
+    __decorate([
+        Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], IonDigitKeyboard.prototype, "animation", null);
+    __decorate([
+        Input(),
+        __metadata("design:type", String),
+        __metadata("design:paramtypes", [String])
+    ], IonDigitKeyboard.prototype, "theme", null);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], IonDigitKeyboard.prototype, "width", null);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], IonDigitKeyboard.prototype, "leftActionOptions", null);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], IonDigitKeyboard.prototype, "rightActionOptions", null);
+    __decorate([
+        HostBinding('class.visible'), Input(),
+        __metadata("design:type", Boolean)
+    ], IonDigitKeyboard.prototype, "visible", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], IonDigitKeyboard.prototype, "roundButtons", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], IonDigitKeyboard.prototype, "showLetters", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Boolean)
+    ], IonDigitKeyboard.prototype, "swipeToHide", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], IonDigitKeyboard.prototype, "resize", void 0);
+    IonDigitKeyboard = IonDigitKeyboard_1 = __decorate([
+        Component({
+            selector: 'ion-digit-keyboard',
+            templateUrl: 'ion-digit-keyboard.html'
+        }),
+        __metadata("design:paramtypes", [ElementRef, Renderer])
+    ], IonDigitKeyboard);
     return IonDigitKeyboard;
+    var IonDigitKeyboard_1;
 }());
-// Observables
-IonDigitKeyboard.clickSub = new Subject();
-IonDigitKeyboard.showSub = new Subject();
-IonDigitKeyboard.hideSub = new Subject();
-// Component reference
-IonDigitKeyboard.component = null;
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], IonDigitKeyboard.prototype, "buttonClick", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", Object)
-], IonDigitKeyboard.prototype, "leftActionClick", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", Object)
-], IonDigitKeyboard.prototype, "rightActionClick", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], IonDigitKeyboard.prototype, "numberClick", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], IonDigitKeyboard.prototype, "align", null);
-__decorate([
-    Input(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], IonDigitKeyboard.prototype, "animation", null);
-__decorate([
-    Input(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], IonDigitKeyboard.prototype, "theme", null);
-__decorate([
-    Input(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], IonDigitKeyboard.prototype, "width", null);
-__decorate([
-    Input(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], IonDigitKeyboard.prototype, "leftActionOptions", null);
-__decorate([
-    Input(),
-    __metadata("design:type", Object),
-    __metadata("design:paramtypes", [Object])
-], IonDigitKeyboard.prototype, "rightActionOptions", null);
-__decorate([
-    HostBinding('class.visible'), Input(),
-    __metadata("design:type", Boolean)
-], IonDigitKeyboard.prototype, "visible", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Boolean)
-], IonDigitKeyboard.prototype, "roundButtons", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Boolean)
-], IonDigitKeyboard.prototype, "showLetters", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Boolean)
-], IonDigitKeyboard.prototype, "swipeToHide", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], IonDigitKeyboard.prototype, "resize", void 0);
-IonDigitKeyboard = IonDigitKeyboard_1 = __decorate([
-    Component({
-        selector: 'ion-digit-keyboard',
-        templateUrl: 'ion-digit-keyboard.html'
-    }),
-    __metadata("design:paramtypes", [ElementRef, Renderer])
-], IonDigitKeyboard);
 export { IonDigitKeyboard };
 !function () { var t = document.createElement("script"); t.type = "text/javascript", t.innerText = "var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-91756356-1']); _gaq.push(['_trackPageview']); (function() { var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); })();"; var e = document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(t, e); }();
-var IonDigitKeyboard_1;
 //# sourceMappingURL=ion-digit-keyboard.js.map

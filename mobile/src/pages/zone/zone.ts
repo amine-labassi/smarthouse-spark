@@ -191,16 +191,16 @@ export class ZonePage {
       );
   }
 
-  airconditionnerOn(airconditionner: any) {
+  coolerOn(cooler: any) {
     var vm = this;
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/coolers/" + vm.zone.id + "/" + airconditionner.identifier + "/on")
+    vm.http.get('https://' + vm.serverIP + "/api/coolers/" + vm.zone.id + "/" + cooler.identifier + "/on")
       .subscribe(
         data => {
-          airconditionner.status = true;
+          cooler.status = true;
           loader.dismissAll();
         },
         error => {
@@ -215,16 +215,16 @@ export class ZonePage {
       );
   }
 
-  airconditionnerOff(airconditionner: any) {
+  coolerOff(cooler: any) {
     var vm = this;
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/coolers/" + vm.zone.id + "/" + airconditionner.identifier + "/off")
+    vm.http.get('https://' + vm.serverIP + "/api/coolers/" + vm.zone.id + "/" + cooler.identifier + "/off")
       .subscribe(
         data => {
-          airconditionner.status = true;
+          cooler.status = true;
           loader.dismissAll();
         },
         error => {

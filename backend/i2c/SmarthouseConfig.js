@@ -88,7 +88,7 @@ module.exports = {
         }
 
           ],
-      "airConditionners": [
+      "coolers": [
         {
           "identifier": "1",
           "description": "clim1",
@@ -155,7 +155,7 @@ module.exports = {
 
 
           ],
-      "airConditionners": [
+      "coolers": [
         {
           "identifier": "1",
           "description": "clim1",

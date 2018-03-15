@@ -22,13 +22,13 @@ var MyApp = (function () {
             splashScreen.hide();
         });
     }
+    MyApp = __decorate([
+        Component({
+            templateUrl: 'app.html'
+        }),
+        __metadata("design:paramtypes", [Platform, StatusBar, SplashScreen])
+    ], MyApp);
     return MyApp;
 }());
-MyApp = __decorate([
-    Component({
-        templateUrl: 'app.html'
-    }),
-    __metadata("design:paramtypes", [Platform, StatusBar, SplashScreen])
-], MyApp);
 export { MyApp };
 //# sourceMappingURL=app.component.js.map
