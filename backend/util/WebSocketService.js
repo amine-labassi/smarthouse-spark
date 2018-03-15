@@ -1,4 +1,6 @@
-class WebSocketSessions {
+var omitDeep = require('omit-deep');
+
+class WebSocketService {
     
     constructor(){
       this.sessoins = {};
@@ -14,13 +16,21 @@ class WebSocketSessions {
         delete this.sessoins[session.socket.server.sessionIdContext];
     }
 
-    notifyAllClients(data){
+    notifyAllClients(zones){
         if(typeof data === 'string' && data.length > 0){
             Object.values(this.sessoins).forEach((session) => {
-                session.send(data);
+                session.send(JSON.stringify(
+                    omitDeep(
+                        zones,
+                        ['mcpInput', 'mcpOutput',
+                            'addressInput', 'addressOutput',
+                            'mcpUp', 'addressUp', 'upTime',
+                            'mcpDown', 'addressDown', 'downTime']
+                    )
+                ));
             });
         }
     }
 }
 
-module.exports = new WebSocketSessions();
+module.exports = new WebSocketService();

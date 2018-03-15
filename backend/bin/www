@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const WebSocketServer = require('websocket').server;
-const WebSocketSessions = require('../util/WebSocketSessions');
+const WebSocketService = require('../util/WebSocketService');
 const app = require('../app');
 const debug = require('debug')('smarthouse-api:server');
 const https = require('https');
@@ -34,11 +34,11 @@ wsserver.on('request', function(request) {
 */
 
 wsserver.on('connect', function(wsc) {
-    WebSocketSessions.addSession(wsc);
+    WebSocketService.addSession(wsc);
 });
 
 wsserver.on('close', function(wsc, reason, desc) {
-    WebSocketSessions.removeSession(wsc);
+    WebSocketService.removeSession(wsc);
 });
 
 server.on('error', (error) => {

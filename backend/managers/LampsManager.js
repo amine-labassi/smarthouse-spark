@@ -1,4 +1,4 @@
-const config = require("./../i2c/SmarthouseConfig").zones;
+const zones = require("./../i2c/SmarthouseConfig").zones;
 
 class LampsManager {
 
@@ -21,7 +21,7 @@ class LampsManager {
     }
 
     openLampAll() {
-        config.forEach((elem) => {
+        zones.forEach((elem) => {
             elem.lamps.forEach((elem) => {
                 if (this.gpioAdapter.getState(elem.mcpOutput, elem.addressOutput)) {
                     this.gpioAdapter.setState(elem.mcpOutput, elem.addressOutput, true, 200);
@@ -32,7 +32,7 @@ class LampsManager {
     }
 
     closeLampAll() {
-        config.forEach((elem) => {
+        zones.forEach((elem) => {
             elem.lamps.forEach((elem) => {
                 if (this.gpioAdapter.getState(elem.mcpOutput, elem.addressOutput)) {
                     this.gpioAdapter.setState(elem.mcpOutput, elem.addressOutput, true, 200);

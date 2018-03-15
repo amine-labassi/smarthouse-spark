@@ -1,4 +1,4 @@
-const  config = require("./../i2c/SmarthouseConfig").zones;
+const  zones = require("./../i2c/SmarthouseConfig").zones;
 
 class WindowsManager {
 
@@ -27,7 +27,7 @@ class WindowsManager {
     }
 
     openWindowAll() {
-        config.forEach((elem) => {
+        zones.forEach((elem) => {
             elem.windows.forEach((elem) => {
                 if (this.gpioAdapter.getState(elem.mcpUp, elem.addressUp) == true || this.gpioAdapter.getState(elem.mcpDown, elem.addressDown) == true) {
                     this.gpioAdapter.setState(elem.mcpUp, elem.addressUp, true, elem.upTime);
@@ -39,7 +39,7 @@ class WindowsManager {
     }
 
     colseWindowAll() {
-        config.forEach((elem) => {
+        zones.forEach((elem) => {
          elem.windows.forEach((elem) => {
             if (this.gpioAdapter.getState(elem.mcpUp, elem.addressUp) == true || this.gpioAdapter.getState(elem.mcpDown, elem.addressDown) == true) {
                 this.gpioAdapter.setState(elem.mcpDown, elem.addressUp, true, elem.downTime);
@@ -76,7 +76,7 @@ class WindowsManager {
 
     mouveWindowAll(pos) {
 
-        config.forEach((elem) => {
+        zones.forEach((elem) => {
             elem.windows.forEach((elem) => {
                 let windowIsUp = this.gpioAdapter.getState(elem.mcpUp, elem.addressUp);
                 let windowIsDown = this.gpioAdapter.getState(elem.mcpDown, elem.addressDown);
