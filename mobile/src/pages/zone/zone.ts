@@ -41,7 +41,7 @@ export class ZonePage {
     });
     var vm = this;
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/" + vm.zone.id + "/" + lamp.identifier + "/on",)
+    vm.http.get('https://' + vm.serverIP + "/api/lamps/" + vm.zone.id + "/" + lamp.identifier + "/on",)
       .subscribe(
         data => {
           lamp.status = true;
@@ -67,7 +67,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/" + vm.zone.id + "/" + lamp.identifier + "/off",)
+    vm.http.get('https://' + vm.serverIP + "/api/lamps/" + vm.zone.id + "/" + lamp.identifier + "/off",)
       .subscribe(
         data => {
           lamp.status = false;
@@ -92,7 +92,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/window/" + vm.zone.id + "/" + mywindow.identifier + "/" + mywindow.value)
+    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/open/" + mywindow.value)
       .subscribe(
         data => {
           if (data == 1) {
@@ -126,7 +126,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/switching/window/" + vm.zone.id + "/" + mywindow.identifier + "/up")
+    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/open")
       .subscribe(
         data => {
 
@@ -161,7 +161,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/switching/window/" + vm.zone.id + "/" + mywindow.identifier + "/down")
+    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/close")
       .subscribe(
         data => {
 
@@ -191,16 +191,16 @@ export class ZonePage {
       );
   }
 
-  airconditionnerOn(airconditionner: any) {
+  coolerOn(cooler: any) {
     var vm = this;
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/switching/climatiseur/" + vm.zone.id + "/" + airconditionner.identifier + "/on")
+    vm.http.get('https://' + vm.serverIP + "/api/coolers/" + vm.zone.id + "/" + cooler.identifier + "/on")
       .subscribe(
         data => {
-          airconditionner.status = true;
+          cooler.status = true;
           loader.dismissAll();
         },
         error => {
@@ -215,16 +215,16 @@ export class ZonePage {
       );
   }
 
-  airconditionnerOff(airconditionner: any) {
+  coolerOff(cooler: any) {
     var vm = this;
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/switching/climatiseur/" + vm.zone.id + "/" + airconditionner.identifier + "/off")
+    vm.http.get('https://' + vm.serverIP + "/api/coolers/" + vm.zone.id + "/" + cooler.identifier + "/off")
       .subscribe(
         data => {
-          airconditionner.status = true;
+          cooler.status = true;
           loader.dismissAll();
         },
         error => {

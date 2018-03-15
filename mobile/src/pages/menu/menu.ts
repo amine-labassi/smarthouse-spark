@@ -31,7 +31,7 @@ export class MenuPage {
     });
     loader.present();
 
-    vm.http.get('https://' + vm.serverIP + "/api/switching/lamp/all/status")
+    vm.http.get('https://' + vm.serverIP + "/api/status")
       .subscribe(
         data => {
           loader.dismissAll();
@@ -39,6 +39,7 @@ export class MenuPage {
 
         },
         error => {
+          console.error(error);
           loader.dismissAll();
           if (!navigator.onLine) {
             vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");

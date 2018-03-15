@@ -8,21 +8,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
-import { DomotiquePage } from "../domotique/domotique";
+import { NavController, AlertController, LoadingController } from 'ionic-angular';
 import { $WebSocket } from "angular2-websocket/angular2-websocket";
 import { SmartHouseAppBroadcaster } from "../../config/SmartHouseAppBroadcaster";
 import { ConfigurationPage } from "../configuration/configuration";
 import { Storage } from "@ionic/storage";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { MenuPage } from "../menu/menu";
 var LoginPage = (function () {
-    function LoginPage(navCtrl, http, alertCtrl, broadcaster, storage) {
+    function LoginPage(navCtrl, http, alertCtrl, broadcaster, storage, loadingCtrl) {
         var _this = this;
         this.navCtrl = navCtrl;
         this.http = http;
         this.alertCtrl = alertCtrl;
         this.broadcaster = broadcaster;
         this.storage = storage;
+        this.loadingCtrl = loadingCtrl;
         this.servers = [];
         this.numericKeyboardOptions = {
             align: 'center',
@@ -42,6 +43,10 @@ var LoginPage = (function () {
             theme: 'opaque-white'
         };
         var vm = this;
+        if (!navigator.onLine) {
+            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+        }
+        vm.server = localStorage.getItem("ip");
         storage.get('SmartHomeServer').then(function (val) {
             if (val == null || val == "[]") {
                 var alert_1 = _this.alertCtrl.create({
@@ -66,20 +71,31 @@ var LoginPage = (function () {
     }
     LoginPage.prototype.doLogin = function ($event) {
         var vm = this;
+        var loader = this.loadingCtrl.create({
+            content: "Please wait...",
+        });
+        loader.present();
         var headers = new HttpHeaders();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         var body = new HttpParams()
             .set('username', 'smartHouseOwner')
             .set('password', this.password);
         localStorage.setItem("ip", vm.server);
-        this.http.post('https://' + vm.server + '/login', body, { headers: headers, responseType: 'text' })
+        this.http.post("https://" + vm.server + '/login', body, { headers: headers })
             .subscribe(function (data) {
-            localStorage.setItem("token", data);
+            localStorage.setItem('token', data.jwt);
             vm.initializeWebSocket();
-            vm.navCtrl.setRoot(DomotiquePage);
+            loader.dismissAll();
+            vm.navCtrl.setRoot(MenuPage);
         }, function (error) {
             // TODO
-            vm.showAlert('La domotique est indisponible');
+            loader.dismissAll();
+            if (!navigator.onLine) {
+                vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+            }
+            else {
+                vm.showAlert('La domotique est indisponible');
+            }
         });
     };
     LoginPage.prototype.addDigit = function (digit) {
@@ -98,7 +114,7 @@ var LoginPage = (function () {
     LoginPage.prototype.initializeWebSocket = function () {
         var vm = this;
         var webSocketConfig = { reconnectIfNotNormalClose: true };
-        var ws = new $WebSocket('wss://' + vm.server + "/push", null, webSocketConfig);
+        var ws = new $WebSocket('wss://' + vm.server, null, webSocketConfig);
         ws.onMessage(function (msg) {
             vm.broadcaster.broadcast('configObject', msg.data);
         }, { autoApply: false });
@@ -118,14 +134,14 @@ var LoginPage = (function () {
         });
         alert.present();
     };
+    LoginPage = __decorate([
+        Component({
+            selector: 'page-login',
+            templateUrl: 'login.html'
+        }),
+        __metadata("design:paramtypes", [NavController, HttpClient, AlertController, SmartHouseAppBroadcaster, Storage, LoadingController])
+    ], LoginPage);
     return LoginPage;
 }());
-LoginPage = __decorate([
-    Component({
-        selector: 'page-login',
-        templateUrl: 'login.html'
-    }),
-    __metadata("design:paramtypes", [NavController, HttpClient, AlertController, SmartHouseAppBroadcaster, Storage])
-], LoginPage);
 export { LoginPage };
 //# sourceMappingURL=login.js.map

@@ -21,49 +21,58 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { IonicStorageModule } from "@ionic/storage";
 import { SmartHouseAppBroadcaster } from "../config/SmartHouseAppBroadcaster";
 import { JwtTokenInterceptor } from "../config/JwtTokenInterceptor";
+import { MenuPage } from "../pages/menu/menu";
+import { ProceduresPage } from "../pages/procedures/procedures";
+import { ProcedurePage } from "../pages/procedure/procedure";
 var AppModule = (function () {
     function AppModule() {
     }
+    AppModule = __decorate([
+        NgModule({
+            declarations: [
+                MyApp,
+                IonDigitKeyboard,
+                ProcedurePage,
+                ProceduresPage,
+                MenuPage,
+                LoginPage,
+                ConfigurationPage,
+                DomotiquePage,
+                TitlePipe,
+                FavorisPage,
+                ZonePage
+            ],
+            imports: [
+                HttpClientModule,
+                BrowserModule,
+                IonicModule.forRoot(MyApp),
+                IonicStorageModule.forRoot({
+                    name: '__mydb',
+                    driverOrder: ['indexeddb', 'sqlite', 'websql']
+                })
+            ],
+            bootstrap: [IonicApp],
+            entryComponents: [
+                MyApp,
+                ProcedurePage,
+                ProceduresPage,
+                MenuPage,
+                LoginPage,
+                ConfigurationPage,
+                DomotiquePage,
+                FavorisPage,
+                ZonePage
+            ],
+            providers: [
+                StatusBar,
+                SplashScreen,
+                { provide: ErrorHandler, useClass: IonicErrorHandler },
+                SmartHouseAppBroadcaster,
+                [{ provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true }]
+            ]
+        })
+    ], AppModule);
     return AppModule;
 }());
-AppModule = __decorate([
-    NgModule({
-        declarations: [
-            MyApp,
-            IonDigitKeyboard,
-            LoginPage,
-            ConfigurationPage,
-            DomotiquePage,
-            TitlePipe,
-            FavorisPage,
-            ZonePage
-        ],
-        imports: [
-            HttpClientModule,
-            BrowserModule,
-            IonicModule.forRoot(MyApp),
-            IonicStorageModule.forRoot({
-                name: '__mydb',
-                driverOrder: ['indexeddb', 'sqlite', 'websql']
-            })
-        ],
-        bootstrap: [IonicApp],
-        entryComponents: [
-            MyApp,
-            LoginPage,
-            ConfigurationPage,
-            DomotiquePage,
-            FavorisPage,
-            ZonePage
-        ],
-        providers: [
-            StatusBar,
-            SplashScreen,
-            { provide: ErrorHandler, useClass: IonicErrorHandler },
-            SmartHouseAppBroadcaster,
-            [{ provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true }]
-        ]
-    })
-], AppModule);
 export { AppModule };
 //# sourceMappingURL=app.module.js.map

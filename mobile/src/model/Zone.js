@@ -1,10 +1,10 @@
 var Zone = (function () {
-    function Zone(id, title, windows, lamps, airConditionners, favoris) {
+    function Zone(id, title, windows, lamps, coolers, favoris) {
         this.id = id;
         this.title = title;
         this.windows = windows;
         this.lamps = lamps;
-        this.airConditionners = airConditionners;
+        this.coolers = coolers;
         this.favoris = favoris;
     }
     return Zone;

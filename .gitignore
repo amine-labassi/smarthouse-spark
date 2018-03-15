@@ -1,10 +1,12 @@
 /target/
 /smarthouse-spark.iml
 /mobile/node_modules/
+/backend/node_modules/
 /mobile/www/
 /mobile/.sourcemaps/
 /mobile/platforms/
 smarthouse.log
+/backend/smarthouse-api/node_modules/
 *.js.map
 /.idea/
 !/src/**/*/.gitkeep

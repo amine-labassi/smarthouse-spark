@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-searchbar placeholder="Rechercher..." [(ngModel)]="searchFilter" [showCancelButton]="true">
+  <<ion-searchbar placeholder="Rechercher..." [(ngModel)]="searchFilter" [showCancelButton]="true">
   </ion-searchbar>
   <ion-list style="margin: 10px;">
     <button ion-item *ngFor="let item of (items | titlePipe:searchFilter)" (click)="openNavZonePage(item, $event)">

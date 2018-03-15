@@ -63,12 +63,12 @@
       </ion-slides>
     </ion-card-content>
   </ion-card>
-  <ion-card class="cards-list-zone-airconditionners" *ngIf="zone.airConditionners && zone.airConditionners.length > 0">
+  <ion-card class="cards-list-zone-coolers" *ngIf="zone.coolers && zone.coolers.length > 0">
     <ion-card-header>Climatisation</ion-card-header>
     <ion-card-content>
       <ion-slides [pager]="true">
-        <ion-slide *ngFor="let airconditionner of zone.airConditionners">
-          <h2>{{ airconditionner.status }}</h2>
+        <ion-slide *ngFor="let cooler of zone.coolers">
+          <h2>{{ cooler.status }}</h2>
           <ion-grid>
             <ion-row center>
               <ion-col width-100>
@@ -77,12 +77,12 @@
             </ion-row>
             <ion-row center>
               <ion-col width-50>
-                <button ion-button color="light" round (click)="airconditionnerOn(airconditionner)">
+                <button ion-button color="light" round (click)="coolerOn(cooler)">
                   I
                 </button>
               </ion-col>
               <ion-col width-50>
-                <button ion-button color="light" round (click)="airconditionnerOff(airconditionner)">
+                <button ion-button color="light" round (click)="coolerOff(cooler)">
                   O
                 </button>
               </ion-col>
