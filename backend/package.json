@@ -1,7 +1,8 @@
 {
   "name": "smarthouse-api",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
+  "author": "Yassin CHBINOU",
   "scripts": {
 
     "setup": "npm i -g pm2 & pm2 install pm2-logrotate & pm2 set pm2-logrotate:retain 5",
