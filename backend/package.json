@@ -12,7 +12,8 @@
 
     "start": "NODE_ENV=production & node ./bin/www",
     "debug": "NODE_ENV=production & node --inspect=0.0.0.0:9229 ./bin/www",
-    "dev": "SET NODE_ENV=development  & node --inspect ./bin/www",
+    "devwin": "SET NODE_ENV=development  & node --inspect ./bin/www",
+    "devlin": "NODE_ENV=development  & node --inspect ./bin/www",
     "test": "mocha **/**.spec.js"
   },
   "dependencies": {
