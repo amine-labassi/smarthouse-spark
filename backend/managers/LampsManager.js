@@ -53,4 +53,4 @@ class LampsManager {
 
 }
 
-module.exports = new WindowsManager();
+module.exports = new LampsManager();

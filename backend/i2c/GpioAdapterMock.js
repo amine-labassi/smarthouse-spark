@@ -1,13 +1,12 @@
-/**
- * Created by Yassine Chbinou on 13/03/2018.
- */
-
 class GpioAdapterMock {
 
     constructor(){}
 
     setState(mcp, pin, delay){
-        return status;
+        var self = this;
+        return new Promise((resolve, reject) => {
+            resolve(true);
+        });
     }
 
     getState(mcp, pin) {
@@ -15,4 +14,4 @@ class GpioAdapterMock {
     }
 }
 
-module.exports = new GpioAdapter();
+module.exports = new GpioAdapterMock();

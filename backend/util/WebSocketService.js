@@ -17,11 +17,11 @@ class WebSocketService {
     }
 
     notifyAllClients(zones){
-        if(typeof data === 'string' && data.length > 0){
+        if(typeof zones === 'object'){
             Object.values(this.sessoins).forEach((session) => {
-                session.send(JSON.stringify(
+                session.sendUTF(JSON.stringify(
                     omitDeep(
-                        zones,
+                        JSON.parse(JSON.stringify(zones)),
                         ['mcpInput', 'mcpOutput',
                             'addressInput', 'addressOutput',
                             'mcpUp', 'addressUp', 'upTime',
