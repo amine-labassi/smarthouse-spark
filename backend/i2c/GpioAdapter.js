@@ -20,8 +20,10 @@ class GpioAdapter {
     setState(mcp, pin, delay) {
         var self = this;
         return new Promise((resolve, reject) => {
-            try {
-                if (pin < 8) {
+            try
+            {
+                if (pin < 8)
+                {
                     var portData = self.i2c1.readByteSync(mcp, 0x12);
                     portData = portData & (255 - (255 & (1 << pin)))
                     self.i2c1.writeByteSync(mcp, 0x12, portData);
@@ -35,7 +37,8 @@ class GpioAdapter {
                         }
                     }, delay);
                 }
-                else {
+                else
+                {
                     pin = pin - 8;
                     var portData = self.i2c1.readByteSync(mcp, 0x13);
                     portData = portData & (255 - (255 & (1 << pin)))
@@ -50,32 +53,41 @@ class GpioAdapter {
                         }
                     }, delay);
                 }
-            } catch (e) {
+            }
+            catch (e)
+            {
                 reject(e);
             }
         });
     }
 
 
-    getState(mcp, pin) {
-        if (pin < 8) {
+    getState(mcp, pin)
+    {
+        if (pin < 8)
+        {
             var portData = self.i2c1.readByteSync(mcp, 0x12);
             var pinValue = portData & (1 << pin);
-            if (pinValue > 0) {
+            if (pinValue > 0)
+            {
                 return true
             }
-            else {
+            else
+            {
                 return false
             }
         }
-        else {
+        else
+        {
             pin = pin - 8
             var portData = self.i2c1.readByteSync(mcp, 0x13);
             var pinValue = portData & (1 << pin);
-            if (pinValue > 0) {
+            if (pinValue > 0)
+            {
                 return true
             }
-            else {
+            else
+            {
                 return false
             }
         }
