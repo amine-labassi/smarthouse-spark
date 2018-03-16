@@ -1,8 +1,9 @@
 class GpioAdapterMock {
 
-    constructor(){}
+    constructor() {
+    }
 
-    setState(mcp, pin, delay){
+    setState(mcp, pin, delay) {
         var self = this;
         return new Promise((resolve, reject) => {
             resolve(true);

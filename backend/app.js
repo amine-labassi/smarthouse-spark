@@ -30,16 +30,16 @@ app.use('/api/coolers', coolers);
 
 console.log(JSON.stringify(listEndpoints(app), null, 2));
 
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
-app.use(function(err, req, res, next) {
-  console.error(err);
-  res.status(err.status || 500);
-  res.json(err);
+app.use(function (err, req, res, next) {
+    console.error(err);
+    res.status(err.status || 500);
+    res.json(err);
 });
 
 module.exports = app;

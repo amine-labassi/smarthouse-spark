@@ -7,24 +7,24 @@ var coolerMgr = require('../managers/CoolersManager');
 
 var notifDelay = 3000;
 
-if(!isNaN(parseInt(process.env.NOTIF_DELAY))){
+if (!isNaN(parseInt(process.env.NOTIF_DELAY))) {
     notifDelay = parseInt(process.env.NOTIF_DELAY);
 }
 
-setInterval(function(){
+setInterval(function () {
     WebSocketService.notifyAllClients(zones);
 }, notifDelay);
 
-router.get('/status', function(req, res) {
+router.get('/status', function (req, res) {
     lampMgr.getStatus();
     coolerMgr.getStatus();
     res.json(
         omitDeep(
             JSON.parse(JSON.stringify(zones)),
             ['mcpInput', 'mcpOutput',
-             'addressInput', 'addressOutput',
-             'mcpUp', 'addressUp', 'upTime',
-             'mcpDown', 'addressDown', 'downTime']
+                'addressInput', 'addressOutput',
+                'mcpUp', 'addressUp', 'upTime',
+                'mcpDown', 'addressDown', 'downTime']
         )
     ).end();
 });
