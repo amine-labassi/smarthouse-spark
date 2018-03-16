@@ -3,8 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+
+    "setup": "npm i -g pm2 & pm2 install pm2-logrotate & pm2 set pm2-logrotate:retain 5",
     "on": "SET NODE_ENV=production & pm2 start ./bin/www",
     "off": "pm2 stop www & pm2 delete www",
+
+
     "start": "NODE_ENV=production & node ./bin/www",
     "debug": "NODE_ENV=production & node --inspect=0.0.0.0:9229 ./bin/www",
     "dev": "SET NODE_ENV=development  & node --inspect ./bin/www",
