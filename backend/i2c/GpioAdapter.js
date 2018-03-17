@@ -11,9 +11,9 @@ class GpioAdapter {
         this.config = require('./SmarthouseConfig');
         this.config.mcps.forEach((mcp) => {
             self.i2c1.writeByteSync(mcp.address, 0x00, mcp.porta);
-            self.i2c1.writeByteSync(mcp.address, 0x12, 0x00);
+            self.i2c1.writeByteSync(mcp.address, 0x12, 0xff);
             self.i2c1.writeByteSync(mcp.address, 0x00, mcp.portb);
-            self.i2c1.writeByteSync(mcp.address, 0x13, 0x00);
+            self.i2c1.writeByteSync(mcp.address, 0x13, 0xff);
         });
     }
 
@@ -64,17 +64,18 @@ class GpioAdapter {
 
     getState(mcp, pin)
     {
+        var self = this;
         if (pin < 8)
         {
             var portData = self.i2c1.readByteSync(mcp, 0x12);
             var pinValue = portData & (1 << pin);
             if (pinValue > 0)
             {
-                return true
+                return false
             }
             else
             {
-                return false
+                return true
             }
         }
         else

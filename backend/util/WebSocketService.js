@@ -1,4 +1,6 @@
 var omitDeep = require('omit-deep');
+var lampMgr = require('../managers/LampsManager');
+var coolerMgr = require('../managers/CoolersManager');
 
 class WebSocketService {
 
@@ -18,7 +20,9 @@ class WebSocketService {
 
     notifyAllClients(zones) {
         if (typeof zones === 'object') {
-            Object.values(this.sessoins).forEach((session) => {
+            lampMgr.getStatus();
+            coolerMgr.getStatus();
+            Object.values(this.sessoins).forEach((session) =>{
                 session.sendUTF(JSON.stringify(
                     omitDeep(
                         JSON.parse(JSON.stringify(zones)),
