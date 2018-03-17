@@ -3,7 +3,7 @@
  */
 export class Window {
   constructor(
-    public id:number,
+    public identifier:number,
     public title:string,
     public value:number
   ){}

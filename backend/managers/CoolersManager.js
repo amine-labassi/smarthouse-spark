@@ -10,32 +10,36 @@ class CoolersManager {
     }
 
     getStatus() {
+        var self = this;
         zones.forEach((zone) => {
             zone.coolers.forEach((cooler) => {
-                cooler.status = this.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput);
+                cooler.status = self.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput);
             });
         });
     }
 
     openCooler(cooler) {
-        if (this.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput)) {
-            this.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, 200);
+        var self = self;
+        if (!self.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput)) {
+            self.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, 200);
         }
         return true;
     }
 
     closeCooler(cooler) {
-        if (!this.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput)) {
-            this.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, 200);
+        var self = this;
+        if (self.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput)) {
+            self.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, 200);
         }
         return true;
     }
 
     openCoolerAll() {
+        var self = this;
         zones.forEach((zone) => {
             zone.coolers.forEach((cooler) => {
-                if (this.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput)) {
-                    this.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, 200);
+                if (!self.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput)) {
+                      self.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, 200);
                 }
             });
         });
@@ -43,10 +47,11 @@ class CoolersManager {
     }
 
     closeCoolerAll() {
+        var self = this;
         zones.forEach((zone) => {
             zone.coolers.forEach((cooler) => {
-                if (this.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput)) {
-                    this.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, 200);
+                if (self.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput)) {
+                    self.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, 200);
                 }
             });
         });

@@ -17,24 +17,24 @@ class LampsManager {
     }
 
     openLamp(lamp) {
-        if (this.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
-            this.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
-        }
-        return true;
-    }
-
-    closeLamp(lamp) {
         if (!this.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
             this.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
         }
         return true;
     }
 
+    closeLamp(lamp) {
+        if (this.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
+            this.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
+        }
+        return true;
+    }
+
     openLampAll() {
-        zones.forEach((elem) => {
-            elem.lamps.forEach((elem) => {
-                if (this.gpioAdapter.getState(elem.mcpInput, elem.addressInput) == true) {
-                    this.gpioAdapter.setState(elem.mcpOutput, elem.addressOutput, 200);
+        zones.forEach((zone) => {
+            zone.lamps.forEach((lamp) => {
+                if (!this.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
+                    this.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
                 }
             });
         });

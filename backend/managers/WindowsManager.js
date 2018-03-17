@@ -51,14 +51,15 @@ class WindowsManager {
     }
 
     mouveWindow(window, pos) {
+        var self = this;
         let windowIsUp = this.gpioAdapter.getState(window.mcpUp, window.addressUp);
         let windowIsDown = this.gpioAdapter.getState(window.mcpDown, window.addressDown);
         let upTime = (window.upTime * pos) / 100;
         if (!windowIsUp || !windowIsDown) {
-            this.gpioAdapter.setState(window.mcpDown, window.addressDown, window.downTime)
+            self.gpioAdapter.setState(window.mcpDown, window.addressDown, window.downTime)
                 .then(
                     function (success) {
-                        this.gpioAdapter.setState(window.mcpUp, window.addressUp, upTime)
+                        self.gpioAdapter.setState(window.mcpUp, window.addressUp, upTime)
                             .then(
                                 function (success) {
                                 },

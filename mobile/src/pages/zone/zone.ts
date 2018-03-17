@@ -13,6 +13,7 @@ import {LoginPage} from "../login/login";
 export class ZonePage {
   zone: Zone;
   serverIP: string;
+  windowsValues: object = {};
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpClient, public alertCtrl: AlertController, public broadcaster: SmartHouseAppBroadcaster, public loadingCtrl: LoadingController) {
@@ -92,7 +93,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/open/" + mywindow.value)
+    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/open/" + vm.windowsValues[mywindow.identifier])
       .subscribe(
         data => {
           if (data == 1) {

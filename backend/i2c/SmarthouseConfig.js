@@ -77,7 +77,7 @@ module.exports = {
                 },
 
                 {
-                    "identifier": "1",
+                    "identifier": "2",
                     "title": "Fenetre lit",
                     "mcpUp": 33,
                     "addressUp": 12,
