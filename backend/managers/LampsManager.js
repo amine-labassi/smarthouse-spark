@@ -7,9 +7,10 @@ class LampsManager {
     }
 
     getStatus() {
+        var self = this;
         zones.forEach((zone) => {
             zone.lamps.forEach((lamp) => {
-                lamp.status = this.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)
+                lamp.status = self.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)
 
 
             });
@@ -17,24 +18,27 @@ class LampsManager {
     }
 
     openLamp(lamp) {
-        if (!this.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
-            this.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
+        var self = this;
+        if (!self.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
+            self.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
         }
         return true;
     }
 
     closeLamp(lamp) {
-        if (this.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
-            this.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
+        var self = this;
+        if (self.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
+            self.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
         }
         return true;
     }
 
     openLampAll() {
+        var self = this;
         zones.forEach((zone) => {
             zone.lamps.forEach((lamp) => {
-                if (!this.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
-                    this.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
+                if (!self.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
+                      self.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
                 }
             });
         });
@@ -42,10 +46,11 @@ class LampsManager {
     }
 
     closeLampAll() {
+        var self = this;
         zones.forEach((zone) => {
             zone.lamps.forEach((lamp) => {
-                if (this.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
-                    this.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
+                if (self.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
+                    self.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
                 }
             });
         });
