@@ -19,7 +19,7 @@ class CoolersManager {
     }
 
     openCooler(cooler) {
-        var self = self;
+        var self = this;
         if (!self.gpioAdapter.getState(cooler.mcpInput, cooler.addressInput)) {
             self.gpioAdapter.setState(cooler.mcpOutput, cooler.addressOutput, 200);
         }

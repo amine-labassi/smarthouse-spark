@@ -1,8 +1,8 @@
-if (process.argv[2] == 'production') {
+if (process.env.NODE_ENV === 'production') {
     module.exports = new require('./GpioAdapter');
-    console.log("running in " + process.argv[2] +  " mode : init GpioAdapter");
+    console.log("running in " + process.env.NODE_ENV +  " mode : init GpioAdapter");
 
 } else {
     module.exports = new require('./GpioAdapterMock');
-    console.log("running in " + process.argv[2] +  " mode : init GpioAdapterMock");
+    console.log("running in " + process.env.NODE_ENV +  " mode : init GpioAdapterMock");
 }

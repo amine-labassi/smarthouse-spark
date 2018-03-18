@@ -71,11 +71,11 @@ class GpioAdapter {
             var pinValue = portData & (1 << pin);
             if (pinValue > 0)
             {
-                return false
+                return true
             }
             else
             {
-                return true
+                return false
             }
         }
         else
