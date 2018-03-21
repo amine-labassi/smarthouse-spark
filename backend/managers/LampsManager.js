@@ -21,6 +21,7 @@ class LampsManager {
         var self = this;
         if (!self.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
             self.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
+
         }
         return true;
     }
@@ -29,19 +30,16 @@ class LampsManager {
         var self = this;
         if (self.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
             self.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
+
         }
         return true;
     }
 
     openLampAll() {
         var self = this;
-        zones.forEach((zone) => {
-            zone.lamps.forEach((lamp) => {
-                if (!self.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
-                      self.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
-                }
-            });
-        });
+
+        self.gpioAdapter.setStateZoneLamps(zones, false);
+
         return true;
     }
 

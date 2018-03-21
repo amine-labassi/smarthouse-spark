@@ -87,36 +87,94 @@ export class ZonePage {
     lamp.status = false;
   }
 
-  mouve(mywindow: any) {
+  demi(mywindow: any) {
     var vm = this;
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/open/" + vm.windowsValues[mywindow.identifier])
+    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/open/50")
       .subscribe(
         data => {
-          if (data == 1) {
-            vm.showAlert('quelqu\'un est en train d\'ouvrir la fenêtre: ' + vm.zone.title + ':' + mywindow.identifier);
+
             loader.dismissAll();
-          }
-          else if (data == 2) {
-            vm.showAlert('qu\'elle qu\'un entrain de fermer la fenetre : ' + vm.zone.title + ':' + mywindow.identifier);
-            loader.dismissAll();
-          }
-          else {
-            loader.dismissAll();
-          }
+
 
         },
         error => {
           loader.dismissAll();
-          if (!navigator.onLine) {
-            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
-          }
-          else {
+
             vm.connectionInterrupted();
-          }
+
+        }
+      );
+  }
+
+  quard(mywindow: any) {
+    var vm = this;
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+    loader.present();
+    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/open/25")
+      .subscribe(
+        data => {
+
+          loader.dismissAll();
+
+
+        },
+        error => {
+          loader.dismissAll();
+
+          vm.connectionInterrupted();
+
+        }
+      );
+  }
+
+  troisQuards(mywindow: any) {
+    var vm = this;
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+    loader.present();
+    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/open/75")
+      .subscribe(
+        data => {
+
+          loader.dismissAll();
+
+
+        },
+        error => {
+          loader.dismissAll();
+
+          vm.connectionInterrupted();
+
+        }
+      );
+  }
+
+  stop(mywindow: any) {
+    var vm = this;
+    let loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+    loader.present();
+    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/stop")
+      .subscribe(
+        data => {
+
+          loader.dismissAll();
+
+
+        },
+        error => {
+          loader.dismissAll();
+
+          vm.connectionInterrupted();
+
         }
       );
   }

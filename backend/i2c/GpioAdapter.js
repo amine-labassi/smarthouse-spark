@@ -8,22 +8,30 @@ class GpioAdapter {
         var self = this;
         this.i2c = require('i2c-bus');
         this.i2c1 = this.i2c.openSync(1);
+        self.initGpio();
+
+    }
+
+    initGpio() {
+        var self = this;
         this.config = require('./SmarthouseConfig');
         this.config.mcps.forEach((mcp) => {
             self.i2c1.writeByteSync(mcp.address, 0x00, mcp.porta);
-            self.i2c1.writeByteSync(mcp.address, 0x12, 0xff);
-            self.i2c1.writeByteSync(mcp.address, 0x00, mcp.portb);
-            self.i2c1.writeByteSync(mcp.address, 0x13, 0xff);
-        });
+            if(mcp.porta == 255){
+                self.i2c1.writeByteSync(mcp.address, 0x12, 0xff);
+            }
+
+                self.i2c1.writeByteSync(mcp.address, 0x00, mcp.portb);
+            if(mcp.portb == 255) {
+                self.i2c1.writeByteSync(mcp.address, 0x13, 0xff);
+            }        });
     }
 
     setState(mcp, pin, delay) {
         var self = this;
         return new Promise((resolve, reject) => {
-            try
-            {
-                if (pin < 8)
-                {
+            try {
+                if (pin < 8) {
                     var portData = self.i2c1.readByteSync(mcp, 0x12);
                     portData = portData & (255 - (255 & (1 << pin)))
                     self.i2c1.writeByteSync(mcp, 0x12, portData);
@@ -37,8 +45,7 @@ class GpioAdapter {
                         }
                     }, delay);
                 }
-                else
-                {
+                else {
                     pin = pin - 8;
                     var portData = self.i2c1.readByteSync(mcp, 0x13);
                     portData = portData & (255 - (255 & (1 << pin)))
@@ -54,41 +61,89 @@ class GpioAdapter {
                     }, delay);
                 }
             }
-            catch (e)
-            {
+            catch (e) {
+                reject(e);
+            }
+        });
+    }
+
+    setStateZoneLamps(zones, stauts) {
+        var self = this;
+        return new Promise((resolve, reject) => {
+            try {
+                for(let zone in zones){
+                    for(let l in zones[zone].lamps){
+                        var lamp= zones[zone].lamps[l]
+                        if (lamp.addressOutput < 8) {
+                            if (self.getState(lamp.mcpInput, lamp.addressInput) == stauts) {
+                                var portData = self.i2c1.readByteSync(lamp.mcpOutput, 0x12);
+                                portData = portData & (255 - (255 & (1 << lamp.addressOutput)))
+                                self.i2c1.writeByteSync(lamp.mcpOutput, 0x14, portData);}
+                        } else {
+                            var pin = lamp.addressOutput - 8;
+                            if (self.getState(lamp.mcpInput, lamp.addressInput) == stauts) {
+                                var portData = self.i2c1.readByteSync(lamp.mcpOutput, 0x13);
+                                portData = portData & (255 - (255 & (1 << pin)))
+                                self.i2c1.writeByteSync(lamp.mcpOutput, 0x15, portData);}
+                        }
+                    }}
+
+                setTimeout(function () {
+                    try {
+                        for(let zone in zones){
+                            for(let l in zones[zone].lamps){
+                                var lamp= zones[zone].lamps[l];
+
+                                if (lamp.addressOutput < 8) {
+                                    var portData = self.i2c1.readByteSync(lamp.mcpOutput, 0x14) | (1 << lamp.addressOutput);
+                                    self.i2c1.writeByteSync(lamp.mcpOutput, 0x14, portData);
+                                } else {
+                                    pin = lamp.addressOutput - 8;
+                                    var portData = self.i2c1.readByteSync(lamp.mcpOutput, 0x15) | (1 << pin);
+                                    self.i2c1.writeByteSync(lamp.mcpOutput, 0x15, portData);
+                                }
+
+                            }}
+                        resolve(true);}
+                    catch (e1) {
+                        self.initGpio();
+                        reject(e1);
+                    }}, 350);
+
+            }
+
+            catch (e) {
+                self.initGpio();
                 reject(e);
             }
         });
     }
 
 
-    getState(mcp, pin)
-    {
+
+
+    getState(mcp, pin) {
         var self = this;
-        if (pin < 8)
-        {
+        if (pin < 8) {
+            self.i2c1.writeByteSync(mcp, 0x00, 0xff);
             var portData = self.i2c1.readByteSync(mcp, 0x12);
             var pinValue = portData & (1 << pin);
-            if (pinValue > 0)
-            {
+            if (pinValue > 0) {
                 return true
             }
-            else
-            {
+            else {
                 return false
             }
         }
-        else
-        {
+        else {
+            self.i2c1.writeByteSync(mcp, 0x01, 0xff);
             pin = pin - 8
             var portData = self.i2c1.readByteSync(mcp, 0x13);
             var pinValue = portData & (1 << pin);
-            if (pinValue > 0)
-            {
+            if (pinValue > 0) {
                 return true
             }
-            else
-            {
+            else {
                 return false
             }
         }
