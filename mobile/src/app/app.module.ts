@@ -18,7 +18,7 @@ import {JwtTokenInterceptor} from "../config/JwtTokenInterceptor";
 import {MenuPage} from "../pages/menu/menu";
 import {ProceduresPage} from "../pages/procedures/procedures";
 import {ProcedurePage} from "../pages/procedure/procedure";
-
+import {HomePage} from "../pages/home/home"
 @NgModule({
   declarations: [
     MyApp,
@@ -31,7 +31,8 @@ import {ProcedurePage} from "../pages/procedure/procedure";
     DomotiquePage,
     TitlePipe,
     FavorisPage,
-    ZonePage
+    ZonePage,
+    HomePage
   ],
   imports: [
     HttpClientModule,

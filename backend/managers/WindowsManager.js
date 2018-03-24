@@ -28,6 +28,13 @@ class WindowsManager {
         return false;
     }
 
+    stopWindow(window) {
+        var self = this;
+        self.gpioAdapter.winStop(window.mcpUp, window.addressUp, window.mcpDown, window.addressDown);
+
+        return false;
+    }
+
     openWindowAll() {
         var self = this;
         zones.forEach((zone) => {
@@ -80,34 +87,7 @@ class WindowsManager {
         return windowIsUp || windowIsDown;
     }
 
-    mouveWindowAll(pos) {
-        var self = this;
-        zones.forEach((zone) => {
-            zone.windows.forEach((window) => {
-                let windowIsUp = self.gpioAdapter.getState(window.mcpUp, window.addressUp);
-                let windowIsDown = self.gpioAdapter.getState(window.mcpDown, window.addressDown);
-                let upTime = (window.upTime * pos) / 100;
-                if (windowIsUp && windowIsDown) {
-                    this.gpioAdapter.setState(window.mcpDown, window.addressDown, window.downTime)
-                        .then(
-                            function (success) {
-                                self.gpioAdapter.setState(window.mcpUp, window.addressUp, upTime)
-                                    .then(
-                                        function (success) {
-                                        },
-                                        function (error) {
-                                            console.error('enable to open window ' + window.identifier);
-                                        }
-                                    )
-                            },
-                            function (error) {
-                                console.error('enable to close window ' + window.identifier);
-                            }
-                        );
-                }
-            });
-        });
-    }
+
 
 }
 

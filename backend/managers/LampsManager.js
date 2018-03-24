@@ -45,13 +45,7 @@ class LampsManager {
 
     closeLampAll() {
         var self = this;
-        zones.forEach((zone) => {
-            zone.lamps.forEach((lamp) => {
-                if (self.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
-                    self.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
-                }
-            });
-        });
+        self.gpioAdapter.setStateZoneLamps(zones, true);
         return true;
     }
 

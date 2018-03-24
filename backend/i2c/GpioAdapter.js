@@ -17,12 +17,12 @@ class GpioAdapter {
         this.config = require('./SmarthouseConfig');
         this.config.mcps.forEach((mcp) => {
             self.i2c1.writeByteSync(mcp.address, 0x00, mcp.porta);
-            if(mcp.porta == 255){
+            if(mcp.porta == 0){
                 self.i2c1.writeByteSync(mcp.address, 0x12, 0xff);
             }
 
-                self.i2c1.writeByteSync(mcp.address, 0x00, mcp.portb);
-            if(mcp.portb == 255) {
+                self.i2c1.writeByteSync(mcp.address, 0x01, mcp.portb);
+            if(mcp.portb == 0) {
                 self.i2c1.writeByteSync(mcp.address, 0x13, 0xff);
             }        });
     }
@@ -148,5 +148,24 @@ class GpioAdapter {
             }
         }
     }
-}
+
+   winStop(mU, pU, mD, pD){
+       if (pU < 8) {
+           var portData = self.i2c1.readByteSync(mU, 0x12) | (1 << pU);
+           self.i2c1.writeByteSync(mU, 0x14, portData);
+       } else {
+           pin = pU - 8;
+           var portData = self.i2c1.readByteSync(mU, 0x13) | (1 << pin);
+           self.i2c1.writeByteSync(mU, 0x15, portData);
+       }
+       if (pD < 8) {
+           var portData = self.i2c1.readByteSync(mD, 0x12) | (1 << pD);
+           self.i2c1.writeByteSync(mD, 0x14, portData);
+       } else {
+           pin = pD - 8;
+           var portData = self.i2c1.readByteSync(mD, 0x13) | (1 << pin);
+           self.i2c1.writeByteSync(mD, 0x15, portData);
+       }
+
+}}
 module.exports = new GpioAdapter();

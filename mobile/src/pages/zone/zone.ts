@@ -51,11 +51,12 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          if (!navigator.onLine) {
-            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          if (error == 401) {
+            vm.connectionInterrupted();
+
           }
           else {
-            vm.connectionInterrupted();
+            vm.showAlert("Error");
           }
         }
       );
@@ -76,11 +77,12 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          if (!navigator.onLine) {
-            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          if (error == 401) {
+            vm.connectionInterrupted();
+
           }
           else {
-            vm.connectionInterrupted();
+            vm.showAlert("Error");
           }
         }
       );
@@ -93,7 +95,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/open/50")
+    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/open/" + 50)
       .subscribe(
         data => {
 
@@ -102,10 +104,13 @@ export class ZonePage {
 
         },
         error => {
-          loader.dismissAll();
-
+          if (error == 401) {
             vm.connectionInterrupted();
 
+          }
+          else {
+            vm.showAlert("Error");
+          }
         }
       );
   }
@@ -116,7 +121,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/open/25")
+    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/open/" + 25)
       .subscribe(
         data => {
 
@@ -125,10 +130,13 @@ export class ZonePage {
 
         },
         error => {
-          loader.dismissAll();
+          if (error == 401) {
+            vm.connectionInterrupted();
 
-          vm.connectionInterrupted();
-
+          }
+          else {
+            vm.showAlert("Error");
+          }
         }
       );
   }
@@ -139,7 +147,7 @@ export class ZonePage {
       content: "Please wait...",
     });
     loader.present();
-    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/open/75")
+    vm.http.get('https://' + vm.serverIP + "/api/windows/" + vm.zone.id + "/" + mywindow.identifier + "/open/" + 75)
       .subscribe(
         data => {
 
@@ -148,10 +156,13 @@ export class ZonePage {
 
         },
         error => {
-          loader.dismissAll();
+          if (error == 401) {
+            vm.connectionInterrupted();
 
-          vm.connectionInterrupted();
-
+          }
+          else {
+            vm.showAlert("Error");
+          }
         }
       );
   }
@@ -171,9 +182,13 @@ export class ZonePage {
 
         },
         error => {
-          loader.dismissAll();
+          if (error == 401) {
+            vm.connectionInterrupted();
 
-          vm.connectionInterrupted();
+          }
+          else {
+            vm.showAlert("Error");
+          }
 
         }
       );
@@ -189,26 +204,18 @@ export class ZonePage {
       .subscribe(
         data => {
 
-          if (data == 1) {
+
             loader.dismissAll();
-            vm.showAlert('quelqu\'un est en train d\'ouvrir la fenêtre: ' + vm.zone.title + ':' + mywindow.identifier);
-          }
-          else if (data == 2) {
-            loader.dismissAll();
-            vm.showAlert('qu\'elle qu\'un entrain de fermer la fenetre : ' + vm.zone.title + ':' + mywindow.identifier);
-          }
-          else {
-            loader.dismissAll();
-          }
+
 
         },
         error => {
-          loader.dismissAll();
-          if (!navigator.onLine) {
-            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          if (error == 401) {
+            vm.connectionInterrupted();
+
           }
           else {
-            vm.connectionInterrupted();
+            vm.showAlert("Error");
           }
         }
       );
@@ -224,27 +231,20 @@ export class ZonePage {
       .subscribe(
         data => {
 
-          if (data == 1) {
-            loader.dismissAll();
-            vm.showAlert('quelqu\'un est en train d\'ouvrir la fenêtre: ' + vm.zone.title + ':' + mywindow.identifier);
-          }
-          else if (data == 2) {
-            loader.dismissAll();
-            vm.showAlert('qu\'elle qu\'un entrain de fermer la fenetre : ' + vm.zone.title + ':' + mywindow.identifier);
-          }
-          else {
+
             loader.dismissAll();
 
 
-          }
+
         },
         error => {
           loader.dismissAll();
-          if (!navigator.onLine) {
-            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          if (error == 401) {
+            vm.connectionInterrupted();
+
           }
           else {
-            vm.connectionInterrupted();
+            vm.showAlert("Error");
           }
         }
       );
@@ -264,11 +264,12 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          if (!navigator.onLine) {
-            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          if (error == 401) {
+            vm.connectionInterrupted();
+
           }
           else {
-            vm.connectionInterrupted();
+            vm.showAlert("Error");
           }
         }
       );
@@ -288,11 +289,12 @@ export class ZonePage {
         },
         error => {
           loader.dismissAll();
-          if (!navigator.onLine) {
-            vm.showAlert("Pas d'internet, activer wifi ou réseau cellulaire");
+          if (error == 401) {
+            vm.connectionInterrupted();
+
           }
           else {
-            vm.connectionInterrupted();
+            vm.showAlert("Error");
           }
 
         }
