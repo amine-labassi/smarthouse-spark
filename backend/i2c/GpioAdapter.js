@@ -154,7 +154,7 @@ class GpioAdapter {
            var portData = self.i2c1.readByteSync(mU, 0x12) | (1 << pU);
            self.i2c1.writeByteSync(mU, 0x14, portData);
        } else {
-           pin = pU - 8;
+           var pin = pU - 8;
            var portData = self.i2c1.readByteSync(mU, 0x13) | (1 << pin);
            self.i2c1.writeByteSync(mU, 0x15, portData);
        }
@@ -162,7 +162,7 @@ class GpioAdapter {
            var portData = self.i2c1.readByteSync(mD, 0x12) | (1 << pD);
            self.i2c1.writeByteSync(mD, 0x14, portData);
        } else {
-           pin = pD - 8;
+           var pin = pD - 8;
            var portData = self.i2c1.readByteSync(mD, 0x13) | (1 << pin);
            self.i2c1.writeByteSync(mD, 0x15, portData);
        }

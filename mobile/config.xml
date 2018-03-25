@@ -4,8 +4,6 @@
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
-    <uses-permission name="android.permission.INTERNET" />
-    <uses-permission name="android.permission.ACCESS_NETWORK_STATE" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
