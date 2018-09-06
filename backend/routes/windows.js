@@ -18,7 +18,8 @@ router.get('/:zoneid/:id/open/:val', function (req, res) {
     var val = req.params.val;
     windowMgr.mouveWindow(
         zones.filter(z => z.id == zoneid)[0].windows.filter(w => w.identifier == id)[0],
-        parseInt(val)
+        parseInt(val),
+        zoneid
     );
     res.json({status: true}).end();
 });
@@ -27,7 +28,8 @@ router.get('/:zoneid/:id/open', function (req, res) {
     var zoneid = req.params.zoneid;
     var id = req.params.id;
     windowMgr.openWindow(
-        zones.filter(z => z.id == zoneid)[0].windows.filter(w => w.identifier == id)[0]
+        zones.filter(z => z.id == zoneid)[0].windows.filter(w => w.identifier == id)[0],
+        zoneid
     );
     res.json({status: true}).end();
 });
@@ -36,7 +38,8 @@ router.get('/:zoneid/:id/close', function (req, res) {
     var zoneid = req.params.zoneid;
     var id = req.params.id;
     windowMgr.closeWindow(
-        zones.filter(z => z.id == zoneid)[0].windows.filter(w => w.identifier == id)[0]
+        zones.filter(z => z.id == zoneid)[0].windows.filter(w => w.identifier == id)[0],
+        zoneid
     );
     res.json({status: true}).end();
 });
@@ -44,7 +47,8 @@ router.get('/:zoneid/:id/stop', function (req, res) {
     var zoneid = req.params.zoneid;
     var id = req.params.id;
     windowMgr.stopWindow(
-        zones.filter(z => z.id == zoneid)[0].windows.filter(w => w.identifier == id)[0]
+        zones.filter(z => z.id == zoneid)[0].windows.filter(w => w.identifier == id)[0],
+        zoneid
     );
     res.json({status: true}).end();
 });

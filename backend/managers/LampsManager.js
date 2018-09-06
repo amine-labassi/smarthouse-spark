@@ -28,6 +28,7 @@ class LampsManager {
 
     closeLamp(lamp) {
         var self = this;
+
         if (self.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
             self.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
 

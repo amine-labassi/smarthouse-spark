@@ -13,6 +13,19 @@ class GpioAdapterMock {
     getState(mcp, pin) {
         return true;
     }
+
+    setStateZoneLamps(zones, stauts){
+        return true;
+    }
+    winMouve(mcp, pin, delay, id, zoneid, localPointer)
+    {
+        return true;
+    }
+    winStop(mU, pU, mD, pD){
+        return true;
+    }
+
+
 }
 
 module.exports = new GpioAdapterMock();
