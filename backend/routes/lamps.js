@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var zones = require("../i2c/SmarthouseConfig").zones;
+var zones = require("../arduino/SmarthouseConfig").zones;
 var lampMgr = require('../managers/LampsManager');
 
 router.get('/on', function (req, res) {
@@ -15,6 +15,7 @@ router.get('/off', function (req, res) {
 router.get('/:zoneid/:id/on', function (req, res) {
     var zoneid = req.params.zoneid;
     var id = req.params.id;
+
     lampMgr.openLamp(zones.filter(z => z.id == zoneid)[0].lamps.filter(l => l.identifier == id)[0]);
     res.json({status: true}).end();
 });

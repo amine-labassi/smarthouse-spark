@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var zones = require("../i2c/SmarthouseConfig").zones;
+var zones = require("../arduino/SmarthouseConfig").zones;
 var coolerMgr = require('../managers/CoolersManager');
 
 router.get('/on', function (req, res) {

@@ -20,16 +20,15 @@ class WebSocketService {
 
     notifyAllClients(zones) {
         if (typeof zones === 'object') {
-            lampMgr.getStatus();
-            coolerMgr.getStatus();
+
             Object.values(this.sessoins).forEach((session) =>{
                 session.sendUTF(JSON.stringify(
                     omitDeep(
                         JSON.parse(JSON.stringify(zones)),
-                        ['mcpInput', 'mcpOutput',
+                        ['arduino',
                             'addressInput', 'addressOutput',
-                            'mcpUp', 'addressUp', 'upTime',
-                            'mcpDown', 'addressDown', 'downTime']
+                             'addressUp', 'upTime',
+                             'downTime']
                     )
                 ));
             });

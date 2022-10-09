@@ -4,12 +4,9 @@
   "private": true,
   "author": "Yassin CHBINOU",
   "scripts": {
-
     "setup": "npm i -g pm2 & pm2 install pm2-logrotate & pm2 set pm2-logrotate:retain 5",
     "on": "export NODE_ENV=production && pm2 start ./bin/www",
     "off": "pm2 stop www && pm2 delete www",
-
-
     "start": "export NODE_ENV=production && node ./bin/www ",
     "debug": "export NODE_ENV=production && node --inspect=0.0.0.0:9229 ./bin/www  ",
     "devwin": "export NODE_ENV=development  && node --inspect ./bin/www",
@@ -31,6 +28,7 @@
     "node.jwt": "^0.1.5",
     "npm-platform-dependencies": "^0.1.0",
     "omit-deep": "^0.3.0",
+    "serialport": "^10.4.0",
     "serve-favicon": "~2.4.5",
     "websocket": "^1.0.25"
   },

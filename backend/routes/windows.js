@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var zones = require("../i2c/SmarthouseConfig").zones;
+var zones = require("../arduino/SmarthouseConfig").zones;
 var windowMgr = require('../managers/WindowsManager');
 
 router.get('/open', function (req, res) {

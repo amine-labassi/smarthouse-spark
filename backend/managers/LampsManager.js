@@ -1,52 +1,40 @@
-const zones = require("./../i2c/SmarthouseConfig").zones;
+const zones = require("../arduino/SmarthouseConfig").zones;
 
 class LampsManager {
 
     constructor() {
-        this.gpioAdapter = require('../i2c/GpioAdapaterFactory');
+        this.arduino = require('../arduino/ArduinoConfig')
     }
 
     getStatus() {
         var self = this;
-        zones.forEach((zone) => {
-            zone.lamps.forEach((lamp) => {
-                lamp.status = self.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)
 
-
-            });
-        });
     }
 
     openLamp(lamp) {
         var self = this;
-        if (!self.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
-            self.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
-
-        }
+        self.arduino.portsa[lamp.arduino].write("o"+lamp.id)
         return true;
     }
 
     closeLamp(lamp) {
         var self = this;
 
-        if (self.gpioAdapter.getState(lamp.mcpInput, lamp.addressInput)) {
-            self.gpioAdapter.setState(lamp.mcpOutput, lamp.addressOutput, 200);
-
-        }
+        self.arduino.portsa[lamp.id].write("f"+lamp.arduino)
         return true;
     }
 
     openLampAll() {
         var self = this;
 
-        self.gpioAdapter.setStateZoneLamps(zones, false);
+
 
         return true;
     }
 
     closeLampAll() {
         var self = this;
-        self.gpioAdapter.setStateZoneLamps(zones, true);
+
         return true;
     }
 

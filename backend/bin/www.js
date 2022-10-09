@@ -6,7 +6,7 @@ const WebSocketService = require('../util/WebSocketService');
 const app = require('../app');
 const debug = require('debug')('smarthouse-api:server');
 const https = require('https');
-
+const aa = require('../arduino/ArduinoConfig')
 const options = {
     key: fs.readFileSync('./resources/key.pem'),
     cert: fs.readFileSync( './resources/cert.pem' )
