@@ -2,7 +2,7 @@
  * Created by YassineChbinou on 11/09/2020.
  */
 var arduinos = require("./SmarthouseConfig").arduinos;
-const { SerialPort } = require('SerialPort')
+const { SerialPort } = require('serialport')
 
 const zones = require("../arduino/SmarthouseConfig").zones;
 const { ReadlineParser } = require('@serialport/parser-readline')
@@ -15,10 +15,10 @@ SerialPort.list().then(
         console.log(ports)
         ports.forEach(port => {
 
-            console.log(`${port.comName}\t${port.serialNumber || ''}\t${port.manufacturer || ''}`)
+            console.log(`${port.path}\t${port.serialNumber || ''}\t${port.manufacturer || ''}`)
             arduinos.forEach(arduino => {
                 if(arduino.ser== port.serialNumber){
-                    portsa[arduino.address] = new SerialPort(port.comName, { baudRate: 2000000 })
+                    portsa[arduino.address] = new SerialPort({path :port.path,  baudRate: 2000000 })
 
                 }
                 setTimeout(function () {
@@ -28,6 +28,7 @@ SerialPort.list().then(
                         portsa.forEach(port =>{
                             port.pipe(parser).on('data', line => {
 
+                                console.log(line)
                                 zones.forEach((zone) => {
                                     zone.lamps.forEach((lamp) => {
                                         if(lamp.arduino == arduino.address){
